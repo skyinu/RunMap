@@ -4,7 +4,7 @@
 extern "C"
 jstring
 Java_com_stdnull_runmap_MainActivity_stringFromJNI(
-        JNIEnv* env,
+        JNIEnv *env,
         jobject /* this */) {
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());

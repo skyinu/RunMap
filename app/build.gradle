@@ -22,6 +22,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    signingConfigs {
+        debug {
+            storeFile file("./key.jks");
+            keyAlias 'key'
+            keyPassword '123456'
+            storePassword '123456'
+        }
+        release{
+            storeFile file("./key.jks");
+            keyAlias 'key'
+            keyPassword '123456'
+            storePassword '123456'
+        }
+    }
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
