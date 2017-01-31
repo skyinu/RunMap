@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">RunMap</string>
+    <string name="distance_unit">距离(公里)</string>
+    <string name="time_duration">时长</string>
+    <string name="total_track_distance">轨迹总里程(公里)</string>
+    <string name="string_cancel">取消</string>
+    <string name="string_goto_setting">去设置</string>
+    <string name="need_gps">应用需要打开GPS,以便提供服务</string>
+    <string name="need_network">应用需要打开网络,以便提供服务</string>
+    <string name="string_track_review">轨迹回放</string>
+    <string name="string_most_stayed">地点停留</string>
+    <string name="string_empty_tips">啊哦，还没有数据...</string>
 </resources>

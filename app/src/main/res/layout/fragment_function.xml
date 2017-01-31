@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/function_fragment_background">
+
+    <TextView
+        android:textColor="@color/color_white"
+        android:layout_marginTop="20dp"
+        android:id="@+id/anchor_title"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total_track_distance" />
+    <TextView
+        android:id="@+id/tv_total_track"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_white"
+        android:layout_below="@id/anchor_title"
+        android:layout_marginTop="1dp"
+        android:text="0.00"
+        android:textSize="60sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_start_track"
+        android:layout_marginBottom="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/start_btn_background"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+</RelativeLayout>

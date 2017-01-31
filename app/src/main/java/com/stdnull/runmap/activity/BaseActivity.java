@@ -1,12 +1,16 @@
 package com.stdnull.runmap.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
+import com.stdnull.runmap.R;
 import com.stdnull.runmap.common.CFLog;
+import com.stdnull.runmap.managers.ActivityContextManager;
 import com.stdnull.runmap.managers.PermissionManager;
 
 /**
@@ -24,6 +28,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         CFLog.i(this.getClass().getName(),"onStart");
+        ActivityContextManager.getInstance().registerActivity(this);
     }
 
     @Override
@@ -54,6 +59,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         CFLog.i(this.getClass().getName(),"onStop");
+        ActivityContextManager.getInstance().unRegisterActivity(this);
     }
 
     @Override
@@ -73,5 +79,19 @@ public class BaseActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PermissionManager.getInstance().handlePermissionResult(requestCode,permissions,grantResults);
+    }
+
+    public void showSettingDialog(final String setting, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message);
+        builder.setNegativeButton(R.string.string_cancel,null);
+        builder.setPositiveButton(R.string.string_goto_setting, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent =  new Intent(setting);
+                startActivity(intent);
+            }
+        });
+        builder.show();
     }
 }
