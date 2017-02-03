@@ -3,6 +3,7 @@ package com.stdnull.runmap.managers;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import com.amap.api.maps.model.LatLng;
 import com.stdnull.runmap.GlobalApplication;
@@ -60,7 +61,7 @@ public class DataManager {
     }
 
     public void clearDataInMemory(){
-        mLocationBean.getLatDatas().clear();
+        mLocationBean.getPointDatas().clear();
     }
 
     public void cacheDataToDatabase(){
@@ -71,9 +72,13 @@ public class DataManager {
                 SQLiteDatabase db = locationDataBase.getWritableDatabase();
                 Calendar calendar = Calendar.getInstance();
                 int date = 10000*calendar.get(Calendar.YEAR)+100*(calendar.get(Calendar.MONTH)+1)+calendar.get(Calendar.DATE);
-                int count = DataManager.this.queryRecordCountToday(date) + 1;
+                int count = DataManager.this.queryRecordCountToday(date+"") + 1;
                 LocationBean locationBean = (LocationBean) params[1];
                 List<TrackPoint> trackPointList = locationBean.getPointDatas();
+                //数据量过低不cache数据
+                if(trackPointList.size() < RMConfiguration.MIN_CACHE_DATA){
+                    return null;
+                }
                 for(int i=0;i<trackPointList.size();i++){
                     TrackPoint point = trackPointList.get(i);
                     ContentValues values = new ContentValues();
@@ -95,12 +100,13 @@ public class DataManager {
                 values.put(LocationDataBase.FILED_TIME_DAY,date);
                 values.put(LocationDataBase.FILED_RECORD_COUNT,count);
                 db.insert(LocationDataBase.TABLE_LOCATION,null,values);
+                //插入完成后删除数据
+                clearDataInMemory();
                 return null;
             }
 
             @Override
             public void onTaskFinished(Void result) {
-
             }
         };
         TaskHanler.getInstance().sendTask(task,mLocationDataBase,mLocationBean);
@@ -138,17 +144,21 @@ public class DataManager {
 
     }
 
-    public int queryRecordCountToday(int dayTime){
+    public int queryRecordCountToday(String dayTime){
         String query_sql = "select  "+LocationDataBase.FILED_RECORD_COUNT + " from " + LocationDataBase.TABLE_LOCATION
                 + " where " + LocationDataBase.FILED_TIME_DAY + " = " + dayTime
                 + " order by " + LocationDataBase.FILED_RECORD_COUNT + " desc ";
         SQLiteDatabase db = mLocationDataBase.getReadableDatabase();
         Cursor cursor = db.rawQuery(query_sql, null);
+
         int result = -1;
         try {
             while (cursor.moveToNext()){
                 int index= cursor.getColumnIndex(LocationDataBase.FILED_RECORD_COUNT);
-                result =  cursor.getInt(index);
+                int count = cursor.getInt(index);
+                if(count > result) {
+                    result = count;
+                }
                 CFLog.e(AmLocationManager.TAG,"current count = "+result);
             }
         }
@@ -168,37 +178,46 @@ public class DataManager {
      */
     public Map<Integer,List<TrackPoint>> readTrackPointFormDataBase(String dayTime) {
         Map<Integer, List<TrackPoint>> groupResult = new HashMap<>();
-        String query_sql = "select * from " + LocationDataBase.TABLE_LOCATION
-                + " group by " + LocationDataBase.FILED_RECORD_COUNT
-                + " order by " + LocationDataBase.FILED_TIME_STAMP + " asc ";
+
         SQLiteDatabase db = mLocationDataBase.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query_sql, null);
-        try {
-            while (cursor.moveToNext()) {
-                int latitudeIndex = cursor.getColumnIndex(LocationDataBase.FILED_LATITUDE);
-                int longitudeIndex = cursor.getColumnIndex(LocationDataBase.FILED_LONGITUDE);
-                int timeStampIndex = cursor.getColumnIndex(LocationDataBase.FILED_TIME_STAMP);
-                int buildingIndex = cursor.getColumnIndex(LocationDataBase.FILED_BUILD_NAME);
-                int countIndex = cursor.getColumnIndex(LocationDataBase.FILED_RECORD_COUNT);
-                double latitude = cursor.getDouble(latitudeIndex);
-                double longitude = cursor.getDouble(longitudeIndex);
-                long timeStamp = Long.valueOf(cursor.getString(timeStampIndex));
-                String building = cursor.getString(buildingIndex);
-                int count = cursor.getInt(countIndex);
-                List<TrackPoint> pointList = groupResult.get(count);
-                if (pointList == null) {
-                    pointList = new ArrayList<>();
-                    groupResult.put(count,pointList);
+
+        int recordCount = queryRecordCountToday(dayTime);
+        for(int i=0;i <= recordCount;i++) {
+            String query_sql = "select * from " + LocationDataBase.TABLE_LOCATION
+                    + " where " + LocationDataBase.FILED_TIME_DAY + " = " + dayTime
+                + " and "+ LocationDataBase.FILED_RECORD_COUNT + " = " + i
+                    + " order by " + LocationDataBase.FILED_TIME_STAMP + " asc ";
+            Cursor cursor = db.rawQuery(query_sql, null);
+            try {
+                while (cursor.moveToNext()) {
+                    int latitudeIndex = cursor.getColumnIndex(LocationDataBase.FILED_LATITUDE);
+                    int longitudeIndex = cursor.getColumnIndex(LocationDataBase.FILED_LONGITUDE);
+                    int timeStampIndex = cursor.getColumnIndex(LocationDataBase.FILED_TIME_STAMP);
+                    int buildingIndex = cursor.getColumnIndex(LocationDataBase.FILED_BUILD_NAME);
+                    int countIndex = cursor.getColumnIndex(LocationDataBase.FILED_RECORD_COUNT);
+                    double latitude = cursor.getDouble(latitudeIndex);
+                    double longitude = cursor.getDouble(longitudeIndex);
+                    long timeStamp = Long.valueOf(cursor.getString(timeStampIndex));
+                    String building = cursor.getString(buildingIndex);
+                    int count = cursor.getInt(countIndex);
+                    List<TrackPoint> pointList = groupResult.get(count);
+                    if (pointList == null) {
+                        pointList = new ArrayList<>();
+                        groupResult.put(count, pointList);
+                    }
+                    TrackPoint point = new TrackPoint(new LatLng(latitude, longitude), building, timeStamp);
+                    pointList.add(point);
                 }
-                TrackPoint point = new TrackPoint(new LatLng(latitude,longitude), building, timeStamp);
-                pointList.add(point);
-            }
-        }
-        finally{
-            if(cursor!=null){
-                cursor.close();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
             }
         }
         return groupResult;
+    }
+
+    public void saveDataAndClearMemory(){
+        cacheDataToDatabase();
     }
 }

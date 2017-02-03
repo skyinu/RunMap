@@ -20,4 +20,9 @@ public final class RMConfiguration {
 
     public static final int MAX_SUPPORT_ITEMS = 30;
 
+    public static final int MIN_CACHE_DATA = 10;
+
+
+    public static final int MAP_PADDING = 120;
+
 }

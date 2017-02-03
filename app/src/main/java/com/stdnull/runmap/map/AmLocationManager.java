@@ -3,23 +3,23 @@ package com.stdnull.runmap.map;
 import android.Manifest;
 import android.graphics.Color;
 import android.os.SystemClock;
-import android.util.Pair;
-import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.PolylineOptions;
-import com.amap.api.maps.utils.SpatialRelationUtil;
 import com.amap.api.maps.utils.overlay.SmoothMoveMarker;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.geocoder.RegeocodeAddress;
@@ -36,8 +36,10 @@ import com.stdnull.runmap.managers.DataManager;
 import com.stdnull.runmap.managers.PermissionManager;
 import com.stdnull.runmap.permission.PermissionCallBack;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by chen on 2017/1/23.
@@ -65,18 +67,39 @@ public class AmLocationManager implements LocationStateListener {
     private long mLocationInterval = 5 * RMConfiguration.SECOND;
 
     /**
-     * 外部监听类
+     * 外部距离变化监听类监听类
      */
     private OnDistanceIncreasedListener mDistanceListener;
+
+    /**
+     * 外部GPS 信号强度变化监听类
+     */
+    private OnGpsPowerListener mGpsPowerListener;
+
+
+    /**
+     * 外部开关状态
+     */
+    private OnGpsSwitchListener mGpsSwitchListener;
+
+    /**
+     * 标志起点是否设置成功
+     */
+    private boolean hasStartPointSetted = false;
+
 
     /**
      * 帮助类，分解部分功能
      */
     private AmLocationHelper mLocationHelper;
 
+    private LatLng mLastLocationPoint;
+
+
     private AmLocationManager() {
         mLocationService = new AmLocationService(this);
         mLocationHelper = new AmLocationHelper();
+
 
     }
 
@@ -112,7 +135,7 @@ public class AmLocationManager implements LocationStateListener {
 
     }
 
-    public void initAMap(AMap aMap) {
+    public void initAMap(AMap aMap, int flag) {
         this.mAmap = aMap;
         //照传入的CameraUpdate参数移动可视区域。
         mAmap.moveCamera(CameraUpdateFactory.zoomTo(19));
@@ -120,8 +143,10 @@ public class AmLocationManager implements LocationStateListener {
         aMap.setLocationSource(mLocationService);
         //显示室内地图
         aMap.showIndoorMap(true);
-        //设置最大缩放等级
-        aMap.setMinZoomLevel(8);
+        if (flag == 0) {
+            //设置最大缩放等级
+            aMap.setMinZoomLevel(8);
+        }
         //如果显示定位层，则界面上将出现定位按钮，如果未设置Location Source 则定位按钮不可点击。
         aMap.setMyLocationEnabled(true);
         //定位、移动到地图中心点，跟踪并根据方向旋转地图
@@ -143,63 +168,108 @@ public class AmLocationManager implements LocationStateListener {
     public void setDistanceListener(OnDistanceIncreasedListener listener) {
         this.mDistanceListener = listener;
     }
+
+    public void setGpsPowerListener(OnGpsPowerListener listener) {
+        this.mGpsPowerListener = listener;
+    }
+
+    public void setGpsSwitchListener(OnGpsSwitchListener listener) {
+        this.mGpsSwitchListener = listener;
+    }
+
+
     //*********************************************************************
 
 
     //***************************UI相关，绘制操作*****************************************
 
-    public void drawPolyLine(LatLng... latLngs) {
+    public void drawPolyLine(int color, LatLng... latLngs) {
         List<LatLng> tmp = Arrays.asList(latLngs);
-        drawPolyLine(tmp);
+        drawPolyLine(tmp, color);
     }
-    public void drawPolyLine(List<LatLng> latLngs) {
+
+    public void drawPolyLine(List<LatLng> latLngs, int color) {
         CFLog.e(TAG, "draw new Poly");
         PolylineOptions options = new PolylineOptions();
         options.addAll(latLngs);
-        options.color(Color.BLUE);
+        options.color(color);
         options.width(20);
         mAmap.addPolyline(options);
 
     }
 
-    public void drawTrackLine(List<LatLng> points,SmoothMoveMarker.MoveListener moveListener) {
+    public void drawPolyLineWithTexture(List<LatLng> latLngs, int textureId) {
+        mAmap.addPolyline(new PolylineOptions().setCustomTexture(BitmapDescriptorFactory.fromResource(textureId))
+                .addAll(latLngs)
+                .useGradient(true)
+                .width(18));
+    }
+
+    public void drawTrackLine(List<LatLng> points, int currentCount, SmoothMoveMarker.MoveListener moveListener) {
+        //寻找与起点距离最远的点
+        float maxDistance = 0;
+        LatLng endPoint = null;
+        for (int i = 1; i < points.size(); i++) {
+            float distance = AMapUtils.calculateLineDistance(points.get(0), points.get(i));
+            if (distance > maxDistance) {
+                endPoint = points.get(i);
+                maxDistance = distance;
+            }
+
+        }
+        CFLog.e(TAG, "max distance = " + maxDistance);
+
         //代表构成的一个矩形区域，由两点决定
-        LatLngBounds bounds = new LatLngBounds(points.get(0), points.get(points.size() - 1));
-        mAmap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50));
+        LatLngBounds bounds = new LatLngBounds(points.get(0), endPoint);
+        //两次移动解决视图不变化的问题
+        mAmap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(points.get(0),15,0,0)));
+        float pad = GlobalApplication.getAppContext().getResources().getDisplayMetrics().scaledDensity * RMConfiguration.MAP_PADDING;
+        mAmap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, (int) pad));
+        drawSingleMaker(points.get(0), GlobalApplication.getAppContext().getString(R.string.string_start_point), -1);
+        drawSingleMaker(points.get(points.size() - 1), GlobalApplication.getAppContext().getString(R.string.string_end_point), -1);
+        if (currentCount == 0) {
+            drawPolyLineWithTexture(points, R.mipmap.track_line_texture);
+        } else {
+            Random random = new Random(SystemClock.currentThreadTimeMillis());
+
+            drawPolyLine(points, Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
+        }
+
 
         //按照指定的经纬度数据和时间，平滑移动
         SmoothMoveMarker smoothMarker = new SmoothMoveMarker(mAmap);
         // 设置滑动的图标
-        smoothMarker.setDescriptor(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
-
-        LatLng drivePoint = points.get(0);
-        //计算点到线的距离
-        Pair<Integer, LatLng> pair = SpatialRelationUtil.calShortestDistancePoint(points, drivePoint);
-        points.set(pair.first, drivePoint);
-        List<LatLng> subList = points.subList(pair.first, points.size());
-
-        // 设置滑动的轨迹左边点
-        smoothMarker.setPoints(subList);
+        smoothMarker.setDescriptor(BitmapDescriptorFactory.fromResource(R.mipmap.track_line_icon));
+        // 设置滑动的轨迹点
+        smoothMarker.setPoints(points);
         // 设置滑动的总时间
-        smoothMarker.setTotalDuration(30);
+        smoothMarker.setTotalDuration(20);
         //设置监听
         smoothMarker.setMoveListener(moveListener);
         // 开始滑动
         smoothMarker.startSmoothMove();
     }
 
+    public void drawSingleMaker(LatLng latLng, String title, int iconId) {
+        if (iconId != -1) {
+            MarkerOptions options = new MarkerOptions().position(latLng).title(title);
+            options.icon(BitmapDescriptorFactory.fromResource(iconId));
+            mAmap.addMarker(options);
+        } else {
+            mAmap.addMarker(new MarkerOptions().position(latLng).title(title).snippet("DefaultMarker"));
+        }
+    }
 
-    public void drawMarker(List<BuildingPoint> buildingPointList){
-        for(int i = 0;i<buildingPointList.size();i++){
+    public void drawMarkers(List<BuildingPoint> buildingPointList) {
+        for (int i = 0; i < buildingPointList.size(); i++) {
             BuildingPoint point = buildingPointList.get(i);
-            MarkerOptions options =new MarkerOptions().position(point.getLatLng()).title(point.getBuildName());
-            options.snippet("停留"+(point.getTime()/1000/60)+"分钟");
+            MarkerOptions options = new MarkerOptions().position(point.getLatLng()).title(point.getBuildName());
+            options.snippet("停留" + (point.getTime() / 1000 / 60) + "分钟");
             final Marker marker = mAmap.addMarker(options);
             marker.setInfoWindowEnable(true);
             marker.showInfoWindow();
         }
     }
-
 
 
     public void changeMapStyle() {
@@ -232,24 +302,53 @@ public class AmLocationManager implements LocationStateListener {
     }
 
 
+    public static List<LatLng> test = new ArrayList<>();
+
+    static {
+        test.add(new LatLng(31.7029985115958, 117.92576410224807));
+        test.add(new LatLng(32.7029985115958, 120.92576410224807));
+        test.add(new LatLng(34.7029985115958, 119.92576410224807));
+        test.add(new LatLng(31.7029985115958, 118.92576410224807));
+        test.add(new LatLng(33.7029985115958, 116.92576410224807));
+        test.add(new LatLng(36.7029985115958, 122.92576410224807));
+        test.add(new LatLng(37.7029985115958, 123.92576410224807));
+        test.add(new LatLng(38.7029985115958, 124.92576410224807));
+        test.add(new LatLng(39.7029985115958, 125.92576410224807));
+        test.add(new LatLng(40.7029985115958, 126.92576410224807));
+        test.add(new LatLng(30.7029985115958, 115.92576410224807));
+        test.add(new LatLng(32.7029985115958, 118.92576410224807));
+
+
+    }
+
     /**
      * 获得新的定位地址时的处理，包括以下几步
-     * 1、判断是否非法数据
-     * 2、构造数据类型添加数据点
-     * 3、绘制线段
-     * 4、经纬度逆编码
+     * 1、更新GPS信号强度信息
+     * 2、判断是否非法数据
+     * 4、构造数据类型添加数据点
+     * 5、绘制线段
+     * 6、经纬度逆编码
      *
      * @param aMapLocation
      */
-    private void resolveLocationChanged(AMapLocation aMapLocation) {
+    private boolean resolveLocationChanged(LocationSource.OnLocationChangedListener amListener, AMapLocation aMapLocation) {
+        if (mGpsPowerListener != null) {
+            mGpsPowerListener.onGpsPower(aMapLocation.getGpsAccuracyStatus());
+        }
         LatLng latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude(), true);
         List<TrackPoint> trackPointList = DataManager.getInstance().getTrackPoints();
         //判断数据的合理性
         if (mLocationHelper.shouldAddLatLng(trackPointList, latLng, aMapLocation.getSpeed())) {
+            amListener.onLocationChanged(aMapLocation);//显示系统定位蓝点
             //绘制轨迹
             if (trackPointList.size() > 0) {
-                drawPolyLine(trackPointList.get(trackPointList.size() - 1).getLocation(), latLng);
+                drawPolyLine(Color.BLUE, trackPointList.get(trackPointList.size() - 1).getLocation(), latLng);
+            } else if (mLastLocationPoint != null) {
+                //当系统从后台进入时，需要将上次定位的点连接
+                drawPolyLine(Color.BLUE, mLastLocationPoint, latLng);
             }
+            //每次单独cache一个缓存点
+            mLastLocationPoint = latLng;
             //添加数据
             TrackPoint trackPoint = new TrackPoint(latLng, SystemClock.elapsedRealtime());
             DataManager.getInstance().addTrackPoint(trackPoint);
@@ -258,8 +357,9 @@ public class AmLocationManager implements LocationStateListener {
             }
             //位置逆编码
             requestRegeoAddress(aMapLocation, trackPoint);
+            return true;
         }
-
+        return false;
     }
 
     private void requestRegeoAddress(AMapLocation aMapLocation, final TrackPoint trackPoint) {
@@ -275,7 +375,9 @@ public class AmLocationManager implements LocationStateListener {
                     return;
                 }
                 trackPoint.setBuildName(result.getBuilding());
-                CFLog.e(TAG, "regeocode result = " + result.getDistrict());
+                CFLog.e(TAG, "regeo building =" + result.getBuilding()
+                        + "district = " + result.getDistrict() + " neiberhood = " + result.getNeighborhood()
+                        + "street = " + result.getStreetNumber());
             }
         };
         LatLonPoint point = new LatLonPoint(aMapLocation.getLatitude(), aMapLocation.getLongitude());
@@ -295,16 +397,21 @@ public class AmLocationManager implements LocationStateListener {
     @Override
     public void notifyServiceDeactivate() {
         if (mAmapLocationClient != null) {
-            mAmapLocationClient.stopLocation();
+            mAmapLocationClient.unRegisterLocationListener(mLocationService);
             mAmapLocationClient.onDestroy();
         }
         mAmapLocationClient = null;
     }
 
+
     @Override
-    public void notifyLocationChanged(AMapLocation aMapLocation) {
-        if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
-            resolveLocationChanged(aMapLocation);
+    public void notifyLocationChanged(LocationSource.OnLocationChangedListener amListener, AMapLocation aMapLocation) {
+        if (aMapLocation != null && aMapLocation.getErrorCode() == AMapLocation.LOCATION_SUCCESS) {
+            if (aMapLocation.getProvider().equals("lbs") && !hasStartPointSetted) {
+                return;
+            }
+            hasStartPointSetted = true;
+            resolveLocationChanged(amListener, aMapLocation);
         } else {
             String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
             CFLog.e(TAG, errText);
@@ -316,9 +423,19 @@ public class AmLocationManager implements LocationStateListener {
 
     }
 
+    @Override
+    public void notifyGPSSwitchChanged() {
+        if (mGpsSwitchListener != null) {
+            mGpsSwitchListener.onGPSSwitchChanged();
+        }
+    }
+
+
     //**********************************************************
-
-
-
-
+    public void onDestroy() {
+        hasStartPointSetted = false;
+        if (mAmapLocationClient != null) {
+            mAmapLocationClient.stopLocation();
+        }
+    }
 }

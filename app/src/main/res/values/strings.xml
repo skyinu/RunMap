@@ -4,10 +4,17 @@
     <string name="time_duration">时长</string>
     <string name="total_track_distance">轨迹总里程(公里)</string>
     <string name="string_cancel">取消</string>
+    <string name="string_ok">是</string>
+    <string name="string_no">否</string>
     <string name="string_goto_setting">去设置</string>
     <string name="need_gps">应用需要打开GPS,以便提供服务</string>
+    <string name="gps_closed_tips">GPS已关闭，应用需要GPS保持开启才能正常工作，是否立即开启?</string>
     <string name="need_network">应用需要打开网络,以便提供服务</string>
     <string name="string_track_review">轨迹回放</string>
     <string name="string_most_stayed">地点停留</string>
     <string name="string_empty_tips">啊哦，还没有数据...</string>
+    <string name="string_msg_exit_hint">正在统计数据，是否确认退出?</string>
+    <string name="string_msg_app_background">应用已进入后台</string>
+    <string name="string_start_point">起点</string>
+    <string name="string_end_point">终点</string>
 </resources>

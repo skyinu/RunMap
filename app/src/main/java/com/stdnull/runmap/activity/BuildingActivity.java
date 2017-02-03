@@ -34,7 +34,7 @@ public class BuildingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_build);
         mAmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        AmLocationManager.getInstance().initAMap(mAmap);
+        AmLocationManager.getInstance().initAMap(mAmap,1);
         initData();
     }
 
@@ -64,13 +64,18 @@ public class BuildingActivity extends BaseActivity {
                     ((ViewGroup)(findViewById(android.R.id.content))).addView(textView);
                     return;
                 }
-                AmLocationManager.getInstance().drawMarker(mBuildPoints);
+                AmLocationManager.getInstance().drawMarkers(mBuildPoints);
 
             }
         };
         TaskHanler.getInstance().sendTask(task);
     }
 
+    /**
+     * 按Building计算停留地点
+     * @param dateList
+     * @return
+     */
     private List<BuildingPoint> calculateTime(List<String> dateList){
         List<BuildingPoint> pointList = new ArrayList<>();
         for(int i=0;i<dateList.size();i++){

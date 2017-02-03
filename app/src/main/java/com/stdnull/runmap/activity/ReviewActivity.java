@@ -59,8 +59,9 @@ public class ReviewActivity extends BaseActivity implements View.OnClickListener
         mRightArrow.setOnClickListener(this);
         mLeftArrow.setOnClickListener(this);
         mAmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        AmLocationManager.getInstance().initAMap(mAmap);
+        AmLocationManager.getInstance().initAMap(mAmap,1);
         initData();
+        mRightArrow.setVisibility(View.GONE);
     }
 
     /**
@@ -101,8 +102,8 @@ public class ReviewActivity extends BaseActivity implements View.OnClickListener
                 mTvTime.setText(StringUtils.splitDate(mDateList.get(0)));
                 mCurrentIndex = 0;
                 mHelper.notifyNewData(mCurrentShow);
-                if(mDateList.size() < 1){
-                    mLeftArrow.setVisibility(View.INVISIBLE);
+                if(mDateList.size() <= 1){
+                    mLeftArrow.setVisibility(View.GONE);
                 }
 
             }
@@ -126,7 +127,7 @@ public class ReviewActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.right_arrow:
                 mCurrentIndex--;
-                updateArrowState(DIRECT_LEFT,mCurrentIndex);
+                updateArrowState(DIRECT_RIGHT,mCurrentIndex);
                 mTvTime.setText(StringUtils.splitDate(mDateList.get(mCurrentIndex)));
                 mPreview = mCurrentShow;
                 mCurrentShow = mNext;
@@ -151,6 +152,7 @@ public class ReviewActivity extends BaseActivity implements View.OnClickListener
                 mPreview = result;
             }
         };
+        TaskHanler.getInstance().sendTask(task);
     }
 
     private void updateNextCache(final String date){
@@ -165,6 +167,7 @@ public class ReviewActivity extends BaseActivity implements View.OnClickListener
                 mNext = result;
             }
         };
+        TaskHanler.getInstance().sendTask(task);
     }
 
 

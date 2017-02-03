@@ -3,6 +3,9 @@ package com.stdnull.runmap.map;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.utils.overlay.SmoothMoveMarker;
 import com.stdnull.runmap.bean.TrackPoint;
+import com.stdnull.runmap.common.CFAsyncTask;
+import com.stdnull.runmap.common.CFLog;
+import com.stdnull.runmap.common.TaskHanler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +23,7 @@ public class AmReviewTrackHelper implements SmoothMoveMarker.MoveListener{
         List<List<LatLng>> showData = prepareShow(source);
         this.mDataSource = showData;
         currentIndex = 0;
-        AmLocationManager.getInstance().drawTrackLine(showData.get(currentIndex),this);
+        AmLocationManager.getInstance().drawTrackLine(showData.get(currentIndex),currentIndex,this);
 
     }
     private List<List<LatLng>> prepareShow(Map<Integer,List<TrackPoint>> source){
@@ -29,7 +32,7 @@ public class AmReviewTrackHelper implements SmoothMoveMarker.MoveListener{
         for(int i=0;i<count;i++) {
             List<LatLng> points = new ArrayList<>();
             List<TrackPoint> trackPointList = source.get(i);
-            for (int j = 0; j < source.size(); j++) {
+            for (int j = 0; j < trackPointList.size(); j++) {
                 points.add(trackPointList.get(j).getLocation());
             }
             groupData.add(points);
@@ -40,8 +43,9 @@ public class AmReviewTrackHelper implements SmoothMoveMarker.MoveListener{
     @Override
     public void move(double v) {
         if(v == 0 && currentIndex < mDataSource.size()){
+            CFLog.e(AmLocationManager.TAG,"a line finished, prepare to draw new line");
             currentIndex ++;
-            AmLocationManager.getInstance().drawTrackLine(mDataSource.get(currentIndex),this);
+            AmLocationManager.getInstance().drawTrackLine(mDataSource.get(currentIndex),currentIndex,AmReviewTrackHelper.this);
         }
     }
 }

@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity {
 
     private void initConfig() {
         if(!SystemUtils.isNetworkEnable(GlobalApplication.getAppContext())){
-            showSettingDialog(Settings.ACTION_NETWORK_OPERATOR_SETTINGS,getString(R.string.need_network));
+            showSettingDialog(Settings.ACTION_DATA_ROAMING_SETTINGS,getString(R.string.need_network)).show();
         }
     }
 

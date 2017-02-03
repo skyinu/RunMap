@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@mipmap/gps_level_low"
+        android:minLevel="1"
+        android:maxLevel="2"/>
+    <item android:drawable="@mipmap/gps_level_heigh"
+        android:maxLevel="4"
+        android:minLevel="3"/>
+
+</level-list>

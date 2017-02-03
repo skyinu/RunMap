@@ -81,8 +81,9 @@ public class BaseActivity extends AppCompatActivity {
         PermissionManager.getInstance().handlePermissionResult(requestCode,permissions,grantResults);
     }
 
-    public void showSettingDialog(final String setting, String message){
+    public AlertDialog showSettingDialog(final String setting, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
         builder.setMessage(message);
         builder.setNegativeButton(R.string.string_cancel,null);
         builder.setPositiveButton(R.string.string_goto_setting, new DialogInterface.OnClickListener() {
@@ -92,6 +93,6 @@ public class BaseActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        builder.show();
+        return builder.create();
     }
 }

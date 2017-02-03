@@ -77,7 +77,7 @@ public class FunctionFragment extends Fragment implements View.OnClickListener{
             }
         }
         else{
-            host.showSettingDialog(Settings.ACTION_LOCATION_SOURCE_SETTINGS, host.getString(R.string.need_gps));
+            host.showSettingDialog(Settings.ACTION_LOCATION_SOURCE_SETTINGS, host.getString(R.string.need_gps)).show();
         }
     }
 }
