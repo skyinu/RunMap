@@ -35,10 +35,13 @@ public class DataManager {
     //数据库实例
     private LocationDataBase mLocationDataBase;
 
+    private boolean mDataConsist;
+
     private DataManager(){
         mLocationBean = new LocationBean();
         mLocationDataBase = new LocationDataBase(GlobalApplication.getAppContext(),
                 RMConfiguration.DATABASE_NAME, null,1);
+        mDataConsist = false;
     }
 
     public static DataManager getInstance(){
@@ -79,6 +82,12 @@ public class DataManager {
                 if(trackPointList.size() < RMConfiguration.MIN_CACHE_DATA){
                     return null;
                 }
+                //表示应用是在一次启动中存储数据
+                if(mDataConsist){
+                    count--;
+                }
+                //标志第一次数据启动
+                mDataConsist = true;
                 for(int i=0;i<trackPointList.size();i++){
                     TrackPoint point = trackPointList.get(i);
                     ContentValues values = new ContentValues();

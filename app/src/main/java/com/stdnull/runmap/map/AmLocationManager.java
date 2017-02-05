@@ -9,6 +9,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapUtils;
+import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.UiSettings;
@@ -183,6 +184,10 @@ public class AmLocationManager implements LocationStateListener {
 
     //***************************UI相关，绘制操作*****************************************
 
+    public void clearAll(){
+        mAmap.clear();
+    }
+
     public void drawPolyLine(int color, LatLng... latLngs) {
         List<LatLng> tmp = Arrays.asList(latLngs);
         drawPolyLine(tmp, color);
@@ -221,10 +226,10 @@ public class AmLocationManager implements LocationStateListener {
 
         //代表构成的一个矩形区域，由两点决定
         LatLngBounds bounds = new LatLngBounds(points.get(0), endPoint);
-        //两次移动解决视图不变化的问题
-        mAmap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(points.get(0),15,0,0)));
+
         float pad = GlobalApplication.getAppContext().getResources().getDisplayMetrics().scaledDensity * RMConfiguration.MAP_PADDING;
         mAmap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, (int) pad));
+
         drawSingleMaker(points.get(0), GlobalApplication.getAppContext().getString(R.string.string_start_point), -1);
         drawSingleMaker(points.get(points.size() - 1), GlobalApplication.getAppContext().getString(R.string.string_end_point), -1);
         if (currentCount == 0) {
@@ -278,6 +283,10 @@ public class AmLocationManager implements LocationStateListener {
         } else {
             mAmap.setMapType(AMap.MAP_TYPE_NORMAL);
         }
+    }
+
+    public void moveToSpecficCamera(CameraUpdate cameraUpdate){
+        mAmap.moveCamera(cameraUpdate);
     }
 
     /**

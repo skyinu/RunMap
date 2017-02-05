@@ -15,8 +15,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:paddingLeft="10dp"
-            android:layout_width="25dp"
-            android:layout_height="20dp" />
+            android:layout_width="35dp"
+            android:layout_height="25dp" />
         <TextView
             android:id="@+id/data_time"
             android:layout_centerInParent="true"
@@ -28,8 +28,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:paddingRight="10dp"
-            android:layout_width="25dp"
-            android:layout_height="20dp" />
+            android:layout_width="35dp"
+            android:layout_height="25dp" />
     </RelativeLayout>
     <fragment
         android:id="@+id/map"

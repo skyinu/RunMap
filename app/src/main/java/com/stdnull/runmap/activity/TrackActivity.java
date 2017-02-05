@@ -267,6 +267,7 @@ public class TrackActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        AppManager.getInstance().unRegisterListener(this);
         AmLocationManager.getInstance().onDestroy();
     }
 

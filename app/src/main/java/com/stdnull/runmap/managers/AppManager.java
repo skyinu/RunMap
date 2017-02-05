@@ -87,7 +87,6 @@ public class AppManager implements Application.ActivityLifecycleCallbacks{
 
     private void notifyBackground(Context context){
         CFLog.e(this.getClass().getName(),"onBackground");
-        Toast.makeText(context, R.string.string_msg_app_background,Toast.LENGTH_SHORT).show();
         for(int i=0;i<mAppStateListeners.size();i++){
             AppStateListener listener = mAppStateListeners.get(i).get();
             if(listener != null){
