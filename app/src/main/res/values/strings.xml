@@ -17,4 +17,11 @@
     <string name="string_msg_app_background">应用已进入后台</string>
     <string name="string_start_point">起点</string>
     <string name="string_end_point">终点</string>
+    <string name="string_share_to_friend">微信好友</string>
+    <string name="string_share_to_circle">朋友圈</string>
+    <string name="errcode_success">发送成功</string>
+    <string name="errcode_cancel">发送取消</string>
+    <string name="errcode_deny">发送被拒绝</string>
+    <string name="errcode_unsupported">不支持错误</string>
+    <string name="errcode_unknown">发送返回</string>
 </resources>

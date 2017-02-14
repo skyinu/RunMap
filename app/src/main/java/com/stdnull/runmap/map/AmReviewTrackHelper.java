@@ -31,6 +31,7 @@ public class AmReviewTrackHelper {
             AmLocationManager.getInstance().moveToSpecficCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(showData.get(currentIndex).get(0), 16, 0, 0)));
         }
         AmLocationManager.getInstance().drawTrackLine(showData.get(currentIndex),currentIndex,new TrackLineMoveListener());
+        firstShow = false;
 
     }
     private List<List<LatLng>> prepareShow(Map<Integer,List<TrackPoint>> source){
@@ -47,26 +48,21 @@ public class AmReviewTrackHelper {
         return groupData;
     }
 
-//    @Override
-//    public void move(double v) {
-//        if(v == 0 && currentIndex < mDataSource.size()){
-//            CFLog.e(AmLocationManager.TAG,"a line finished, prepare to draw new line");
-//            currentIndex ++;
-//            AmLocationManager.getInstance().drawTrackLine(mDataSource.get(currentIndex),currentIndex,AmReviewTrackHelper.this);
-//        }
-//    }
 
     class  TrackLineMoveListener implements SmoothMoveMarker.MoveListener{
         private boolean hasExecuted = false;
+        private double pre = -1;
 
         @Override
         public void move(double v) {
-            if(!hasExecuted && v == 0 && currentIndex < mDataSource.size()){
+            CFLog.e(AmLocationManager.TAG,"remain distance ="+v);
+            if(!hasExecuted && v == 0 && currentIndex < mDataSource.size() && (pre - v) < 10){
                 CFLog.e(AmLocationManager.TAG,"a line finished, prepare to draw new line");
                 hasExecuted = true;
                 currentIndex ++;
                 AmLocationManager.getInstance().drawTrackLine(mDataSource.get(currentIndex),currentIndex,new TrackLineMoveListener());
             }
+            pre = v;
         }
     }
 }

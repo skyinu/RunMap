@@ -47,7 +47,11 @@
         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.ReviewActivity"/>
         <activity android:name=".activity.BuildingActivity"/>
-
+        <activity android:name=".wxapi.WXEntryActivity"
+            android:label="@string/app_name"
+            android:exported="true"
+            android:theme="@style/Transparent"/>
+        <service android:name=".service.DataService"/>
         <service android:name="com.amap.api.location.APSService"/>
         <!--高德地图API key-->
         <meta-data

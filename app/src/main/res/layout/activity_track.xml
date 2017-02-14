@@ -151,6 +151,7 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/map_btn_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/text_container">
@@ -168,6 +169,30 @@
                 android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:background="@mipmap/quit_map_ui" />
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/closed_map_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/color_white">
+            <Button
+                android:id="@+id/finish_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@mipmap/finish_current"
+                android:layout_alignParentLeft="true"/>
+            <Button
+                android:id="@+id/share_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@mipmap/share"
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
     </RelativeLayout>
 

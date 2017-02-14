@@ -1,7 +1,9 @@
 package com.stdnull.runmap.activity.frag;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
@@ -17,7 +19,12 @@ import com.stdnull.runmap.R;
 import com.stdnull.runmap.activity.BaseActivity;
 import com.stdnull.runmap.activity.TrackActivity;
 import com.stdnull.runmap.common.CFLog;
+import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.utils.SystemUtils;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.zip.DeflaterInputStream;
 
 /**
  * Created by chen on 2017/1/28.
@@ -52,6 +59,23 @@ public class FunctionFragment extends Fragment implements View.OnClickListener{
         mStartTrackBtn = (Button) root.findViewById(R.id.btn_start_track);
         mTvTotalTrack = (TextView) root.findViewById(R.id.tv_total_track);
         mStartTrackBtn.setOnClickListener(this);
+
+        Activity host = getActivity();
+        if(host != null){
+            SharedPreferences sp = host.getSharedPreferences(RMConfiguration.FILE_CONFIG, Context.MODE_PRIVATE);
+            long distance = sp.getLong(RMConfiguration.KEY_TOTAL_DISTANCE,0);
+            long tmpDistance = sp.getLong(RMConfiguration.KEY_TMP_DISTANCE,0);
+            distance += tmpDistance;
+            if(tmpDistance > 0){
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putLong(RMConfiguration.KEY_TMP_DISTANCE,0);
+                editor.putLong(RMConfiguration.KEY_TOTAL_DISTANCE,distance);
+            }
+            DecimalFormat distanceFormater = (DecimalFormat) NumberFormat.getInstance();
+            distanceFormater.setMinimumFractionDigits(2);
+            distanceFormater.setMaximumFractionDigits(2);
+            mTvTotalTrack.setText(distanceFormater.format(distance/1000.0));
+        }
 
     }
 

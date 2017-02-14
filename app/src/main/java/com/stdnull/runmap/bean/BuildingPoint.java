@@ -1,6 +1,9 @@
 package com.stdnull.runmap.bean;
 
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.model.LatLng;
+import com.stdnull.runmap.common.RMConfiguration;
+import com.stdnull.runmap.utils.StringUtils;
 
 /**
  * Created by chen on 2017/1/31.
@@ -42,7 +45,22 @@ public class BuildingPoint {
         }
 
         BuildingPoint that = (BuildingPoint) o;
+        if( AMapUtils.calculateLineDistance(latLng,that.latLng) < RMConfiguration.MAX_DISTANCE){
+            return true;
+        }
+        if(StringUtils.isEmpty(buildName) && StringUtils.isEmpty(that.buildName)){
+            return false;
+        }
         return buildName != null ? buildName.equals(that.buildName) : that.buildName == null;
 
+    }
+
+    @Override
+    public String toString() {
+        return "BuildingPoint{" +
+                "latLng=" + latLng +
+                ", buildName='" + buildName + '\'' +
+                ", time=" + time +
+                '}';
     }
 }
