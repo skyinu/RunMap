@@ -47,8 +47,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Random;
+import java.util.Stack;
 
 /**
  * Created by chen on 2017/1/23.
@@ -230,8 +233,15 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
                 .width(18));
     }
 
+    private Queue<SmoothMoveMarker> mMarkerLists = new LinkedList<>();
+
     public void drawTrackLine(List<LatLng> points, int currentCount, SmoothMoveMarker.MoveListener moveListener) {
         //寻找与起点距离最远的点
+        SmoothMoveMarker pre = mMarkerLists.peek();
+        if(pre != null){
+            pre.setMoveListener(null);
+            mMarkerLists.poll();
+        }
         float maxDistance = 0;
         LatLng endPoint = null;
         for (int i = 1; i < points.size(); i++) {
@@ -247,6 +257,7 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
         LatLngBounds bounds = new LatLngBounds(points.get(0), endPoint);
 
         float pad = GlobalApplication.getAppContext().getResources().getDisplayMetrics().scaledDensity * RMConfiguration.MAP_PADDING;
+        moveToSpecficCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(points.get(0), 17, 0, 0)));
         mAmap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, (int) pad));
 
         drawSingleMaker(points.get(0), GlobalApplication.getAppContext().getString(R.string.string_start_point), -1);
@@ -272,6 +283,7 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
         smoothMarker.setMoveListener(moveListener);
         // 开始滑动
         smoothMarker.startSmoothMove();
+        mMarkerLists.add(smoothMarker);
     }
 
     public void drawSingleMaker(LatLng latLng, String title, int iconId) {

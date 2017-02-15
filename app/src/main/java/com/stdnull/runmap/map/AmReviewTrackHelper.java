@@ -1,12 +1,15 @@
 package com.stdnull.runmap.map;
 
-import com.amap.api.maps.AMap;
+import android.os.SystemClock;
+
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.utils.overlay.SmoothMoveMarker;
 import com.stdnull.runmap.bean.TrackPoint;
 import com.stdnull.runmap.common.CFLog;
+import com.stdnull.runmap.common.RMConfiguration;
+import com.stdnull.runmap.utils.SystemUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,12 +54,13 @@ public class AmReviewTrackHelper {
 
     class  TrackLineMoveListener implements SmoothMoveMarker.MoveListener{
         private boolean hasExecuted = false;
-        private double pre = -1;
+        private double pre = -100;
 
         @Override
         public void move(double v) {
-            CFLog.e(AmLocationManager.TAG,"remain distance ="+v);
-            if(!hasExecuted && v == 0 && currentIndex < mDataSource.size() && (pre - v) < 10){
+            CFLog.e(AmLocationManager.TAG,"remain distance ="+v );
+            if(!hasExecuted && v == 0 && currentIndex < mDataSource.size()
+                    && Math.abs(pre - v) < 10 ){
                 CFLog.e(AmLocationManager.TAG,"a line finished, prepare to draw new line");
                 hasExecuted = true;
                 currentIndex ++;
