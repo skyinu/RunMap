@@ -89,14 +89,6 @@ public class AmLocationHelper{
         float fraction = kmh/120;
         int color = evaluate(fraction,RMConfiguration.LOW_SPEED_COLOR,RMConfiguration.HIGH_SPEED_COLOR);
         return  color;
-//        if(kmh < 5){
-//            return RMConfiguration.LOW_SPEED;
-//        }
-//        else if(kmh <12){
-//            return RMConfiguration.MID_SPEED_COLOR;
-//        }
-//        return Color.BLUE;
-
     }
 
     private int evaluate(float fraction, int startValue, int endValue) {
