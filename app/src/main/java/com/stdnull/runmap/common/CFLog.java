@@ -3,6 +3,7 @@ package com.stdnull.runmap.common;
 import android.util.Log;
 
 /**
+ * 日志打印工具类
  * Created by chen on 2017/1/19.
  */
 

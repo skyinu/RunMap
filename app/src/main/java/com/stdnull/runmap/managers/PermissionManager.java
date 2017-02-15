@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
+ * 权限管理类
  * Created by chen on 2017/1/19.
  */
 

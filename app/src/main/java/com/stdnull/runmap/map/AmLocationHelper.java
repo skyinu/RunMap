@@ -21,6 +21,7 @@ import com.stdnull.runmap.utils.SystemUtils;
 import java.util.List;
 
 /**
+ * 地图数据处理帮助类
  * Created by chen on 2017/1/28.
  */
 

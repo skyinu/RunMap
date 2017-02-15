@@ -14,6 +14,7 @@ import com.stdnull.runmap.managers.ActivityContextManager;
 import com.stdnull.runmap.managers.PermissionManager;
 
 /**
+ * 所有Activity的基类
  * Created by chen on 2016/12/26.
  */
 

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * 系统页面管理类
  * Created by chen on 2017/1/27.
  */
 

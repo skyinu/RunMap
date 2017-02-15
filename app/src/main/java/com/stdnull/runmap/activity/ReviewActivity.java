@@ -23,10 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 轨迹回放页面
  * Created by chen on 2017/1/28.
- * Step:
- * 1、找到30days之内的数据
- * 2、取数据
  */
 
 public class ReviewActivity extends BaseActivity implements View.OnClickListener{

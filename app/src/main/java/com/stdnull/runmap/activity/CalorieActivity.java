@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.stdnull.runmap.R;
 
 /**
+ * 距离转卡路里页面
  * Created by chen on 2017/2/14.
  */
 

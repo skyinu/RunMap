@@ -13,6 +13,7 @@ import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.utils.SystemUtils;
 
 /**
+ * 接口实现类
  * Created by chen on 2017/1/26.
  */
 

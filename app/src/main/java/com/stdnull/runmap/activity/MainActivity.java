@@ -11,6 +11,7 @@ import com.stdnull.runmap.ui.PagerIndicator;
 import com.stdnull.runmap.utils.SystemUtils;
 
 /**
+ * 系统主页面
  * Created by chen on 2017/1/28.
  */
 

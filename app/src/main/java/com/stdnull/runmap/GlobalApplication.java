@@ -7,6 +7,7 @@ import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.managers.AppManager;
 
 /**
+ * app进程类
  * Created by chen on 2017/1/19.
  */
 

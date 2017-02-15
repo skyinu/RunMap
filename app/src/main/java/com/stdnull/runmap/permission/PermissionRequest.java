@@ -8,6 +8,7 @@ import com.stdnull.runmap.activity.BaseActivity;
 import com.stdnull.runmap.managers.PermissionManager;
 
 /**
+ * 权限请求类
  * Created by chen on 2017/1/23.
  */
 

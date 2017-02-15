@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * 滑动容的标题指示器UI控件
  * Created by chen on 2016/10/8.
  */
 

@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.stdnull.runmap.R;
 
 /**
+ * 我的页面功能条目UI
  * Created by chen on 2016/3/20.
  */
 public class SettingItemView extends Button {

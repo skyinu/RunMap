@@ -3,6 +3,7 @@ package com.stdnull.runmap.bean;
 import com.amap.api.maps.model.LatLng;
 
 /**
+ * 回放轨迹的数据存储点
  * Created by chen on 2017/1/30.
  */
 

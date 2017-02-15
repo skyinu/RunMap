@@ -17,6 +17,7 @@ import com.stdnull.runmap.activity.CalorieActivity;
 import com.stdnull.runmap.activity.ReviewActivity;
 
 /**
+ * 轨迹页面
  * Created by chen on 2017/1/28.
  */
 

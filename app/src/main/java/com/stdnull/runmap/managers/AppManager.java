@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 应用状态管理
  * Created by chen on 2017/1/19.
  */
 

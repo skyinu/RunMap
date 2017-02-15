@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 import com.stdnull.runmap.common.RMConfiguration;
 
 /**
+ * 系统服务查询工具类
  * Created by chen on 2017/1/20.
  */
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 存储数据点的类
  * Created by chen on 2017/1/27.
  */
 

@@ -45,6 +45,9 @@ import com.stdnull.runmap.utils.SystemUtils;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+/**
+ * 轨迹监控页面
+ */
 public class TrackActivity extends BaseActivity implements View.OnClickListener,
         OnDistanceIncreasedListener,OnGpsPowerListener,AppManager.AppStateListener,OnGpsSwitchListener{
     private AMap mAmap;//地图交互对象对象
@@ -402,6 +405,4 @@ public class TrackActivity extends BaseActivity implements View.OnClickListener,
         }
         AmLocationManager.getInstance().scaleCurrentCamera();
     }
-
-
 }

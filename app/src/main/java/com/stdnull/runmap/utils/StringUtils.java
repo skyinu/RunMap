@@ -1,6 +1,7 @@
 package com.stdnull.runmap.utils;
 
 /**
+ * 字符串处理工具类
  * Created by chen on 2017/1/20.
  */
 

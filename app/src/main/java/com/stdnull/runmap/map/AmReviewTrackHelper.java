@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 轨迹播放辅助类
  * Created by chen on 2017/1/30.
  */
 

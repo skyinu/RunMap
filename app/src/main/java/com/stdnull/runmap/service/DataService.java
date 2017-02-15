@@ -20,6 +20,7 @@ import com.stdnull.runmap.activity.TrackActivity;
 import com.stdnull.runmap.common.CFLog;
 
 /**
+ * 前台服务
  * Created by chen on 2017/2/8.
  */
 

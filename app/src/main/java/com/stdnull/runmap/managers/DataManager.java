@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 数据操作类
  * Created by chen on 2017/1/27.
  */
 

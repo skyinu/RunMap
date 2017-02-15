@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Fragment页面适配器类
  * Created by chen on 2017/1/28.
  */
 

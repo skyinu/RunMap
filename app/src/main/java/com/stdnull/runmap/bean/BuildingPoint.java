@@ -6,6 +6,7 @@ import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.utils.StringUtils;
 
 /**
+ * 数据库存储数据实体类
  * Created by chen on 2017/1/31.
  */
 

@@ -3,6 +3,7 @@ package com.stdnull.runmap.common;
 import android.graphics.Color;
 
 /**
+ * 系统配置工具类
  * Created by chen on 2016/12/26.
  */
 

@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 停留地点分布图页面
  * Created by chen on 2017/1/28.
  */
 

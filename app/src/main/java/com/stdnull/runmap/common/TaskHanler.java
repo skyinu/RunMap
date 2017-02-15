@@ -5,6 +5,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 
 /**
+ * 任务处理类
  * Created by chen on 2017/1/28.
  */
 

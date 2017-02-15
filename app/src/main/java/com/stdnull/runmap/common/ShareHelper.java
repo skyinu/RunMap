@@ -25,6 +25,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import java.io.ByteArrayOutputStream;
 
 /**
+ * 微信分享操作类
  * Created by chen on 2017/2/10.
  */
 

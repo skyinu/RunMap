@@ -24,9 +24,9 @@ import com.stdnull.runmap.utils.SystemUtils;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.zip.DeflaterInputStream;
 
 /**
+ * 我的页面
  * Created by chen on 2017/1/28.
  */
 

@@ -13,7 +13,9 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-
+/**
+ * 微信分享的回调Activity
+ */
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     private IWXAPI api;
     @Override

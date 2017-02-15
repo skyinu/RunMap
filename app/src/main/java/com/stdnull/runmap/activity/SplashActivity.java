@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import com.stdnull.runmap.R;
 
 /**
+ * 系统欢迎页
  * Created by chen on 2017/1/23.
  */
 
