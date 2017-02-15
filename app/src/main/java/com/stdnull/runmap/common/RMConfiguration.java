@@ -1,5 +1,7 @@
 package com.stdnull.runmap.common;
 
+import android.graphics.Color;
+
 /**
  * Created by chen on 2016/12/26.
  */
@@ -26,11 +28,15 @@ public final class RMConfiguration {
 
     public static final int MIN_CACHE_DATA = 10;
 
-
     public static final int MAP_PADDING = 120;
 
     public static final String WEIXIN_APP_ID = "wx80d09d1ee6a69b27";
 
     public static final int FORCE_COUNT = 60;
+
+    public static final int LOW_SPEED_COLOR = Color.parseColor("#06ff00");
+    public static final int MID_SPEED_COLOR = Color.parseColor("#fbfb01");
+    public static final int HIGH_SPEED_COLOR = Color.parseColor("#ff0501");
+    public static final int LOW_SPEED = 1;
 
 }

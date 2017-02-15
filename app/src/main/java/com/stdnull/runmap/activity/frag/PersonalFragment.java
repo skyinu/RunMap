@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.stdnull.runmap.R;
 import com.stdnull.runmap.activity.BaseActivity;
 import com.stdnull.runmap.activity.BuildingActivity;
+import com.stdnull.runmap.activity.CalorieActivity;
 import com.stdnull.runmap.activity.ReviewActivity;
 
 /**
@@ -23,6 +24,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
     private View mRootView;
     private Button mReviewBtn;
     private Button mMostVisitBtn;
+    private Button mDistance2Carlrie;
     public static PersonalFragment newInstance() {
         PersonalFragment fragment = new PersonalFragment();
         Bundle args = new Bundle();
@@ -47,8 +49,10 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
     protected void initView(View root){
         mReviewBtn = (Button) root.findViewById(R.id.track_review);
         mMostVisitBtn = (Button) root.findViewById(R.id.most_stayed);
+        mDistance2Carlrie = (Button) root.findViewById(R.id.distance_to_carorie);
         mMostVisitBtn.setOnClickListener(this);
         mReviewBtn.setOnClickListener(this);
+        mDistance2Carlrie.setOnClickListener(this);
     }
 
     @Override
@@ -65,6 +69,10 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.most_stayed:
                 intent = new Intent(host, BuildingActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.distance_to_carorie:
+                intent = new Intent(host, CalorieActivity.class);
                 startActivity(intent);
                 break;
         }

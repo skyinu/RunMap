@@ -47,6 +47,7 @@
         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.ReviewActivity"/>
         <activity android:name=".activity.BuildingActivity"/>
+        <activity android:name=".activity.CalorieActivity"/>
         <activity android:name=".wxapi.WXEntryActivity"
             android:label="@string/app_name"
             android:exported="true"

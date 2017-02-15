@@ -38,6 +38,7 @@ import com.stdnull.runmap.managers.ActivityContextManager;
 import com.stdnull.runmap.managers.DataManager;
 import com.stdnull.runmap.managers.PermissionManager;
 import com.stdnull.runmap.permission.PermissionCallBack;
+import com.stdnull.runmap.utils.SystemUtils;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -221,12 +222,6 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
 
     }
 
-    public void drawPolyLine(List<TrackPoint> mTrackPoints,LatLng latLng){
-        for(int i = mLastLocationIndex;i<mTrackPoints.size()-2;i++){
-            drawPolyLine(Color.BLUE,mTrackPoints.get(i).getLocation(),mTrackPoints.get(i+1).getLocation());
-        }
-        drawPolyLine(Color.BLUE,mTrackPoints.get(mTrackPoints.size()-1).getLocation(),latLng);
-    }
 
     public void drawPolyLineWithTexture(List<LatLng> latLngs, int textureId) {
         mAmap.addPolyline(new PolylineOptions().setCustomTexture(BitmapDescriptorFactory.fromResource(textureId))
@@ -367,7 +362,8 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
             amListener.onLocationChanged(aMapLocation);//显示系统定位蓝点
             //绘制轨迹
             if (trackPointList.size() > 0) {
-                drawPolyLine(Color.BLUE, trackPointList.get(trackPointList.size() - 1).getLocation(), latLng);
+                int color = mLocationHelper.getColorBySpeed(aMapLocation.getSpeed());
+                drawPolyLine(color, trackPointList.get(trackPointList.size() - 1).getLocation(), latLng);
             } else if (mLastLocationPoint != null) {
                 //当系统从后台进入时，需要将上次定位的点连接
                // drawPolyLine(trackPointList,latLng);
@@ -393,6 +389,9 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
         CFAsyncTask<RegeocodeAddress> task = new CFAsyncTask<RegeocodeAddress>() {
             @Override
             public RegeocodeAddress onTaskExecuted(Object... params) {
+                if(!SystemUtils.isNetworkEnable(GlobalApplication.getAppContext())){
+                    return null;
+                }
                 return mLocationHelper.regeocodeAddress((LatLonPoint) params[0]);
             }
 
