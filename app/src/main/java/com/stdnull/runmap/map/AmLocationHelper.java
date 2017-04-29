@@ -87,7 +87,7 @@ public class AmLocationHelper{
 
     public int getColorBySpeed(float speed){
         float kmh = speed * 3.6F;
-        float fraction = kmh/120;
+        float fraction = kmh/90;
         int color = evaluate(fraction,RMConfiguration.LOW_SPEED_COLOR,RMConfiguration.HIGH_SPEED_COLOR);
         return  color;
     }
