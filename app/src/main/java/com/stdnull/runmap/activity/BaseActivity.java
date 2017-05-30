@@ -3,15 +3,14 @@ package com.stdnull.runmap.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.stdnull.runmap.R;
 import com.stdnull.runmap.common.CFLog;
-import com.stdnull.runmap.managers.ActivityContextManager;
-import com.stdnull.runmap.managers.PermissionManager;
+import com.stdnull.runmap.lifecircle.LifeCycleMonitor;
+import com.stdnull.runmap.modules.permission.PermissionManager;
 
 /**
  * 所有Activity的基类
@@ -29,7 +28,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         CFLog.i(this.getClass().getName(),"onStart");
-        ActivityContextManager.getInstance().registerActivity(this);
+        LifeCycleMonitor.getInstance().registerActivity(this);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         CFLog.i(this.getClass().getName(),"onStop");
-        ActivityContextManager.getInstance().unRegisterActivity(this);
+        LifeCycleMonitor.getInstance().unRegisterActivity(this);
     }
 
     @Override

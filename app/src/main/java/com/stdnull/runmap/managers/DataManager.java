@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 import com.amap.api.maps.model.LatLng;
 import com.stdnull.runmap.GlobalApplication;
@@ -16,7 +15,7 @@ import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.common.TaskHanler;
-import com.stdnull.runmap.map.AmLocationManager;
+import com.stdnull.runmap.modules.map.AmLocationManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;

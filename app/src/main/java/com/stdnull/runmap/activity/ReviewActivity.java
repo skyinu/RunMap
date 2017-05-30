@@ -15,8 +15,8 @@ import com.stdnull.runmap.bean.TrackPoint;
 import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.TaskHanler;
 import com.stdnull.runmap.managers.DataManager;
-import com.stdnull.runmap.map.AmLocationManager;
-import com.stdnull.runmap.map.AmReviewTrackHelper;
+import com.stdnull.runmap.modules.map.AmLocationManager;
+import com.stdnull.runmap.modules.map.AmReviewTrackHelper;
 import com.stdnull.runmap.utils.StringUtils;
 
 import java.util.List;

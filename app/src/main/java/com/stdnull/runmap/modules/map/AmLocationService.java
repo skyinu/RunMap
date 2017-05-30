@@ -1,4 +1,4 @@
-package com.stdnull.runmap.map;
+package com.stdnull.runmap.modules.map;
 
 import android.database.ContentObserver;
 import android.provider.Settings;
@@ -10,7 +10,6 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.LocationSource;
 import com.stdnull.runmap.GlobalApplication;
 import com.stdnull.runmap.common.CFLog;
-import com.stdnull.runmap.utils.SystemUtils;
 
 /**
  * 接口实现类

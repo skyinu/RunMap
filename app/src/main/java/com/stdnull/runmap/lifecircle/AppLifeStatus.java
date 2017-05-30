@@ -1,13 +1,10 @@
-package com.stdnull.runmap.managers;
+package com.stdnull.runmap.lifecircle;
 
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
-
-import com.stdnull.runmap.R;
 import com.stdnull.runmap.common.CFLog;
 
 import java.lang.ref.WeakReference;
@@ -19,29 +16,29 @@ import java.util.List;
  * Created by chen on 2017/1/19.
  */
 
-public class AppManager implements Application.ActivityLifecycleCallbacks{
-    private static AppManager mInstance = new AppManager();
-
+class AppLifeStatus implements Application.ActivityLifecycleCallbacks{
+    //to indicate whether app is first launched
     private boolean isFirstForeground = true;
+    //the active activity number,in this case, the value may always one
     private int mActiveActivity = 0;
+    private Activity mCurrentActivity;
+    //app state listener lists
     private List<WeakReference<AppStateListener>> mAppStateListeners;
 
-    public AppManager(){
+    public AppLifeStatus(){
         mAppStateListeners = new ArrayList<>();
     }
 
-    public static AppManager getInstance(){
-        return mInstance;
-    }
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
     }
 
     @Override
     public void onActivityStarted(Activity activity) {
-        if(mActiveActivity++ == 0){
+        if(mActiveActivity ++ == 0){
             if(!isFirstForeground) {
                 notifyForeground(activity);
+
             }
             isFirstForeground = false;
         }
@@ -49,18 +46,17 @@ public class AppManager implements Application.ActivityLifecycleCallbacks{
 
     @Override
     public void onActivityResumed(Activity activity) {
-
+        mCurrentActivity = activity;
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
-
+        mCurrentActivity = null;
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-        mActiveActivity--;
-        if(mActiveActivity == 0){
+        if(--mActiveActivity == 0){
             notifyBackground(activity);
         }
     }
@@ -73,6 +69,10 @@ public class AppManager implements Application.ActivityLifecycleCallbacks{
     @Override
     public void onActivityDestroyed(Activity activity) {
 
+    }
+
+    public Activity getCurrentActivity() {
+        return mCurrentActivity;
     }
 
     private void notifyForeground(Context context){
@@ -96,12 +96,12 @@ public class AppManager implements Application.ActivityLifecycleCallbacks{
         }
     }
 
-    public void registerListener(@NonNull AppStateListener listener){
+    protected void registerListener(@NonNull AppStateListener listener){
         WeakReference<AppStateListener> item = new WeakReference<>(listener);
         mAppStateListeners.add(item);
     }
 
-    public void unRegisterListener(@NonNull AppStateListener listener){
+    protected void unRegisterListener(@NonNull AppStateListener listener){
         for(int i=0;i<mAppStateListeners.size();i++){
             AppStateListener item = mAppStateListeners.get(i).get();
             if(listener.equals(item)){
@@ -112,8 +112,4 @@ public class AppManager implements Application.ActivityLifecycleCallbacks{
     }
 
 
-    public interface AppStateListener{
-        void onForeground(Context context);
-        void onBackground(Context context);
-    }
 }

@@ -1,9 +1,8 @@
-package com.stdnull.runmap.map;
+package com.stdnull.runmap.modules.map;
 
 import android.Manifest;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.os.Environment;
 import android.os.SystemClock;
 
 import com.amap.api.location.AMapLocation;
@@ -34,24 +33,17 @@ import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.common.TaskHanler;
-import com.stdnull.runmap.managers.ActivityContextManager;
+import com.stdnull.runmap.lifecircle.LifeCycleMonitor;
 import com.stdnull.runmap.managers.DataManager;
-import com.stdnull.runmap.managers.PermissionManager;
-import com.stdnull.runmap.permission.PermissionCallBack;
+import com.stdnull.runmap.modules.permission.PermissionManager;
+import com.stdnull.runmap.modules.permission.PermissionCallBack;
 import com.stdnull.runmap.utils.SystemUtils;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Random;
-import java.util.Stack;
 
 /**
  * 地图服务类
@@ -335,7 +327,7 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
      * 发起定位
      */
     public void startLocation() {
-        PermissionManager.getInstance().requestPermission(ActivityContextManager.getInstance().getLatestActivity(),
+        PermissionManager.getInstance().requestPermission(LifeCycleMonitor.getInstance().getLatestActivity(),
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                 new PermissionCallBack() {
                     @Override

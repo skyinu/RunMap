@@ -1,4 +1,4 @@
-package com.stdnull.runmap.map;
+package com.stdnull.runmap.modules.map;
 
 /**
  * GPS开关的监听

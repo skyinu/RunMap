@@ -1,23 +1,22 @@
-package com.stdnull.runmap.permission;
+package com.stdnull.runmap.modules.permission;
 
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 
 import com.stdnull.runmap.activity.BaseActivity;
-import com.stdnull.runmap.managers.PermissionManager;
 
 /**
  * 权限请求类
  * Created by chen on 2017/1/23.
  */
 
-public class PermissionRequest implements PermissionCallBack{
+public class PermissionRequest{
     private PermissionCallBack mCallBack;
     private String [] mRequestPermission;
-    private BaseActivity activity;
+    private Activity activity;
 
-    public PermissionRequest(BaseActivity activity, String []permissions,PermissionCallBack mCallBack){
+    public PermissionRequest(Activity activity, String []permissions,PermissionCallBack mCallBack){
         this.activity = activity;
         this.mCallBack = mCallBack;
         this.mRequestPermission = permissions;
@@ -39,13 +38,7 @@ public class PermissionRequest implements PermissionCallBack{
         }
     }
 
-    @Override
-    public void onAllPermissionGranted() {
-        mCallBack.onAllPermissionGranted();
-    }
-
-    @Override
-    public void onDenied() {
-        mCallBack.onDenied();
+    public PermissionCallBack getCallBack() {
+        return mCallBack;
     }
 }

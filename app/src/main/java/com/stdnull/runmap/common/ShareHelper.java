@@ -3,7 +3,6 @@ package com.stdnull.runmap.common;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,14 +10,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
-import com.stdnull.runmap.GlobalApplication;
 import com.stdnull.runmap.R;
-import com.stdnull.runmap.map.AmLocationManager;
-import com.stdnull.runmap.map.OnCaptureListener;
+import com.stdnull.runmap.modules.map.AmLocationManager;
+import com.stdnull.runmap.modules.map.OnCaptureListener;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXImageObject;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 

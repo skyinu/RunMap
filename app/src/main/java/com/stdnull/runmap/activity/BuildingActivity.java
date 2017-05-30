@@ -20,9 +20,8 @@ import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.common.TaskHanler;
 import com.stdnull.runmap.managers.DataManager;
-import com.stdnull.runmap.map.AmLocationManager;
+import com.stdnull.runmap.modules.map.AmLocationManager;
 import com.stdnull.runmap.utils.StringUtils;
-import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 
 import java.util.ArrayList;
 import java.util.List;

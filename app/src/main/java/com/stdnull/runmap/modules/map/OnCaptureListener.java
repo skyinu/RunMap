@@ -1,4 +1,4 @@
-package com.stdnull.runmap.map;
+package com.stdnull.runmap.modules.map;
 
 import android.graphics.Bitmap;
 

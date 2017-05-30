@@ -1,22 +1,18 @@
-package com.stdnull.runmap.map;
+package com.stdnull.runmap.modules.map;
 
-import android.graphics.Color;
 import android.os.SystemClock;
 
 import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.geocoder.GeocodeResult;
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeAddress;
 import com.amap.api.services.geocoder.RegeocodeQuery;
-import com.amap.api.services.geocoder.RegeocodeResult;
 import com.stdnull.runmap.GlobalApplication;
 import com.stdnull.runmap.bean.TrackPoint;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
-import com.stdnull.runmap.utils.SystemUtils;
 
 import java.util.List;
 

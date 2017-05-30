@@ -36,8 +36,6 @@ public final class RMConfiguration {
     public static final int FORCE_COUNT = 60;
 
     public static final int LOW_SPEED_COLOR = Color.parseColor("#06ff00");
-    public static final int MID_SPEED_COLOR = Color.parseColor("#fbfb01");
     public static final int HIGH_SPEED_COLOR = Color.parseColor("#ff0501");
-    public static final int LOW_SPEED = 1;
 
 }

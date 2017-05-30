@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.stdnull.runmap.common.CFLog;
-import com.stdnull.runmap.managers.AppManager;
+import com.stdnull.runmap.lifecircle.LifeCycleMonitor;
 
 /**
  * app进程类
@@ -26,7 +26,7 @@ public class GlobalApplication extends Application {
     }
 
     private void init(){
-        registerActivityLifecycleCallbacks(AppManager.getInstance());
+        registerActivityLifecycleCallbacks(LifeCycleMonitor.getInstance().getLifeCycleCallBack());
     }
 
     @Override

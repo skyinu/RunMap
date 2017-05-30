@@ -1,11 +1,10 @@
-package com.stdnull.runmap.managers;
+package com.stdnull.runmap.modules.permission;
 
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 
 import com.stdnull.runmap.activity.BaseActivity;
-import com.stdnull.runmap.permission.PermissionCallBack;
-import com.stdnull.runmap.permission.PermissionRequest;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -25,25 +24,24 @@ public class PermissionManager {
         return mInstance;
     }
 
-    public void requestPermission(BaseActivity activity, String[]permissons, PermissionCallBack callBack){
+    public void requestPermission(Activity activity, String[]permissons, PermissionCallBack callBack){
         PermissionRequest request = new PermissionRequest(activity,permissons,callBack);
         mCurrentRequest.add(request);
         request.startRequest();
     }
 
     public void handlePermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
-        if(requestCode != PERMISSION_CODE){
+        PermissionRequest request = mCurrentRequest.poll();
+        PermissionCallBack callBack = request.getCallBack();
+        if(requestCode != PERMISSION_CODE || callBack == null){
             return;
         }
         for(int i=0;i<grantResults.length;i++){
             if(grantResults[i] == PackageManager.PERMISSION_DENIED){
-                PermissionRequest request = mCurrentRequest.poll();
-                request.onDenied();
+                callBack.onDenied();
                 return;
             }
         }
-        PermissionRequest request = mCurrentRequest.poll();
-        request.onAllPermissionGranted();
-
+         callBack.onAllPermissionGranted();
     }
 }

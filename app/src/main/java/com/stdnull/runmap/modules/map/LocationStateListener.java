@@ -1,4 +1,4 @@
-package com.stdnull.runmap.map;
+package com.stdnull.runmap.modules.map;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.LocationSource;

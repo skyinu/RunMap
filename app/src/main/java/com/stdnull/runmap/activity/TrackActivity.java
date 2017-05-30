@@ -33,12 +33,13 @@ import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.common.ShareHelper;
 import com.stdnull.runmap.common.TaskHanler;
-import com.stdnull.runmap.managers.AppManager;
+import com.stdnull.runmap.lifecircle.AppStateListener;
+import com.stdnull.runmap.lifecircle.LifeCycleMonitor;
 import com.stdnull.runmap.managers.DataManager;
-import com.stdnull.runmap.map.AmLocationManager;
-import com.stdnull.runmap.map.OnDistanceIncreasedListener;
-import com.stdnull.runmap.map.OnGpsPowerListener;
-import com.stdnull.runmap.map.OnGpsSwitchListener;
+import com.stdnull.runmap.modules.map.AmLocationManager;
+import com.stdnull.runmap.modules.map.OnDistanceIncreasedListener;
+import com.stdnull.runmap.modules.map.OnGpsPowerListener;
+import com.stdnull.runmap.modules.map.OnGpsSwitchListener;
 import com.stdnull.runmap.service.DataService;
 import com.stdnull.runmap.utils.SystemUtils;
 
@@ -49,7 +50,7 @@ import java.text.NumberFormat;
  * 轨迹监控页面
  */
 public class TrackActivity extends BaseActivity implements View.OnClickListener,
-        OnDistanceIncreasedListener,OnGpsPowerListener,AppManager.AppStateListener,OnGpsSwitchListener{
+        OnDistanceIncreasedListener,OnGpsPowerListener,AppStateListener,OnGpsSwitchListener{
     private AMap mAmap;//地图交互对象对象
     private RelativeLayout mMapUiContainer;
     private Button mBtnChangeMapStyle;
@@ -98,7 +99,7 @@ public class TrackActivity extends BaseActivity implements View.OnClickListener,
         AmLocationManager.getInstance().setDistanceListener(this);
         AmLocationManager.getInstance().setGpsPowerListener(this);
         AmLocationManager.getInstance().setGpsSwitchListener(this);
-        AppManager.getInstance().registerListener(this);
+        LifeCycleMonitor.getInstance().registerListener(this);
 
     }
 
@@ -344,7 +345,7 @@ public class TrackActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        AppManager.getInstance().unRegisterListener(this);
+        LifeCycleMonitor.getInstance().unRegisterListener(this);
         AmLocationManager.getInstance().onDestroy();
         stopService(new Intent(this,DataService.class));
     }

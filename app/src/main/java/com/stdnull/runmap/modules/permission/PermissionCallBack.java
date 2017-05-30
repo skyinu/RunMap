@@ -1,4 +1,4 @@
-package com.stdnull.runmap.permission;
+package com.stdnull.runmap.modules.permission;
 
 /**
  * 权限请求结果的回调
