@@ -1,4 +1,4 @@
-package com.stdnull.runmap.activity;
+package com.stdnull.runmap.ui.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapFragment;
 import com.amap.api.maps.model.LatLng;
 import com.stdnull.runmap.R;
-import com.stdnull.runmap.bean.BuildingPoint;
-import com.stdnull.runmap.bean.TrackPoint;
+import com.stdnull.runmap.model.BuildingPoint;
+import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;

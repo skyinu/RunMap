@@ -1,4 +1,4 @@
-package com.stdnull.runmap.activity;
+package com.stdnull.runmap.ui.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapFragment;
 import com.stdnull.runmap.R;
-import com.stdnull.runmap.bean.TrackPoint;
+import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.TaskHanler;
 import com.stdnull.runmap.managers.DataManager;

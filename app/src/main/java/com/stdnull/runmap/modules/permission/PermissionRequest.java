@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
-import com.stdnull.runmap.activity.BaseActivity;
-
 /**
  * 权限请求类
  * Created by chen on 2017/1/23.

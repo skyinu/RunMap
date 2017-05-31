@@ -1,22 +1,17 @@
 package com.stdnull.runmap.service;
 
 import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
-import android.view.View;
 import android.widget.RemoteViews;
 
-import com.stdnull.runmap.GlobalApplication;
 import com.stdnull.runmap.R;
-import com.stdnull.runmap.activity.TrackActivity;
 import com.stdnull.runmap.common.CFLog;
 
 /**

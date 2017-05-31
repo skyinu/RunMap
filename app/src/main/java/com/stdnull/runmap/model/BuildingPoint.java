@@ -1,4 +1,4 @@
-package com.stdnull.runmap.bean;
+package com.stdnull.runmap.model;
 
 import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.model.LatLng;

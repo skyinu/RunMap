@@ -1,25 +1,25 @@
-package com.stdnull.runmap.activity;
+package com.stdnull.runmap.ui.activity;
 
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 
-import com.stdnull.runmap.GlobalApplication;
 import com.stdnull.runmap.R;
-import com.stdnull.runmap.activity.frag.FragmentAdapter;
-import com.stdnull.runmap.ui.PagerIndicator;
-import com.stdnull.runmap.utils.SystemUtils;
+import com.stdnull.runmap.presenter.action.IMainPresenter;
+import com.stdnull.runmap.presenter.actionImpl.MainPresenterImpl;
+import com.stdnull.runmap.ui.frag.FragmentAdapter;
+import com.stdnull.runmap.ui.view.PagerIndicator;
 
 /**
  * 系统主页面
  * Created by chen on 2017/1/28.
  */
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements IMainActivity {
     private ViewPager mFragmentContainer;
     private PagerIndicator mPagerIndicator;
     private FragmentAdapter mFragmentAdapter;
     private static String[] mFragmentTitles = new String[]{"轨迹","我的"};
+    private IMainPresenter mMainPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,21 +27,17 @@ public class MainActivity extends BaseActivity {
         init();
     }
     protected void init(){
-        initConfig();
-        initView();
-    }
-
-    private void initConfig() {
-        if(!SystemUtils.isNetworkEnable(GlobalApplication.getAppContext())){
-            showSettingDialog(Settings.ACTION_DATA_ROAMING_SETTINGS,getString(R.string.need_network)).show();
-        }
-    }
-
-    protected void initView(){
+        mMainPresenter = new MainPresenterImpl(this);
+        mMainPresenter.checkNetWork(this);
         mFragmentContainer = (ViewPager) findViewById(R.id.fragment_container);
         mPagerIndicator = (PagerIndicator) findViewById(R.id.pager_indicator);
         mPagerIndicator.setTitle(mFragmentTitles);
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
         mFragmentContainer.setAdapter(mFragmentAdapter);
+    }
+
+    @Override
+    public void showNetWorkHintDialog(String action, String title) {
+        showSettingDialog(action,title).show();
     }
 }

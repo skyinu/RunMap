@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 
-import com.stdnull.runmap.activity.BaseActivity;
-
 import java.util.LinkedList;
 import java.util.Queue;
 

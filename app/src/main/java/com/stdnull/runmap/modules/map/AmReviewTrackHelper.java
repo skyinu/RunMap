@@ -4,7 +4,7 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.utils.overlay.SmoothMoveMarker;
-import com.stdnull.runmap.bean.TrackPoint;
+import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.common.CFLog;
 
 import java.util.ArrayList;

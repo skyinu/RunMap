@@ -1,4 +1,4 @@
-package com.stdnull.runmap.ui;
+package com.stdnull.runmap.ui.view;
 
 import android.content.Context;
 import android.graphics.Canvas;

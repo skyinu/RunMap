@@ -1,4 +1,4 @@
-package com.stdnull.runmap.bean;
+package com.stdnull.runmap.model;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

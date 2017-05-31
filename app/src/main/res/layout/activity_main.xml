@@ -8,11 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-        <com.stdnull.runmap.ui.PagerIndicator
+        <com.stdnull.runmap.ui.view.PagerIndicator
             android:background="@color/colorPrimary"
             android:id="@+id/pager_indicator"
             android:layout_width="match_parent"
-            android:layout_height="45dp"></com.stdnull.runmap.ui.PagerIndicator>
+            android:layout_height="45dp"></com.stdnull.runmap.ui.view.PagerIndicator>
     </android.support.v4.view.ViewPager>
 
 </LinearLayout>

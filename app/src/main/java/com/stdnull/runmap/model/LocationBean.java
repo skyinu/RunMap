@@ -1,4 +1,4 @@
-package com.stdnull.runmap.bean;
+package com.stdnull.runmap.model;
 
 import java.util.ArrayList;
 import java.util.List;

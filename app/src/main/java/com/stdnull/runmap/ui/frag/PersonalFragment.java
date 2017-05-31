@@ -1,23 +1,22 @@
-package com.stdnull.runmap.activity.frag;
+package com.stdnull.runmap.ui.frag;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.INotificationSideChannel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.stdnull.runmap.R;
-import com.stdnull.runmap.activity.BaseActivity;
-import com.stdnull.runmap.activity.BuildingActivity;
-import com.stdnull.runmap.activity.CalorieActivity;
-import com.stdnull.runmap.activity.ReviewActivity;
+import com.stdnull.runmap.ui.activity.BaseActivity;
+import com.stdnull.runmap.ui.activity.BuildingActivity;
+import com.stdnull.runmap.ui.activity.CalorieActivity;
+import com.stdnull.runmap.ui.activity.ReviewActivity;
 
 /**
- * 轨迹页面
+ * 我的页面-附加功能页
  * Created by chen on 2017/1/28.
  */
 
@@ -59,10 +58,10 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         BaseActivity host = (BaseActivity) getActivity();
-        if(host == null){
+        if(host == null  || isAdded()){
             return;
         }
-        Intent intent = null;
+        Intent intent;
         switch (v.getId()){
             case R.id.track_review:
                 intent = new Intent(host, ReviewActivity.class);

@@ -1,4 +1,4 @@
-package com.stdnull.runmap.activity;
+package com.stdnull.runmap.ui.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;

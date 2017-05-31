@@ -1,4 +1,4 @@
-package com.stdnull.runmap.activity;
+package com.stdnull.runmap.ui.activity;
 
 import android.os.Bundle;
 import android.text.Editable;

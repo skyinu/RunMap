@@ -12,5 +12,8 @@
     <style name="Transparent" parent="AppTheme">
         <item name="android:windowIsTranslucent">true</item>
     </style>
+    <style name="FullScreen" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
 
 </resources>

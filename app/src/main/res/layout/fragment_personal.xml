@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_dim_gray">
-    <com.stdnull.runmap.ui.SettingItemView
+    <com.stdnull.runmap.ui.view.SettingItemView
         android:id="@+id/track_review"
         android:layout_marginTop="22dp"
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:paddingLeft="46dp"
         android:textSize="18sp"
         android:gravity="center_vertical"/>
-    <com.stdnull.runmap.ui.SettingItemView
+    <com.stdnull.runmap.ui.view.SettingItemView
         android:id="@+id/most_stayed"
         android:layout_marginTop="22dp"
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
         android:paddingLeft="46dp"
         android:textSize="18sp"
         android:gravity="center_vertical"/>
-    <com.stdnull.runmap.ui.SettingItemView
+    <com.stdnull.runmap.ui.view.SettingItemView
         android:id="@+id/distance_to_carorie"
         android:layout_marginTop="22dp"
         android:layout_width="match_parent"

@@ -8,9 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.amap.api.maps.model.LatLng;
 import com.stdnull.runmap.GlobalApplication;
-import com.stdnull.runmap.bean.LocationBean;
-import com.stdnull.runmap.bean.LocationDataBase;
-import com.stdnull.runmap.bean.TrackPoint;
+import com.stdnull.runmap.model.LocationBean;
+import com.stdnull.runmap.model.LocationDataBase;
+import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;

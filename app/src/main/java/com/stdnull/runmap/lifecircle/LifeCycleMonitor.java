@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
-import com.stdnull.runmap.activity.BaseActivity;
+import com.stdnull.runmap.ui.activity.BaseActivity;
 
 import java.util.LinkedList;
 import java.util.List;

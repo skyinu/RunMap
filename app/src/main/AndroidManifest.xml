@@ -37,17 +37,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.SplashActivity">
+            android:name=".ui.activity.SplashActivity"
+            android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.TrackActivity"/>
-        <activity android:name=".activity.MainActivity"/>
-        <activity android:name=".activity.ReviewActivity"/>
-        <activity android:name=".activity.BuildingActivity"/>
-        <activity android:name=".activity.CalorieActivity"/>
+        <activity android:name=".ui.activity.TrackActivity"/>
+        <activity android:name=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.activity.ReviewActivity"/>
+        <activity android:name=".ui.activity.BuildingActivity"/>
+        <activity android:name=".ui.activity.CalorieActivity"/>
         <activity android:name=".wxapi.WXEntryActivity"
             android:label="@string/app_name"
             android:exported="true"

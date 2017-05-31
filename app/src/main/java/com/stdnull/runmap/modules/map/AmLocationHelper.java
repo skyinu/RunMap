@@ -10,7 +10,7 @@ import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeAddress;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.stdnull.runmap.GlobalApplication;
-import com.stdnull.runmap.bean.TrackPoint;
+import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 
