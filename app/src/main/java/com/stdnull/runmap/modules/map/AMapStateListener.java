@@ -6,7 +6,7 @@ import com.amap.api.maps.LocationSource;
 /**
  * 地图生命周期、GPS开关检测、地图加载的接口回调
  */
-public interface LocationStateListener{
+public interface AMapStateListener {
     void notifyServiceActive();
 
     void notifyServiceDeactivate();

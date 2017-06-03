@@ -16,56 +16,53 @@ import com.stdnull.runmap.common.CFLog;
  * Created by chen on 2017/1/26.
  */
 
-public class AmLocationService implements LocationSource,AMapLocationListener,AMap.OnMapLoadedListener {
+public class AMapStateListenerImpl implements LocationSource,AMapLocationListener,AMap.OnMapLoadedListener {
     /**
      * SDK自身的位置变化监听对象
      */
     protected OnLocationChangedListener mLocationChangedListener;
 
-    protected LocationStateListener mStateListner;
-    public AmLocationService(@NonNull LocationStateListener stateListener){
-        super();
-        this.mStateListner = stateListener;
+    protected AMapStateListener mStateListener;
+    public AMapStateListenerImpl(@NonNull AMapStateListener stateListener){
+        this.mStateListener = stateListener;
         GlobalApplication.getAppContext().getContentResolver()
-                .registerContentObserver(
-                        Settings.Secure
-                                .getUriFor(Settings.System.LOCATION_PROVIDERS_ALLOWED),
+                .registerContentObserver(Settings.Secure.getUriFor(android.provider.Settings.Secure.LOCATION_PROVIDERS_ALLOWED),
                         false, mGpsMonitor);
     }
     @Override
     public void activate(OnLocationChangedListener onLocationChangedListener) {
-        CFLog.i(AmLocationManager.TAG,"activate");
+        CFLog.i(AMapImpl.TAG,"activate");
         this.mLocationChangedListener = onLocationChangedListener;
-        mStateListner.notifyServiceActive();
+        mStateListener.notifyServiceActive();
 
     }
 
     @Override
     public void deactivate() {
-        CFLog.i(AmLocationManager.TAG,"deactivate");
-        mStateListner.notifyServiceDeactivate();
+        CFLog.i(AMapImpl.TAG,"deactivate");
+        mStateListener.notifyServiceDeactivate();
         mLocationChangedListener = null;
     }
 
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
-        CFLog.i(AmLocationManager.TAG,"onLocationChanged="+aMapLocation.toString());
+        CFLog.i(AMapImpl.TAG,"onLocationChanged="+aMapLocation.toString());
         if(mLocationChangedListener != null && aMapLocation != null && aMapLocation.getErrorCode() == 0){
-            mStateListner.notifyLocationChanged(mLocationChangedListener,aMapLocation);
+            mStateListener.notifyLocationChanged(mLocationChangedListener,aMapLocation);
         }
 
     }
 
     @Override
     public void onMapLoaded() {
-        mStateListner.notifyMapLoaded();
+        mStateListener.notifyMapLoaded();
     }
 
     private final ContentObserver mGpsMonitor = new ContentObserver(null) {
         @Override
         public void onChange(boolean selfChange) {
             super.onChange(selfChange);
-            mStateListner.notifyGPSSwitchChanged();
+            mStateListener.notifyGPSSwitchChanged();
         }
     };
 }

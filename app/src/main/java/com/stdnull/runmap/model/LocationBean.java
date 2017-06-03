@@ -12,6 +12,9 @@ public class LocationBean {
 
     private List<TrackPoint> mPointDatas;
 
+    public LocationBean(List<TrackPoint> pointDatas) {
+        this.mPointDatas = pointDatas;
+    }
 
     public LocationBean() {
         mPointDatas = new ArrayList<>();

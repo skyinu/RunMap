@@ -4,6 +4,7 @@ import android.Manifest;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.SystemClock;
+import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -50,14 +51,13 @@ import java.util.Random;
  * Created by chen on 2017/1/23.
  */
 
-public class AmLocationManager implements LocationStateListener, AMap.OnMarkerClickListener{
+public class AMapImpl implements AMapStateListener, AMap.OnMarkerClickListener{
 
     public static final String TAG = "location";
 
     private AMap mAmap;
 
-    private static AmLocationManager mInstance;
-    private AmLocationService mLocationService;
+    private static AMapImpl mInstance;
     /**
      * 定位服务类实例，提供单次定位、持续定位、最后位置相关功能。
      */
@@ -108,16 +108,17 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
 
     private int mTrashDataCount = 0;
 
-    private AmLocationManager() {
-        mLocationService = new AmLocationService(this);
+    private AMapStateListenerImpl mAmapStateListener;
+
+    private AMapImpl() {
+        mAmapStateListener = new AMapStateListenerImpl(this);
+
         mLocationHelper = new AmLocationHelper();
-
-
     }
 
-    public static synchronized AmLocationManager getInstance() {
+    public static synchronized AMapImpl getInstance() {
         if (mInstance == null) {
-            mInstance = new AmLocationManager();
+            mInstance = new AMapImpl();
         }
         return mInstance;
     }
@@ -126,7 +127,7 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
 
     private void initLocationClient() {
         mAmapLocationClient = new AMapLocationClient(GlobalApplication.getAppContext());
-        mAmapLocationClient.setLocationListener(mLocationService);
+        mAmapLocationClient.setLocationListener(mAmapStateListener);
         mAmapLocationClient.setLocationOption(mAmapLocationOption);
     }
 
@@ -147,12 +148,13 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
 
     }
 
+
     public void initAMap(AMap aMap, int flag) {
         this.mAmap = aMap;
         //照传入的CameraUpdate参数移动可视区域。
         mAmap.moveCamera(CameraUpdateFactory.zoomTo(19));
         //设置定位资源。如果不设置此定位资源则定位按钮不可点击。
-        aMap.setLocationSource(mLocationService);
+        aMap.setLocationSource(mAmapStateListener);
         //显示室内地图
         aMap.showIndoorMap(true);
         if (flag == 0) {
@@ -171,6 +173,8 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
         //去除缩放按钮
         UiSettings settings = aMap.getUiSettings();
         settings.setZoomControlsEnabled(false);
+
+        Log.e("TAG","initAMap");
     }
 
 
@@ -215,7 +219,6 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
         options.color(color);
         options.width(20);
         mAmap.addPolyline(options);
-
     }
 
 
@@ -327,6 +330,7 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
      * 发起定位
      */
     public void startLocation() {
+        Log.e("TAG","startLocation");
         PermissionManager.getInstance().requestPermission(LifeCycleMonitor.getInstance().getLatestActivity(),
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                 new PermissionCallBack() {
@@ -415,9 +419,11 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
         TaskHanler.getInstance().sendTask(task, point);
     }
 
+
     //************************事件通知相关*********************************
     @Override
     public void notifyServiceActive() {
+        Log.e("TAG","notifyServiceActive");
         if (mAmapLocationClient != null) {
             return;
         }
@@ -428,10 +434,11 @@ public class AmLocationManager implements LocationStateListener, AMap.OnMarkerCl
     @Override
     public void notifyServiceDeactivate() {
         if (mAmapLocationClient != null) {
-            mAmapLocationClient.unRegisterLocationListener(mLocationService);
+            mAmapLocationClient.unRegisterLocationListener(mAmapStateListener);
             mAmapLocationClient.onDestroy();
         }
         mAmapLocationClient = null;
+        Log.e("TAG","notifyServiceDeactivate");
     }
 
 

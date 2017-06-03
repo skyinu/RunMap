@@ -11,7 +11,7 @@ import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.presenter.action.IFunctionFragPresenter;
 import com.stdnull.runmap.ui.activity.BaseActivity;
-import com.stdnull.runmap.ui.activity.TrackActivity;
+import com.stdnull.runmap.ui.activity.MovementTrackActivity;
 import com.stdnull.runmap.ui.frag.IFunctionFragment;
 import com.stdnull.runmap.utils.SystemUtils;
 
@@ -58,7 +58,7 @@ public class FunctionFragPresenterImpl implements IFunctionFragPresenter {
             return;
         }
         if(SystemUtils.isGpsEnabled(GlobalApplication.getAppContext())){
-            Intent intent = new Intent(host, TrackActivity.class);
+            Intent intent = new Intent(host, MovementTrackActivity.class);
             host.startActivity(intent);
         }
         else{

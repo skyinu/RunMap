@@ -19,7 +19,7 @@ public class SplashActivity extends BaseActivity implements ISplashActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         mSplashPresenter = new SplashPresenterImpl(this);
-        mSplashPresenter.startCountDown(3);
+        mSplashPresenter.startCountDown(1);
 
     }
 

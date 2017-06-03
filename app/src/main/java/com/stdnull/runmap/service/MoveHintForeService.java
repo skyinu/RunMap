@@ -19,7 +19,7 @@ import com.stdnull.runmap.common.CFLog;
  * Created by chen on 2017/2/8.
  */
 
-public class DataService extends Service {
+public class MoveHintForeService extends Service {
     public static final int MSG_TIME_UPDATE = 0xa1;
     public static final int MSG_DISTANCE_UPDATE = 0xa2;
     private RemoteViews remoteViews;
@@ -67,7 +67,6 @@ public class DataService extends Service {
         builder.setContent(remoteViews);
         builder.setSmallIcon(R.mipmap.app_icon);
         notification = builder.getNotification();
-
         startForeground(1,notification);
         CFLog.e(this.getClass().getName(),"onCreate");
     }

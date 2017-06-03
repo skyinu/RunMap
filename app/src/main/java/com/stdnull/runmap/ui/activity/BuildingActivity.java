@@ -20,7 +20,7 @@ import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.common.TaskHanler;
 import com.stdnull.runmap.managers.DataManager;
-import com.stdnull.runmap.modules.map.AmLocationManager;
+import com.stdnull.runmap.modules.map.AMapImpl;
 import com.stdnull.runmap.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -41,9 +41,9 @@ public class BuildingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_build);
         mAmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        AmLocationManager.getInstance().initAMap(mAmap,1);
+        AMapImpl.getInstance().initAMap(mAmap,1);
         CameraUpdate update = CameraUpdateFactory.zoomTo(4);
-        AmLocationManager.getInstance().moveToSpecficCamera(update);
+        AMapImpl.getInstance().moveToSpecficCamera(update);
         initData();
     }
 
@@ -108,7 +108,7 @@ public class BuildingActivity extends BaseActivity {
 //                    point.setTime(600000);
 //                    mBuildPoints.add(point);
 //                }
-                AmLocationManager.getInstance().drawMarkers(mBuildPoints);
+                AMapImpl.getInstance().drawMarkers(mBuildPoints);
 
             }
         };

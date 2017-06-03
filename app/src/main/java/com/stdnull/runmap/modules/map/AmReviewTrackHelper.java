@@ -21,16 +21,16 @@ public class AmReviewTrackHelper {
     private List<List<LatLng>> mDataSource;
     private boolean firstShow = false;
     public void notifyNewData(Map<Integer, List<TrackPoint>> source){
-        AmLocationManager.getInstance().clearAll();
+        AMapImpl.getInstance().clearAll();
         List<List<LatLng>> showData = prepareShow(source);
         this.mDataSource = showData;
         currentIndex = 0;
         //解决视图不变化的问题
         if(!firstShow) {
             firstShow = true;
-            AmLocationManager.getInstance().moveToSpecficCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(showData.get(currentIndex).get(0), 16, 0, 0)));
+            AMapImpl.getInstance().moveToSpecficCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(showData.get(currentIndex).get(0), 16, 0, 0)));
         }
-        AmLocationManager.getInstance().drawTrackLine(showData.get(currentIndex),currentIndex,new TrackLineMoveListener());
+        AMapImpl.getInstance().drawTrackLine(showData.get(currentIndex),currentIndex,new TrackLineMoveListener());
         firstShow = false;
 
     }
@@ -55,13 +55,13 @@ public class AmReviewTrackHelper {
 
         @Override
         public void move(double v) {
-            CFLog.e(AmLocationManager.TAG,"remain distance ="+v );
+            CFLog.e(AMapImpl.TAG,"remain distance ="+v );
             if(!hasExecuted && v == 0 && currentIndex < mDataSource.size()
                     && Math.abs(pre - v) < 10 ){
-                CFLog.e(AmLocationManager.TAG,"a line finished, prepare to draw new line");
+                CFLog.e(AMapImpl.TAG,"a line finished, prepare to draw new line");
                 hasExecuted = true;
                 currentIndex ++;
-                AmLocationManager.getInstance().drawTrackLine(mDataSource.get(currentIndex),currentIndex,new TrackLineMoveListener());
+                AMapImpl.getInstance().drawTrackLine(mDataSource.get(currentIndex),currentIndex,new TrackLineMoveListener());
             }
             pre = v;
         }

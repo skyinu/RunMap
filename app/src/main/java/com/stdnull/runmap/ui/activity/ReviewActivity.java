@@ -15,7 +15,7 @@ import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.TaskHanler;
 import com.stdnull.runmap.managers.DataManager;
-import com.stdnull.runmap.modules.map.AmLocationManager;
+import com.stdnull.runmap.modules.map.AMapImpl;
 import com.stdnull.runmap.modules.map.AmReviewTrackHelper;
 import com.stdnull.runmap.utils.StringUtils;
 
@@ -57,7 +57,7 @@ public class ReviewActivity extends BaseActivity implements View.OnClickListener
         mRightArrow.setOnClickListener(this);
         mLeftArrow.setOnClickListener(this);
         mAmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        AmLocationManager.getInstance().initAMap(mAmap,1);
+        AMapImpl.getInstance().initAMap(mAmap,1);
         initData();
         mRightArrow.setVisibility(View.GONE);
     }

@@ -44,7 +44,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.TrackActivity"/>
+        <activity android:name=".ui.activity.MovementTrackActivity"/>
         <activity android:name=".ui.activity.MainActivity"/>
         <activity android:name=".ui.activity.ReviewActivity"/>
         <activity android:name=".ui.activity.BuildingActivity"/>
@@ -53,7 +53,7 @@
             android:label="@string/app_name"
             android:exported="true"
             android:theme="@style/Transparent"/>
-        <service android:name=".service.DataService"/>
+        <service android:name=".service.MoveHintForeService"/>
         <service android:name="com.amap.api.location.APSService"/>
         <!--高德地图API key-->
         <meta-data

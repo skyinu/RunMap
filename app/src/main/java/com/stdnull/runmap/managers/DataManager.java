@@ -15,7 +15,7 @@ import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.common.TaskHanler;
-import com.stdnull.runmap.modules.map.AmLocationManager;
+import com.stdnull.runmap.modules.map.AMapImpl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,6 +34,7 @@ public class DataManager {
 
     //管理经纬度数据对象
     private LocationBean mLocationBean;
+
     //数据库实例
     private LocationDataBase mLocationDataBase;
 
@@ -135,7 +136,7 @@ public class DataManager {
         int num = db.delete(LocationDataBase.TABLE_LOCATION,
                 LocationDataBase.FILED_TIME_DAY + " = ? and "
                 + LocationDataBase.FILED_RECORD_COUNT + " = ?",new String[]{fdate,fcount});
-        CFLog.e(AmLocationManager.TAG,"delete data before cache, number = " +num);
+        CFLog.e(AMapImpl.TAG,"delete data before cache, number = " +num);
     }
 
     /**
@@ -158,7 +159,7 @@ public class DataManager {
                 if(!mDataTime.contains(date)) {
                     mDataTime.add(date);
                 }
-                CFLog.e(AmLocationManager.TAG,date);
+                CFLog.e(AMapImpl.TAG,date);
             }
         }
         finally {
@@ -185,7 +186,7 @@ public class DataManager {
                 if(count > result) {
                     result = count;
                 }
-                CFLog.e(AmLocationManager.TAG,"current count = "+result);
+                CFLog.e(AMapImpl.TAG,"current count = "+result);
             }
         }
         finally {
@@ -259,5 +260,9 @@ public class DataManager {
             editor.putLong(RMConfiguration.KEY_TMP_DISTANCE,distance);
             editor.commit();
         }
+    }
+
+    public void setmLocationBean(LocationBean bean){
+        this.mLocationBean = bean;
     }
 }
