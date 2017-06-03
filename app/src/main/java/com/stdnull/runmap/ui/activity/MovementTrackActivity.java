@@ -19,7 +19,6 @@ import com.amap.api.maps.MapFragment;
 import com.stdnull.runmap.R;
 import com.stdnull.runmap.model.IMoveTrack;
 import com.stdnull.runmap.model.MoveTrackModel;
-import com.stdnull.runmap.modules.map.AMapImpl;
 import com.stdnull.runmap.modules.map.AmapWrapper;
 import com.stdnull.runmap.presenter.action.ITrackPresenter;
 import com.stdnull.runmap.presenter.actionImpl.TrackPresenterImpl;
@@ -148,7 +147,6 @@ public class MovementTrackActivity extends BaseActivity implements IMovementTrac
 
     @Override
     public void showExitHintLayout() {
-        AMapImpl.getInstance().setClosed(true);
         findViewById(R.id.rl_map_btn_container).setVisibility(View.GONE);
         findViewById(R.id.ll_text_container).setVisibility(View.GONE);
         RelativeLayout trackExitHint = (RelativeLayout) findViewById(R.id.rl_track_exit_hint_container);

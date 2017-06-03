@@ -56,17 +56,12 @@ public class MoveTrackModel implements IMoveTrack {
     }
 
     @Override
-    public long getDurationDistance() {
-        return mDurationDistance;
-    }
-
-    @Override
     public List<TrackPoint> getHistoryCoordiates() {
         return mCoordinateLists;
     }
 
     @Override
     public void saveModelToDatabase(boolean isEnd) {
-        DataManager.getInstance().cacheDataToDatabase(mCoordinateLists, isEnd);
+        DataManager.getInstance().saveDataAndClearMemory(mCoordinateLists,mDurationDistance, isEnd);
     }
 }

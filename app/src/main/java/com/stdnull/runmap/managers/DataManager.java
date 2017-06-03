@@ -8,14 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.amap.api.maps.model.LatLng;
 import com.stdnull.runmap.GlobalApplication;
-import com.stdnull.runmap.model.LocationBean;
 import com.stdnull.runmap.model.LocationDataBase;
 import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.common.TaskHanler;
-import com.stdnull.runmap.modules.map.AMapImpl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,7 +36,6 @@ public class DataManager {
     private boolean mDataConsist;
 
     private DataManager(){
-//        mLocationBean = new LocationBean();
         mLocationDataBase = new LocationDataBase(GlobalApplication.getAppContext(),
                 RMConfiguration.DATABASE_NAME, null,1);
         mDataConsist = false;
@@ -55,21 +52,7 @@ public class DataManager {
         return mInstance;
     }
 
-    public void addTrackPoint(TrackPoint trackPoint){
-//        mLocationBean.addPointDatas(trackPoint);
-    }
-
-    public List<TrackPoint> getTrackPoints(){
-//        return mLocationBean.getPointDatas();
-        return null;
-    }
-
-
-    public void clearDataInMemory(){
-//        mLocationBean.getPointDatas().clear();
-    }
-
-    public void cacheDataToDatabase(List<TrackPoint> trackPoints, final boolean isLast){
+    public void cacheDataToDatabase(final List<TrackPoint> trackPoints, final boolean isLast){
         CFAsyncTask task = new CFAsyncTask<Void>() {
             @Override
             public Void onTaskExecuted(Object... params) {
@@ -119,7 +102,7 @@ public class DataManager {
             @Override
             public void onTaskFinished(Void result) {
                 if(isLast){
-                    clearDataInMemory();
+                    trackPoints.clear();
                 }
             }
         };
@@ -133,7 +116,7 @@ public class DataManager {
         int num = db.delete(LocationDataBase.TABLE_LOCATION,
                 LocationDataBase.FILED_TIME_DAY + " = ? and "
                 + LocationDataBase.FILED_RECORD_COUNT + " = ?",new String[]{fdate,fcount});
-        CFLog.e(AMapImpl.TAG,"delete data before cache, number = " +num);
+        CFLog.e("TAG","delete data before cache, number = " +num);
     }
 
     /**
@@ -156,7 +139,7 @@ public class DataManager {
                 if(!mDataTime.contains(date)) {
                     mDataTime.add(date);
                 }
-                CFLog.e(AMapImpl.TAG,date);
+                CFLog.e("TAG",date);
             }
         }
         finally {
@@ -183,7 +166,7 @@ public class DataManager {
                 if(count > result) {
                     result = count;
                 }
-                CFLog.e(AMapImpl.TAG,"current count = "+result);
+                CFLog.e("TAG","current count = "+result);
             }
         }
         finally {

@@ -32,7 +32,7 @@ public class AmLocationHelper{
     public boolean shouldAddLatLng(List<TrackPoint> trackPointList, LatLng latLng, float speed){
         if(trackPointList.isEmpty()) {
             mLatestUpdateTime = SystemClock.elapsedRealtime();
-            CFLog.e(AMapImpl.TAG,"Add new data = " + latLng.toString());
+            CFLog.e("TAG","Add new data = " + latLng.toString());
             mLatestIncreasedDistance = 0;
             return true;
         }
@@ -41,13 +41,13 @@ public class AmLocationHelper{
             float distance = AMapUtils.calculateLineDistance(latLng,new LatLng(point.getLatitude(),point.getLongitude()));
             if(distance < RMConfiguration.DRAW_DISTANCE){
                 mLatestIncreasedDistance = 0;
-                CFLog.e(AMapImpl.TAG,"to closed , don't need , distance = " + distance);
+                CFLog.e("TAG","to closed , don't need , distance = " + distance);
                 return false;
             }
             if(!isErrorLaglng(distance,speed)){
                 mLatestUpdateTime = SystemClock.elapsedRealtime();
                 mLatestIncreasedDistance = distance;
-                CFLog.i(AMapImpl.TAG,"Add new data = " + latLng.toString());
+                CFLog.i("TAG","Add new data = " + latLng.toString());
                 return true;
             }
             return false;
@@ -59,16 +59,13 @@ public class AmLocationHelper{
         double interval = (SystemClock.elapsedRealtime() - mLatestUpdateTime)/1000.0;
         float v = (float) (distance/interval);
         if(v > RMConfiguration.MAX_SPEED || v > speed * 1.5){
-            CFLog.e(AMapImpl.TAG,"error data, don't need to add, speed ="+v +" ,"+speed);
+            CFLog.e("TAG","error data, don't need to add, speed ="+v +" ,"+speed);
             return true;
         }
         return false;
 
     }
 
-    public float getLatestIncreasedDistance(){
-        return mLatestIncreasedDistance;
-    }
 
 
     public RegeocodeAddress regeocodeAddress(LatLonPoint latLonPoint){

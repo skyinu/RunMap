@@ -33,6 +33,7 @@ import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.common.TaskHanler;
+import com.stdnull.runmap.model.BuildingPoint;
 import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.modules.map.filter.ILocationFilter;
 import com.stdnull.runmap.modules.map.listenter.IGpsPowerListener;
@@ -328,6 +329,11 @@ public class AmapWrapper implements IMap,AMapStateListener {
     @Override
     public void clear() {
         mAmap.clear();
+    }
+
+    @Override
+    public void drawMarkers(List<BuildingPoint> buildingPointList) {
+        mMapDrawer.drawMarkers(buildingPointList);
     }
 
     private RegeocodeAddress regeocodeAddress(LatLonPoint latLonPoint){

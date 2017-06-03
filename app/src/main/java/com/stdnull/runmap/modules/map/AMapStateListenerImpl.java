@@ -31,7 +31,7 @@ public class AMapStateListenerImpl implements LocationSource,AMapLocationListene
     }
     @Override
     public void activate(OnLocationChangedListener onLocationChangedListener) {
-        CFLog.i(AMapImpl.TAG,"activate");
+        CFLog.i("TAG","activate");
         this.mLocationChangedListener = onLocationChangedListener;
         mStateListener.notifyServiceActive();
 
@@ -39,14 +39,14 @@ public class AMapStateListenerImpl implements LocationSource,AMapLocationListene
 
     @Override
     public void deactivate() {
-        CFLog.i(AMapImpl.TAG,"deactivate");
+        CFLog.i("TAG","deactivate");
         mStateListener.notifyServiceDeactivate();
         mLocationChangedListener = null;
     }
 
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
-        CFLog.i(AMapImpl.TAG,"onLocationChanged="+aMapLocation.toString());
+        CFLog.i("TAG","onLocationChanged="+aMapLocation.toString());
         if(mLocationChangedListener != null && aMapLocation != null && aMapLocation.getErrorCode() == 0){
             mStateListener.notifyLocationChanged(mLocationChangedListener,aMapLocation);
         }

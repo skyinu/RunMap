@@ -40,7 +40,6 @@ public class MapDrawer {
 
     public void drawPolyLine(float speed, LatLng... latLngs) {
         List<LatLng> tmp = Arrays.asList(latLngs);
-
         drawPolyLine(tmp, getColorBySpeed(speed));
     }
 

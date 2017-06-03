@@ -7,6 +7,7 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.utils.overlay.SmoothMoveMarker;
+import com.stdnull.runmap.model.BuildingPoint;
 import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.modules.map.filter.ILocationFilter;
 import com.stdnull.runmap.modules.map.listenter.IGpsPowerListener;
@@ -39,4 +40,5 @@ public interface IMap {
     void drawPolyLine(List<LatLng> latLngs, int color);
     void drawTrackAnimation(List<LatLng> drawSource, int currentIndex, SmoothMoveMarker.MoveListener moveListener);
     void clear();
+    void drawMarkers(List<BuildingPoint> buildingPointList);
 }

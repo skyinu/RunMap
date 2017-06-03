@@ -14,7 +14,6 @@ public interface IMoveTrack {
     void onSaveInstanceState(Bundle bundle);
     long onNewLocation(TrackPoint trackPoint);
     long updateDuration(int addedTime);
-    long getDurationDistance();
     List<TrackPoint> getHistoryCoordiates();
     void saveModelToDatabase(boolean isEnd);
 }

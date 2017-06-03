@@ -203,8 +203,7 @@ public class TrackPresenterImpl implements ITrackPresenter, IOnNewLocation, IGps
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 boolean shouldShowShare = mMoveModel.getHistoryCoordiates().size() < RMConfiguration.MIN_CACHE_DATA;
-                DataManager.getInstance().saveDataAndClearMemory(mMoveModel.getHistoryCoordiates(), mMoveModel.getDurationDistance() ,true);
-                mMoveModel.getHistoryCoordiates().clear();
+                mMoveModel.saveModelToDatabase(true);
                 if(shouldShowShare) {
                     mMovementTrackActivity.finishActivity();
                 }
@@ -222,7 +221,7 @@ public class TrackPresenterImpl implements ITrackPresenter, IOnNewLocation, IGps
     @Override
     public void scaleCurrentCamera() {
         CameraPosition position = mapObject.getController().getCameraPosition();
-        List<TrackPoint> trackPoints = DataManager.getInstance().getTrackPoints();
+        List<TrackPoint> trackPoints = mMoveModel.getHistoryCoordiates();
         LatLng start = new LatLng(trackPoints.get(0).getLatitude(), trackPoints.get(0).getLongitude());
         LatLng end = new LatLng(trackPoints.get(trackPoints.size() - 1).getLatitude(), trackPoints.get(trackPoints.size() - 1).getLongitude());
         CameraUpdate update = CameraUpdateFactory.newLatLngBounds(new LatLngBounds(start, end), (int) (position.zoom - 6));
@@ -304,8 +303,9 @@ public class TrackPresenterImpl implements ITrackPresenter, IOnNewLocation, IGps
         LatLng cur = new LatLng(location.getLatitude(), location.getLongitude());
         TrackPoint trackPoint = new TrackPoint(cur, SystemClock.elapsedRealtime());
         mapObject.requestRegeoAddress(location, trackPoint);
+
         List<TrackPoint> trackPoints = mMoveModel.getHistoryCoordiates();
-        if(trackPoints.size() > 1) {
+        if(trackPoints.size() >= 1) {
             mapObject.drawPolyLine(location.getSpeed(), trackPoint.getLocation(),
                     trackPoints.get(trackPoints.size() - 1).getLocation());
         }
@@ -363,7 +363,7 @@ public class TrackPresenterImpl implements ITrackPresenter, IOnNewLocation, IGps
 
     @Override
     public void onBackground(Context context) {
-        DataManager.getInstance().saveDataAndClearMemory(mMoveModel.getHistoryCoordiates(), mMoveModel.getDurationDistance() , false);
+        mMoveModel.saveModelToDatabase(false);
     }
 
     class SecondTimer extends Handler{
