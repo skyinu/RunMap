@@ -1,4 +1,4 @@
-package com.stdnull.runmap.ui.frag;
+package com.stdnull.runmap.ui.uibehavior;
 
 /**
  * Created by chen on 2017/5/31.

@@ -38,6 +38,10 @@ public class TaskHanler {
 
     }
 
+    public void sendTaskDelayed(Runnable runnable, int time){
+        mTaskHandler.postDelayed(runnable, time);
+    }
+
     public void sendTaskDelayed(final CFAsyncTask task,int time, final Object ...params){
         Runnable action = new Runnable() {
             @Override

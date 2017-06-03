@@ -14,13 +14,14 @@ import com.stdnull.runmap.R;
 import com.stdnull.runmap.presenter.actionImpl.FunctionFragPresenterImpl;
 import com.stdnull.runmap.presenter.action.IFunctionFragPresenter;
 import com.stdnull.runmap.ui.activity.BaseActivity;
+import com.stdnull.runmap.ui.uibehavior.IFunctionFragment;
 
 /**
  * 主功能页面
  * Created by chen on 2017/1/28.
  */
 
-public class FunctionFragment extends Fragment implements View.OnClickListener, IFunctionFragment{
+public class FunctionFragment extends Fragment implements View.OnClickListener, IFunctionFragment {
     private View mRootView;
     private TextView mTvTotalTrack;
     private Button mStartTrackBtn;

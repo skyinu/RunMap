@@ -67,7 +67,6 @@ public class MoveTrackModel implements IMoveTrack {
 
     @Override
     public void saveModelToDatabase(boolean isEnd) {
-        DataManager.getInstance().setmLocationBean(new LocationBean(mCoordinateLists));
-        DataManager.getInstance().cacheDataToDatabase(isEnd);
+        DataManager.getInstance().cacheDataToDatabase(mCoordinateLists, isEnd);
     }
 }

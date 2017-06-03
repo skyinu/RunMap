@@ -1,7 +1,6 @@
 package com.stdnull.runmap.ui.activity;
 
 
-import android.app.Activity;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -24,6 +23,7 @@ import com.stdnull.runmap.modules.map.AMapImpl;
 import com.stdnull.runmap.modules.map.AmapWrapper;
 import com.stdnull.runmap.presenter.action.ITrackPresenter;
 import com.stdnull.runmap.presenter.actionImpl.TrackPresenterImpl;
+import com.stdnull.runmap.ui.uibehavior.IMovementTrackActivity;
 
 /**
  * Created by chen on 2017/6/3.

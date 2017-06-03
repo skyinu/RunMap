@@ -12,7 +12,7 @@ import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.presenter.action.IFunctionFragPresenter;
 import com.stdnull.runmap.ui.activity.BaseActivity;
 import com.stdnull.runmap.ui.activity.MovementTrackActivity;
-import com.stdnull.runmap.ui.frag.IFunctionFragment;
+import com.stdnull.runmap.ui.uibehavior.IFunctionFragment;
 import com.stdnull.runmap.utils.SystemUtils;
 
 import java.text.DecimalFormat;

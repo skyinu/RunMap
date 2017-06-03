@@ -37,7 +37,6 @@ import com.stdnull.runmap.lifecircle.AppStateListener;
 import com.stdnull.runmap.lifecircle.LifeCycleMonitor;
 import com.stdnull.runmap.managers.DataManager;
 import com.stdnull.runmap.model.IMoveTrack;
-import com.stdnull.runmap.model.LocationBean;
 import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.modules.map.IMap;
 import com.stdnull.runmap.modules.map.filter.LocationEndFilter;
@@ -49,7 +48,7 @@ import com.stdnull.runmap.modules.map.listenter.IMapCaptureFinished;
 import com.stdnull.runmap.modules.map.listenter.IOnNewLocation;
 import com.stdnull.runmap.presenter.action.ITrackPresenter;
 import com.stdnull.runmap.service.MoveHintForeService;
-import com.stdnull.runmap.ui.activity.IMovementTrackActivity;
+import com.stdnull.runmap.ui.uibehavior.IMovementTrackActivity;
 import com.stdnull.runmap.utils.ShareUtils;
 import com.stdnull.runmap.utils.SystemUtils;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
@@ -203,9 +202,10 @@ public class TrackPresenterImpl implements ITrackPresenter, IOnNewLocation, IGps
         builder.setPositiveButton(R.string.string_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                DataManager.getInstance().setmLocationBean(new LocationBean(mMoveModel.getHistoryCoordiates()));
-                DataManager.getInstance().saveDataAndClearMemory(mMoveModel.getDurationDistance() ,true);
-                if(DataManager.getInstance().getTrackPoints().size() < RMConfiguration.MIN_CACHE_DATA) {
+                boolean shouldShowShare = mMoveModel.getHistoryCoordiates().size() < RMConfiguration.MIN_CACHE_DATA;
+                DataManager.getInstance().saveDataAndClearMemory(mMoveModel.getHistoryCoordiates(), mMoveModel.getDurationDistance() ,true);
+                mMoveModel.getHistoryCoordiates().clear();
+                if(shouldShowShare) {
                     mMovementTrackActivity.finishActivity();
                 }
                 else{
@@ -236,7 +236,7 @@ public class TrackPresenterImpl implements ITrackPresenter, IOnNewLocation, IGps
 
     @Override
     public void onSaveInstanceState(Bundle bundle) {
-        mMoveModel.onRestoreInstanceState(bundle);
+        mMoveModel.onSaveInstanceState(bundle);
     }
 
     @Override
@@ -363,8 +363,7 @@ public class TrackPresenterImpl implements ITrackPresenter, IOnNewLocation, IGps
 
     @Override
     public void onBackground(Context context) {
-        DataManager.getInstance().setmLocationBean(new LocationBean(mMoveModel.getHistoryCoordiates()));
-        DataManager.getInstance().saveDataAndClearMemory(mMoveModel.getDurationDistance() , false);
+        DataManager.getInstance().saveDataAndClearMemory(mMoveModel.getHistoryCoordiates(), mMoveModel.getDurationDistance() , false);
     }
 
     class SecondTimer extends Handler{

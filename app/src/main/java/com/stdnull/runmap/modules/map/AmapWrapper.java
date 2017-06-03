@@ -10,19 +10,25 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.PolylineOptions;
+import com.amap.api.maps.utils.overlay.SmoothMoveMarker;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeAddress;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.stdnull.runmap.GlobalApplication;
+import com.stdnull.runmap.R;
 import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
@@ -35,11 +41,13 @@ import com.stdnull.runmap.modules.map.listenter.IMapCaptureFinished;
 import com.stdnull.runmap.modules.map.listenter.IOnNewLocation;
 import com.stdnull.runmap.modules.permission.PermissionCallBack;
 import com.stdnull.runmap.modules.permission.PermissionManager;
+import com.stdnull.runmap.presenter.actionImpl.ReviewPresenterImpl;
 import com.stdnull.runmap.utils.SystemUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by chen on 2017/6/1.
@@ -219,7 +227,6 @@ public class AmapWrapper implements IMap,AMapStateListener {
 
     @Override
     public void notifyMapLoaded() {
-
     }
 
     @Override
@@ -311,6 +318,16 @@ public class AmapWrapper implements IMap,AMapStateListener {
     @Override
     public void drawPolyLine(List<LatLng> latLngs, int color) {
         mMapDrawer.drawPolyLine(latLngs, color);
+    }
+
+    @Override
+    public void drawTrackAnimation(List<LatLng> drawSource, int currentIndex, SmoothMoveMarker.MoveListener moveListener) {
+        mMapDrawer.drawTrackAnimation(drawSource, currentIndex, moveListener);
+    }
+
+    @Override
+    public void clear() {
+        mAmap.clear();
     }
 
     private RegeocodeAddress regeocodeAddress(LatLonPoint latLonPoint){

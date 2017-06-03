@@ -72,24 +72,6 @@ public class AMapImpl implements AMapStateListener, AMap.OnMarkerClickListener{
     private long mLocationInterval = 5 * RMConfiguration.SECOND;
 
     /**
-     * 外部距离变化监听类监听类
-     */
-    private OnDistanceIncreasedListener mDistanceListener;
-
-    /**
-     * 外部GPS 信号强度变化监听类
-     */
-    private OnGpsPowerListener mGpsPowerListener;
-
-
-    /**
-     * 外部开关状态
-     */
-    private OnGpsSwitchListener mGpsSwitchListener;
-
-    private OnCaptureListener mCaptureListener;
-
-    /**
      * 标志起点是否设置成功
      */
     private boolean hasStartPointSetted = false;
@@ -177,25 +159,6 @@ public class AMapImpl implements AMapStateListener, AMap.OnMarkerClickListener{
         Log.e("TAG","initAMap");
     }
 
-
-    //***************************************************************
-
-    //***********************数据设置相关*************************************
-    public void setDistanceListener(OnDistanceIncreasedListener listener) {
-        this.mDistanceListener = listener;
-    }
-
-    public void setGpsPowerListener(OnGpsPowerListener listener) {
-        this.mGpsPowerListener = listener;
-    }
-
-    public void setGpsSwitchListener(OnGpsSwitchListener listener) {
-        this.mGpsSwitchListener = listener;
-    }
-
-    public void setCaptureListener(OnCaptureListener listener) {
-        this.mCaptureListener = listener;
-    }
 
 
     //*********************************************************************
@@ -305,47 +268,8 @@ public class AMapImpl implements AMapStateListener, AMap.OnMarkerClickListener{
     }
 
 
-    public void changeMapStyle() {
-        if (mAmap.getMapType() == AMap.MAP_TYPE_NORMAL) {
-            mAmap.setMapType(AMap.MAP_TYPE_SATELLITE);
-        } else {
-            mAmap.setMapType(AMap.MAP_TYPE_NORMAL);
-        }
-    }
-
-    public void scaleCurrentCamera() {
-        CameraPosition position = mAmap.getCameraPosition();
-        List<TrackPoint> trackPoints = DataManager.getInstance().getTrackPoints();
-        LatLng start = new LatLng(trackPoints.get(0).getLatitude(), trackPoints.get(0).getLongitude());
-        LatLng end = new LatLng(trackPoints.get(trackPoints.size() - 1).getLatitude(), trackPoints.get(trackPoints.size() - 1).getLongitude());
-        CameraUpdate update = CameraUpdateFactory.newLatLngBounds(new LatLngBounds(start, end), (int) (position.zoom - 6));
-        moveToSpecficCamera(update);
-    }
-
     public void moveToSpecficCamera(CameraUpdate cameraUpdate) {
         mAmap.moveCamera(cameraUpdate);
-    }
-
-    /**
-     * 发起定位
-     */
-    public void startLocation() {
-        Log.e("TAG","startLocation");
-        PermissionManager.getInstance().requestPermission(LifeCycleMonitor.getInstance().getLatestActivity(),
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                new PermissionCallBack() {
-                    @Override
-                    public void onAllPermissionGranted() {
-                        if (mAmapLocationClient != null) {
-                            mAmapLocationClient.startLocation();
-                        }
-                    }
-
-                    @Override
-                    public void onDenied() {
-
-                    }
-                });
     }
 
 
@@ -360,9 +284,6 @@ public class AMapImpl implements AMapStateListener, AMap.OnMarkerClickListener{
      * @param aMapLocation
      */
     private boolean resolveLocationChanged(LocationSource.OnLocationChangedListener amListener, AMapLocation aMapLocation) {
-        if (mGpsPowerListener != null) {
-            mGpsPowerListener.onGpsPower(aMapLocation.getGpsAccuracyStatus());
-        }
         LatLng latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude(), true);
         List<TrackPoint> trackPointList = DataManager.getInstance().getTrackPoints();
         //判断数据的合理性,每五分钟强制增加数据
@@ -383,9 +304,6 @@ public class AMapImpl implements AMapStateListener, AMap.OnMarkerClickListener{
             //添加数据
             TrackPoint trackPoint = new TrackPoint(latLng, SystemClock.elapsedRealtime());
             DataManager.getInstance().addTrackPoint(trackPoint);
-            if (mDistanceListener != null) {
-                mDistanceListener.onDistanceIncreased(mLocationHelper.getLatestIncreasedDistance(), latLng);
-            }
             //位置逆编码
             requestRegeoAddress(aMapLocation, trackPoint);
             return true;
@@ -466,47 +384,12 @@ public class AMapImpl implements AMapStateListener, AMap.OnMarkerClickListener{
 
     @Override
     public void notifyGPSSwitchChanged() {
-        if (mGpsSwitchListener != null) {
-            mGpsSwitchListener.onGPSSwitchChanged();
-        }
     }
 
-
-    //**********************************************************
-    public void onDestroy() {
-        hasStartPointSetted = false;
-        if (mAmapLocationClient != null) {
-            mAmapLocationClient.stopLocation();
-        }
-    }
 
 
     public void setClosed(boolean closed) {
         isClosed = closed;
-    }
-
-    /**
-     * 对地图进行截屏
-     */
-    public void captureMap() {
-        mAmap.getMapScreenShot(new AMap.OnMapScreenShotListener() {
-            @Override
-            public void onMapScreenShot(Bitmap bitmap) {
-            }
-            @Override
-            public void onMapScreenShot(Bitmap bitmap, int status) {
-                if (mCaptureListener != null) {
-                    mCaptureListener.onCaptureFinished(bitmap, status);
-                }
-                StringBuffer buffer = new StringBuffer();
-                if (status != 0)
-                    buffer.append("地图渲染完成，截屏无网格");
-                else {
-                    buffer.append("地图未渲染完成，截屏有网格");
-                }
-                CFLog.e(TAG,buffer.toString());
-            }
-        });
     }
 
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.stdnull.runmap.R;
 import com.stdnull.runmap.presenter.action.ISplashPresenter;
 import com.stdnull.runmap.presenter.actionImpl.SplashPresenterImpl;
+import com.stdnull.runmap.ui.uibehavior.ISplashActivity;
 
 /**
  * 系统欢迎页

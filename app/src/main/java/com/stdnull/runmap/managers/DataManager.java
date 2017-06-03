@@ -32,16 +32,13 @@ public class DataManager {
     private static DataManager mInstance;
     private static final Object INSTANCE_LOCK = new Object();
 
-    //管理经纬度数据对象
-    private LocationBean mLocationBean;
-
     //数据库实例
     private LocationDataBase mLocationDataBase;
 
     private boolean mDataConsist;
 
     private DataManager(){
-        mLocationBean = new LocationBean();
+//        mLocationBean = new LocationBean();
         mLocationDataBase = new LocationDataBase(GlobalApplication.getAppContext(),
                 RMConfiguration.DATABASE_NAME, null,1);
         mDataConsist = false;
@@ -59,19 +56,20 @@ public class DataManager {
     }
 
     public void addTrackPoint(TrackPoint trackPoint){
-        mLocationBean.addPointDatas(trackPoint);
+//        mLocationBean.addPointDatas(trackPoint);
     }
 
     public List<TrackPoint> getTrackPoints(){
-        return mLocationBean.getPointDatas();
+//        return mLocationBean.getPointDatas();
+        return null;
     }
 
 
     public void clearDataInMemory(){
-        mLocationBean.getPointDatas().clear();
+//        mLocationBean.getPointDatas().clear();
     }
 
-    public void cacheDataToDatabase(final boolean isLast){
+    public void cacheDataToDatabase(List<TrackPoint> trackPoints, final boolean isLast){
         CFAsyncTask task = new CFAsyncTask<Void>() {
             @Override
             public Void onTaskExecuted(Object... params) {
@@ -81,8 +79,7 @@ public class DataManager {
                 //构造当前时间的字符串
                 int date = 10000*calendar.get(Calendar.YEAR)+100*(calendar.get(Calendar.MONTH)+1)+calendar.get(Calendar.DATE);
                 int count = DataManager.this.queryRecordCountToday(date+"") + 1;
-                LocationBean locationBean = (LocationBean) params[1];
-                List<TrackPoint> trackPointList = locationBean.getPointDatas();
+                List<TrackPoint> trackPointList = (List<TrackPoint>) params[1];
                 //数据量过低且是第一次存储数据时不cache数据
                 if(trackPointList.size() < RMConfiguration.MIN_CACHE_DATA){
                     return null;
@@ -126,7 +123,7 @@ public class DataManager {
                 }
             }
         };
-        TaskHanler.getInstance().sendTask(task,mLocationDataBase,mLocationBean);
+        TaskHanler.getInstance().sendTask(task,mLocationDataBase,trackPoints);
     }
 
     private void deleteDateByDateAndCount(int date, int count){
@@ -244,8 +241,8 @@ public class DataManager {
         return groupResult;
     }
 
-    public void saveDataAndClearMemory(Long distance,boolean isLast){
-        cacheDataToDatabase(isLast);
+    public void saveDataAndClearMemory(List<TrackPoint> trackPoints, Long distance,boolean isLast){
+        cacheDataToDatabase(trackPoints, isLast);
         //更新sp中的距离信息,单位为米
         SharedPreferences sp = GlobalApplication.getAppContext().getSharedPreferences(RMConfiguration.FILE_CONFIG, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
@@ -260,9 +257,5 @@ public class DataManager {
             editor.putLong(RMConfiguration.KEY_TMP_DISTANCE,distance);
             editor.commit();
         }
-    }
-
-    public void setmLocationBean(LocationBean bean){
-        this.mLocationBean = bean;
     }
 }

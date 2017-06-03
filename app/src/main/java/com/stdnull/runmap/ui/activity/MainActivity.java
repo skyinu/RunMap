@@ -7,6 +7,7 @@ import com.stdnull.runmap.R;
 import com.stdnull.runmap.presenter.action.IMainPresenter;
 import com.stdnull.runmap.presenter.actionImpl.MainPresenterImpl;
 import com.stdnull.runmap.ui.frag.FragmentAdapter;
+import com.stdnull.runmap.ui.uibehavior.IMainActivity;
 import com.stdnull.runmap.ui.view.PagerIndicator;
 
 /**

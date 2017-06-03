@@ -58,7 +58,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         BaseActivity host = (BaseActivity) getActivity();
-        if(host == null  || isAdded()){
+        if(host == null  || !isAdded()){
             return;
         }
         Intent intent;

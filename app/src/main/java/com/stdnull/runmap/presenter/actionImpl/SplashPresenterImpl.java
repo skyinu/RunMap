@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.stdnull.runmap.presenter.action.ISplashPresenter;
-import com.stdnull.runmap.ui.activity.ISplashActivity;
+import com.stdnull.runmap.ui.uibehavior.ISplashActivity;
 
 /**
  * Created by chen on 2017/5/31.
