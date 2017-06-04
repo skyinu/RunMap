@@ -1,6 +1,6 @@
 ## RunMap
-[![RunMapV1.0](https://github.com/stdnull/RunMap/blob/v1.0/readme/runmap_version.svg)]
-[![Progress](https://github.com/stdnull/RunMap/blob/v1.0/readme/runmap_state.svg)]
+![RunMapV1.0](https://github.com/stdnull/RunMap/blob/v1.0/readme/runmap_version.svg)
+![Progress](https://github.com/stdnull/RunMap/blob/v1.0/readme/runmap_state.svg)
 
 ## 截图
 

@@ -8,5 +8,6 @@
 /captures
 .externalNativeBuild
 *.jks
+/app/*.jks
 gradle.properties
 
