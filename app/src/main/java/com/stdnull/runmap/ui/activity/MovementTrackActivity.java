@@ -3,10 +3,12 @@ package com.stdnull.runmap.ui.activity;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -41,7 +43,6 @@ public class MovementTrackActivity extends BaseActivity implements IMovementTrac
     /**
      * 概要数据显示页Layout
      */
-    private LinearLayout mLlDataUiContainer;
     private View mViewGpsPower;
     private Button mBtnChangeMapUi;
     private TextView mTvDataMoveDistance;
@@ -51,6 +52,8 @@ public class MovementTrackActivity extends BaseActivity implements IMovementTrac
     private ITrackPresenter mTrackPresenter;
 
     private PopupWindow mSharePopWindow;
+
+    private SwipeRefreshLayout mLocationProgressLayout;
 
 
 
@@ -82,16 +85,14 @@ public class MovementTrackActivity extends BaseActivity implements IMovementTrac
         mTvMoveDistance = (TextView) findViewById(R.id.tv_duration_distance);
         mTvMoveDuration = (TextView) findViewById(R.id.tv_duration_time);
 
-        //初始化数据UI相关
-        mLlDataUiContainer = (LinearLayout) findViewById(R.id.ll_data_ui_container);
-        mViewGpsPower = findViewById(R.id.view_gps_power);
-        mBtnChangeMapUi = (Button) findViewById(R.id.btn_change_to_map_ui);
-        mTvDataMoveDistance = (TextView) findViewById(R.id.tv_data_ui_distance);
-        mTvDataMoveTime = (TextView) findViewById(R.id.tv_data_ui_time);
-
         mBtnMapStyleChange.setOnClickListener(this);
         mBtnActivityLayoutChange.setOnClickListener(this);
-        mBtnChangeMapUi.setOnClickListener(this);
+
+        mLocationProgressLayout = (SwipeRefreshLayout) findViewById(R.id.spl_refresh_view);
+        mLocationProgressLayout.setRefreshing(true);
+        mLocationProgressLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent),
+                getResources().getColor(R.color.colorPrimary));
+
     }
 
 
@@ -116,17 +117,24 @@ public class MovementTrackActivity extends BaseActivity implements IMovementTrac
     @Override
     public void updateDistance(String distanceGap) {
         mTvMoveDistance.setText(distanceGap);
-        mTvDataMoveDistance.setText(distanceGap);
+        if(mTvDataMoveDistance != null) {
+            mTvDataMoveDistance.setText(distanceGap);
+        }
     }
 
     @Override
     public void updateTime(String time) {
-        mTvDataMoveTime.setText(time);
+        if(mTvDataMoveTime != null) {
+            mTvDataMoveTime.setText(time);
+        }
         mTvMoveDuration.setText(time);
     }
 
     @Override
     public void updateGpsPower(int gpsPower) {
+        if(mViewGpsPower ==null){
+            return;
+        }
         if(gpsPower == AMapLocation.GPS_ACCURACY_GOOD){
             mViewGpsPower.getBackground().setLevel(3);
         }
@@ -153,8 +161,16 @@ public class MovementTrackActivity extends BaseActivity implements IMovementTrac
         trackExitHint.setVisibility(View.VISIBLE);
         findViewById(R.id.btn_finish).setOnClickListener(this);
         findViewById(R.id.btn_share).setOnClickListener(this);
-        mTrackPresenter.showDataUiLayout(MovementTrackActivity.this, mRlMapUiContainer, getFragmentManager().findFragmentById(R.id.map));
+        mTrackPresenter.showMapUiLayout(MovementTrackActivity.this, mRlMapUiContainer, getFragmentManager().findFragmentById(R.id.map));
         mTrackPresenter.scaleCurrentCamera();
+    }
+
+    @Override
+    public void dismissRefresh() {
+        mLocationProgressLayout.setRefreshing(false);
+        mLocationProgressLayout.setEnabled(false);
+        //for experience, init layout here
+        inflateDataUiLayout();
     }
 
     @Override
@@ -185,9 +201,24 @@ public class MovementTrackActivity extends BaseActivity implements IMovementTrac
         }
     }
 
+    private void inflateDataUiLayout(){
+        ViewStub viewStub = (ViewStub) findViewById(R.id.vs_data_ui_layout);
+        if(viewStub == null){
+            //already inflate
+            return;
+        }
+        View dataUiRoot = viewStub.inflate();
+        //初始化数据UI相关
+        mViewGpsPower = dataUiRoot.findViewById(R.id.view_gps_power);
+        mBtnChangeMapUi = (Button) dataUiRoot.findViewById(R.id.btn_change_to_map_ui);
+        mTvDataMoveDistance = (TextView) dataUiRoot.findViewById(R.id.tv_data_ui_distance);
+        mTvDataMoveTime = (TextView) dataUiRoot.findViewById(R.id.tv_data_ui_time);
+        mBtnChangeMapUi.setOnClickListener(this);
+    }
+
     private void showShareLayout() {
         mSharePopWindow = new PopupWindow(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        View view = LayoutInflater.from(this).inflate(R.layout.sharelayout,null);
+        View view = LayoutInflater.from(this).inflate(R.layout.sharelayout, null);
         view.findViewById(R.id.btn_share_to_circle).setOnClickListener(this);
         view.findViewById(R.id.btn_share_to_friend).setOnClickListener(this);
         mSharePopWindow.setContentView(view);

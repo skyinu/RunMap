@@ -2,9 +2,18 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ViewStub
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/vs_data_ui_layout"
+        android:layout="@layout/activity_track_data_layout"/>
 
-    <include layout="@layout/activity_track_data_layout"/>
-    <include layout="@layout/activity_track_map_layout"/>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/spl_refresh_view">
+        <include layout="@layout/activity_track_map_layout"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 

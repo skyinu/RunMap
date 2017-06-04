@@ -32,4 +32,6 @@ public interface IMovementTrackActivity {
     void finishActivity();
 
     void showExitHintLayout();
+
+    void dismissRefresh();
 }

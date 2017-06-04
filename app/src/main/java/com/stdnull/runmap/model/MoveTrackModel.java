@@ -39,11 +39,12 @@ public class MoveTrackModel implements IMoveTrack {
 
     @Override
     public long onNewLocation(TrackPoint trackPoint) {
+        LatLng cur = new LatLng(trackPoint.getLatitude(), trackPoint.getLongitude());
         if(mCoordinateLists.isEmpty()){
+            mCoordinateLists.add(trackPoint);
             return 0;
         }
         LatLng pre = mCoordinateLists.get(mCoordinateLists.size() - 1).getLocation();
-        LatLng cur = new LatLng(trackPoint.getLatitude(), trackPoint.getLongitude());
         mCoordinateLists.add(trackPoint);
         mDurationDistance += AMapUtils.calculateLineDistance(pre, cur);
         return mDurationDistance;

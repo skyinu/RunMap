@@ -202,9 +202,9 @@ public class TrackPresenterImpl implements ITrackPresenter, IOnNewLocation, IGps
         builder.setPositiveButton(R.string.string_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                boolean shouldShowShare = mMoveModel.getHistoryCoordiates().size() < RMConfiguration.MIN_CACHE_DATA;
+                boolean shouldShowShare = mMoveModel.getHistoryCoordiates().size() > RMConfiguration.MIN_CACHE_DATA;
                 mMoveModel.saveModelToDatabase(true);
-                if(shouldShowShare) {
+                if(!shouldShowShare) {
                     mMovementTrackActivity.finishActivity();
                 }
                 else{
@@ -295,12 +295,15 @@ public class TrackPresenterImpl implements ITrackPresenter, IOnNewLocation, IGps
     public void onNewLocation(AMapLocation location) {
         if(mLocationTypeFiler != null && mapObject.removeLocationFilter(mLocationTypeFiler)) {
             mLocationTypeFiler = null;
+            //locate succeed, dismiss refresh layout
+            mMovementTrackActivity.dismissRefresh();
         }
         if(!isTimerStarted){
             isTimerStarted = true;
             mSecondTimer.sendEmptyMessageDelayed(0, TIME_UPDATE_FREQUENCY);
         }
         LatLng cur = new LatLng(location.getLatitude(), location.getLongitude());
+        //新坐标点
         TrackPoint trackPoint = new TrackPoint(cur, SystemClock.elapsedRealtime());
         mapObject.requestRegeoAddress(location, trackPoint);
 
