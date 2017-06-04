@@ -1,6 +1,7 @@
 ## RunMap
-[![RunMapV1.0](https://github.com/stdnull/RunMap/blob/master/readme/runmap_version.svg)](https://github.com/stdnull/RunMap)
-[![Progress](https://github.com/stdnull/RunMap/blob/master/readme/runmap_state.svg)](https://github.com/stdnull/RunMap)
+[![RunMapV1.0](https://img.shields.io/github/release/stdnull/runmap.svg)](https://github.com/stdnull/RunMap)
+[![License](https://img.shields.io/badge/License-Apache-green.svg)](https://github.com/stdnull/RunMap)
+[![Progress](https://img.shields.io/badge/Progress-Refining-yellowgreen.svg)](https://github.com/stdnull/RunMap)
 
 ## 截图
 
