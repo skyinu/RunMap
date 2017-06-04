@@ -1,5 +1,13 @@
 ## RunMap
 [![RunMapV1.0](https://github.com/stdnull/RunMap/raw/master/gif/readme/runmap_version.svg)]
+[![Progress](https://github.com/stdnull/RunMap/raw/master/gif/readme/runmap_state.svg)]
+
+## 截图
+
+<img src="/readme/runmap_first.png" alt="main" title="screenshot" width="300" height="500" />
+<img src="/readme/runmap_main_1.png" alt="main" title="screenshot" width="300" height="500" />
+<img src="/readme/runmap_main_2.png" alt="main" title="screenshot" width="300" height="500" />
+
 
 ## 链接:
 
