@@ -204,13 +204,14 @@ public class TrackPresenterImpl implements ITrackPresenter, IOnNewLocation, IGps
             public void onClick(DialogInterface dialog, int which) {
                 boolean shouldShowShare = mMoveModel.getHistoryCoordiates().size() > RMConfiguration.MIN_CACHE_DATA;
                 mMoveModel.saveModelToDatabase(true);
-                if(!shouldShowShare) {
-                    mMovementTrackActivity.finishActivity();
-                }
-                else{
+                if(shouldShowShare) {
                     isForceExit = true;
                     mapObject.addLocationFilter(new LocationEndFilter(true));
                     mMovementTrackActivity.showExitHintLayout();
+                }
+                else{
+                    mMovementTrackActivity.finishActivity();
+
                 }
             }
         });

@@ -3,6 +3,7 @@ package com.stdnull.runmap;
 import android.app.Application;
 import android.content.Context;
 
+import com.stdnull.runmap.common.CFCrashHandler;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.lifecircle.LifeCycleMonitor;
 
@@ -27,6 +28,7 @@ public class GlobalApplication extends Application {
 
     private void init(){
         registerActivityLifecycleCallbacks(LifeCycleMonitor.getInstance().getLifeCycleCallBack());
+        CFCrashHandler.getInstance().registCrashHandler();
     }
 
     @Override
