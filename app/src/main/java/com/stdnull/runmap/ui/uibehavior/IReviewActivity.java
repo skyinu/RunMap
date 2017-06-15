@@ -1,4 +1,4 @@
-package com.stdnull.runmap.ui.activity;
+package com.stdnull.runmap.ui.uibehavior;
 
 /**
  * Created by chen on 2017/6/3.

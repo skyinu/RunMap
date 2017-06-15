@@ -25,15 +25,15 @@ public class AMapStateListenerImpl implements LocationSource,AMapLocationListene
     protected AMapStateListener mStateListener;
     public AMapStateListenerImpl(@NonNull AMapStateListener stateListener){
         this.mStateListener = stateListener;
-        GlobalApplication.getAppContext().getContentResolver()
-                .registerContentObserver(Settings.Secure.getUriFor(android.provider.Settings.Secure.LOCATION_PROVIDERS_ALLOWED),
-                        false, mGpsMonitor);
     }
     @Override
     public void activate(OnLocationChangedListener onLocationChangedListener) {
         CFLog.i("TAG","activate");
         this.mLocationChangedListener = onLocationChangedListener;
         mStateListener.notifyServiceActive();
+        GlobalApplication.getAppContext().getContentResolver()
+                .registerContentObserver(Settings.Secure.getUriFor(android.provider.Settings.Secure.LOCATION_PROVIDERS_ALLOWED),
+                        false, mGpsMonitor);
 
     }
 
@@ -42,6 +42,8 @@ public class AMapStateListenerImpl implements LocationSource,AMapLocationListene
         CFLog.i("TAG","deactivate");
         mStateListener.notifyServiceDeactivate();
         mLocationChangedListener = null;
+        GlobalApplication.getAppContext().getContentResolver()
+                .unregisterContentObserver(mGpsMonitor);
     }
 
     @Override

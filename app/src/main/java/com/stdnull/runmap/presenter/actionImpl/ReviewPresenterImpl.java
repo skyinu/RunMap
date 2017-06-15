@@ -15,7 +15,7 @@ import com.stdnull.runmap.model.ReviewModel;
 import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.modules.map.IMap;
 import com.stdnull.runmap.presenter.action.IReviewPresenter;
-import com.stdnull.runmap.ui.activity.IReviewActivity;
+import com.stdnull.runmap.ui.uibehavior.IReviewActivity;
 import com.stdnull.runmap.ui.activity.ReviewActivity;
 import com.stdnull.runmap.utils.StringUtils;
 

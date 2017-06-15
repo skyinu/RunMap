@@ -14,6 +14,7 @@ import com.stdnull.runmap.R;
 import com.stdnull.runmap.modules.map.AmapWrapper;
 import com.stdnull.runmap.presenter.action.IReviewPresenter;
 import com.stdnull.runmap.presenter.actionImpl.ReviewPresenterImpl;
+import com.stdnull.runmap.ui.uibehavior.IReviewActivity;
 
 /**
  * 轨迹回放页面

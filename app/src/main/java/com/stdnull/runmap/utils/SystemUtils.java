@@ -1,5 +1,6 @@
 package com.stdnull.runmap.utils;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -46,5 +47,18 @@ public final class SystemUtils {
             return info.isAvailable();
         }
         return false;
+    }
+
+    public static String getProcessName(Context context) {
+        int pid = android.os.Process.myPid();//获取进程pid
+        String processName = "";
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);//获取系统的ActivityManager服务
+        for (ActivityManager.RunningAppProcessInfo appProcess : am.getRunningAppProcesses()) {
+            if (appProcess.pid == pid) {
+                processName = appProcess.processName;
+                return processName;
+            }
+        }
+        return processName;
     }
 }

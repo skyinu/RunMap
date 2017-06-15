@@ -2,10 +2,12 @@ package com.stdnull.runmap;
 
 import android.app.Application;
 import android.content.Context;
-
+import android.text.TextUtils;
+import com.squareup.leakcanary.LeakCanary;
 import com.stdnull.runmap.common.CFCrashHandler;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.lifecircle.LifeCycleMonitor;
+import com.stdnull.runmap.utils.SystemUtils;
 
 /**
  * app进程类
@@ -18,8 +20,15 @@ public class GlobalApplication extends Application {
     public void onCreate() {
         super.onCreate();
         CFLog.e(this.getClass().getName(),"onCreate");
-        mAppContext = this;
-        init();
+        String processName = SystemUtils.getProcessName(this);
+        if(!TextUtils.isEmpty(processName)&& getPackageName().equals(processName)) {
+            mAppContext = this;
+            init();
+        }
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     public static Context getAppContext(){
