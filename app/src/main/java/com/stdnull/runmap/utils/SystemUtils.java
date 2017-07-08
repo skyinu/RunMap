@@ -43,10 +43,7 @@ public final class SystemUtils {
     public static boolean isNetworkEnable(Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connectivityManager.getActiveNetworkInfo();
-        if(info != null){
-            return info.isAvailable();
-        }
-        return false;
+        return info != null && info.isAvailable();
     }
 
     public static String getProcessName(Context context) {

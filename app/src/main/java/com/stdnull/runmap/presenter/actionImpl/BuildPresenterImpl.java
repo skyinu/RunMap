@@ -1,5 +1,7 @@
 package com.stdnull.runmap.presenter.actionImpl;
 
+import android.util.SparseArray;
+
 import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -93,11 +95,10 @@ public class BuildPresenterImpl implements IBuildPresenter {
         List<BuildingPoint> pointList = new ArrayList<>();
         for(int i=0;i<dateList.size();i++){
             //按日期取数据
-            Map<Integer,List<TrackPoint>> trackItem = DataManager.getInstance().readTrackPointFormDataBase(dateList.get(i));
-            Set<Integer> keys = trackItem.keySet();
+            SparseArray<List<TrackPoint>> trackItem = DataManager.getInstance().readTrackPointFormDataBase(dateList.get(i));
             //按日期遍历记录次数
-            for(Integer k : keys){
-                List<TrackPoint> trackPoints = trackItem.get(k);
+            for(int keyIndex = 0; i < trackItem.size(); keyIndex++){
+                List<TrackPoint> trackPoints = trackItem.get(trackItem.keyAt(keyIndex));
                 String buildName = null;
                 Long time = 0L;
                 boolean startFlag = false;

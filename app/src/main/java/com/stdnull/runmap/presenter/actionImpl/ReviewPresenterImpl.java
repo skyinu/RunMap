@@ -1,5 +1,6 @@
 package com.stdnull.runmap.presenter.actionImpl;
 
+import android.util.SparseArray;
 import android.view.View;
 
 import com.amap.api.maps.CameraUpdateFactory;
@@ -115,14 +116,14 @@ public class ReviewPresenterImpl implements IReviewPresenter {
     }
 
     private void updatePrevCache(final String date){
-        CFAsyncTask<Map<Integer,List<TrackPoint>>> task = new CFAsyncTask<Map<Integer, List<TrackPoint>>>() {
+        CFAsyncTask<SparseArray<List<TrackPoint>>> task = new CFAsyncTask<SparseArray<List<TrackPoint>>>() {
             @Override
-            public Map<Integer, List<TrackPoint>> onTaskExecuted(Object... params) {
+            public SparseArray<List<TrackPoint>> onTaskExecuted(Object... params) {
                 return DataManager.getInstance().readTrackPointFormDataBase(date);
             }
 
             @Override
-            public void onTaskFinished(Map<Integer, List<TrackPoint>> result) {
+            public void onTaskFinished(SparseArray<List<TrackPoint>> result) {
                 mReviewModel.setPreviewData(result);
             }
         };
@@ -130,14 +131,14 @@ public class ReviewPresenterImpl implements IReviewPresenter {
     }
 
     private void updateNextCache(final String date){
-        CFAsyncTask<Map<Integer,List<TrackPoint>>> task = new CFAsyncTask<Map<Integer, List<TrackPoint>>>() {
+        CFAsyncTask<SparseArray<List<TrackPoint>>> task = new CFAsyncTask<SparseArray<List<TrackPoint>>>() {
             @Override
-            public Map<Integer, List<TrackPoint>> onTaskExecuted(Object... params) {
+            public SparseArray<List<TrackPoint>> onTaskExecuted(Object... params) {
                 return DataManager.getInstance().readTrackPointFormDataBase(date);
             }
 
             @Override
-            public void onTaskFinished(Map<Integer, List<TrackPoint>> result) {
+            public void onTaskFinished(SparseArray<List<TrackPoint>> result) {
                 mReviewModel.setNextData(result);
             }
         };

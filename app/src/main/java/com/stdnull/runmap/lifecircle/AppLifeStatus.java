@@ -96,12 +96,12 @@ class AppLifeStatus implements Application.ActivityLifecycleCallbacks{
         }
     }
 
-    protected void registerListener(@NonNull AppStateListener listener){
+    void registerListener(@NonNull AppStateListener listener){
         WeakReference<AppStateListener> item = new WeakReference<>(listener);
         mAppStateListeners.add(item);
     }
 
-    protected void unRegisterListener(@NonNull AppStateListener listener){
+    void unRegisterListener(@NonNull AppStateListener listener){
         for(int i=0;i<mAppStateListeners.size();i++){
             AppStateListener item = mAppStateListeners.get(i).get();
             if(listener.equals(item)){

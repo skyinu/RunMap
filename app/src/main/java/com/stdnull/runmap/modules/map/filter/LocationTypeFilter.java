@@ -9,9 +9,6 @@ import com.amap.api.location.AMapLocation;
 public class LocationTypeFilter implements ILocationFilter {
     @Override
     public boolean accept(AMapLocation previous, AMapLocation current) {
-        if(current.getLocationType() == AMapLocation.LOCATION_TYPE_GPS){
-            return true;
-        }
-        return false;
+        return current.getLocationType() == AMapLocation.LOCATION_TYPE_GPS;
     }
 }

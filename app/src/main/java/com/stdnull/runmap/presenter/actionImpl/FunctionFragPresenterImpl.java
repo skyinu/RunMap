@@ -43,6 +43,7 @@ public class FunctionFragPresenterImpl implements IFunctionFragPresenter {
             SharedPreferences.Editor editor = sp.edit();
             editor.putLong(RMConfiguration.KEY_TMP_DISTANCE,0);
             editor.putLong(RMConfiguration.KEY_TOTAL_DISTANCE,distance);
+            editor.commit();
             DecimalFormat distanceFormater = (DecimalFormat) NumberFormat.getInstance();
             distanceFormater.setMinimumFractionDigits(2);
             distanceFormater.setMaximumFractionDigits(2);

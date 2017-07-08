@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.Button;
@@ -16,7 +17,7 @@ import com.stdnull.runmap.R;
  * 我的页面功能条目UI
  * Created by chen on 2016/3/20.
  */
-public class SettingItemView extends Button {
+public class SettingItemView extends AppCompatButton {
     private Bitmap mStartImage;
     private Rect mImageRegion;
     private Rect mSrc;

@@ -226,7 +226,6 @@ public class MovementTrackActivity extends BaseActivity implements IMovementTrac
         mSharePopWindow.setBackgroundDrawable(new BitmapDrawable());
         mSharePopWindow.setOutsideTouchable(true);
         mSharePopWindow.showAtLocation(findViewById(android.R.id.content), Gravity.BOTTOM,0,0);
-        return;
     }
 
     /**

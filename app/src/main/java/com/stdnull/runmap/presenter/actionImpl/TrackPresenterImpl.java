@@ -35,7 +35,6 @@ import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.common.TaskHanler;
 import com.stdnull.runmap.lifecircle.AppStateListener;
 import com.stdnull.runmap.lifecircle.LifeCycleMonitor;
-import com.stdnull.runmap.managers.DataManager;
 import com.stdnull.runmap.model.IMoveTrack;
 import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.modules.map.IMap;
@@ -350,7 +349,7 @@ public class TrackPresenterImpl implements ITrackPresenter, IOnNewLocation, IGps
 
             @Override
             public void onTaskFinished(Boolean result) {
-                if(result == false && (mGpsTipsDialog == null || !mGpsTipsDialog.isShowing())){
+                if(!result && (mGpsTipsDialog == null || !mGpsTipsDialog.isShowing())){
                     mGpsTipsDialog = mMovementTrackActivity.showGpsSettingDialog(Settings.ACTION_LOCATION_SOURCE_SETTINGS, R.string.gps_closed_tips);
                     mGpsTipsDialog.show();
                 }

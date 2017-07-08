@@ -7,10 +7,7 @@ package com.stdnull.runmap.utils;
 
 public final class StringUtils {
     public static boolean isEmpty(String string){
-        if(string == null || string.length() < 1){
-            return true;
-        }
-        return false;
+        return string == null || string.length() < 1;
     }
 
     public static String splitDate(String date){

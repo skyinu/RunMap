@@ -16,13 +16,13 @@ import com.stdnull.runmap.common.CFLog;
  * Created by chen on 2017/1/26.
  */
 
-public class AMapStateListenerImpl implements LocationSource,AMapLocationListener,AMap.OnMapLoadedListener {
+class AMapStateListenerImpl implements LocationSource,AMapLocationListener,AMap.OnMapLoadedListener {
     /**
      * SDK自身的位置变化监听对象
      */
-    protected OnLocationChangedListener mLocationChangedListener;
+    private OnLocationChangedListener mLocationChangedListener;
 
-    protected AMapStateListener mStateListener;
+    private AMapStateListener mStateListener;
     public AMapStateListenerImpl(@NonNull AMapStateListener stateListener){
         this.mStateListener = stateListener;
     }

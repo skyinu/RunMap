@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.SparseArray;
 
 import com.amap.api.maps.model.LatLng;
 import com.stdnull.runmap.GlobalApplication;
@@ -52,7 +53,7 @@ public class DataManager {
         return mInstance;
     }
 
-    public void cacheDataToDatabase(final List<TrackPoint> trackPoints, final boolean isLast){
+    private void cacheDataToDatabase(final List<TrackPoint> trackPoints, final boolean isLast){
         CFAsyncTask task = new CFAsyncTask<Void>() {
             @Override
             public Void onTaskExecuted(Object... params) {
@@ -183,8 +184,8 @@ public class DataManager {
      * @param dayTime
      * @return
      */
-    public Map<Integer,List<TrackPoint>> readTrackPointFormDataBase(String dayTime) {
-        Map<Integer, List<TrackPoint>> groupResult = new HashMap<>();
+    public SparseArray<List<TrackPoint>> readTrackPointFormDataBase(String dayTime) {
+        SparseArray<List<TrackPoint>> groupResult = new SparseArray<>();
 
         SQLiteDatabase db = mLocationDataBase.getReadableDatabase();
 
@@ -234,11 +235,11 @@ public class DataManager {
             total += distance;
             editor.putLong(RMConfiguration.KEY_TOTAL_DISTANCE,total);
             editor.putLong(RMConfiguration.KEY_TMP_DISTANCE,0);
-            editor.commit();
+            editor.apply();
         }
         else{
             editor.putLong(RMConfiguration.KEY_TMP_DISTANCE,distance);
-            editor.commit();
+            editor.apply();
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.stdnull.runmap.model;
 
+import android.util.SparseArray;
+
 import com.amap.api.maps.model.LatLng;
 
 import java.util.List;
@@ -10,17 +12,17 @@ import java.util.Map;
  */
 
 public interface IReview {
-    Map<Integer, List<TrackPoint>> getPreviewData();
+    SparseArray<List<TrackPoint>> getPreviewData();
 
-    void setPreviewData(Map<Integer, List<TrackPoint>> previewData);
+    void setPreviewData(SparseArray<List<TrackPoint>> previewData);
 
-     Map<Integer, List<TrackPoint>> getCurrentShowData();
+     SparseArray<List<TrackPoint>> getCurrentShowData();
 
-    void setCurrentShowData(Map<Integer, List<TrackPoint>> currentShowData);
+    void setCurrentShowData(SparseArray<List<TrackPoint>> currentShowData);
 
-    Map<Integer, List<TrackPoint>> getNextData();
+    SparseArray<List<TrackPoint>> getNextData();
 
-    void setNextData(Map<Integer, List<TrackPoint>> nextData);
+    void setNextData(SparseArray<List<TrackPoint>> nextData);
 
     List<String> getDateList();
 

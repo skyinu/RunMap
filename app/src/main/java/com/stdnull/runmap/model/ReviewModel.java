@@ -1,5 +1,7 @@
 package com.stdnull.runmap.model;
 
+import android.util.SparseArray;
+
 import com.amap.api.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -14,9 +16,9 @@ public class ReviewModel implements IReview {
     /**
      * data list to show in map
      */
-    private Map<Integer,List<TrackPoint>> mPreviewData;//前一天数据
-    private Map<Integer,List<TrackPoint>> mCurrentShowData;//当前查看数据
-    private Map<Integer,List<TrackPoint>> mNextData;//下一天数据
+    private SparseArray<List<TrackPoint>> mPreviewData;//前一天数据
+    private SparseArray<List<TrackPoint>> mCurrentShowData;//当前查看数据
+    private SparseArray<List<TrackPoint>> mNextData;//下一天数据
     /**
      * date list
      */
@@ -28,32 +30,32 @@ public class ReviewModel implements IReview {
 
 
     @Override
-    public Map<Integer, List<TrackPoint>> getPreviewData() {
+    public SparseArray<List<TrackPoint>> getPreviewData() {
         return mPreviewData;
     }
 
     @Override
-    public void setPreviewData(Map<Integer, List<TrackPoint>> previewData) {
+    public void setPreviewData(SparseArray<List<TrackPoint>> previewData) {
         this.mPreviewData = previewData;
     }
 
     @Override
-    public Map<Integer, List<TrackPoint>> getCurrentShowData() {
+    public SparseArray<List<TrackPoint>> getCurrentShowData() {
         return mCurrentShowData;
     }
 
     @Override
-    public void setCurrentShowData(Map<Integer, List<TrackPoint>> currentShowData) {
+    public void setCurrentShowData(SparseArray<List<TrackPoint>> currentShowData) {
         this.mCurrentShowData = currentShowData;
     }
 
     @Override
-    public Map<Integer, List<TrackPoint>> getNextData() {
+    public SparseArray<List<TrackPoint>> getNextData() {
         return mNextData;
     }
 
     @Override
-    public void setNextData(Map<Integer, List<TrackPoint>> nextData) {
+    public void setNextData(SparseArray<List<TrackPoint>> nextData) {
         this.mNextData = nextData;
     }
 
@@ -79,11 +81,11 @@ public class ReviewModel implements IReview {
 
     @Override
     public List<List<LatLng>> formatTrackPoints() {
-        int count = mCurrentShowData.keySet().size();
+        int count = mCurrentShowData.size();
         List<List<LatLng>> groupData = new ArrayList<>();
         for(int i=0;i<count;i++) {
             List<LatLng> points = new ArrayList<>();
-            List<TrackPoint> trackPointList = mCurrentShowData.get(i);
+            List<TrackPoint> trackPointList = mCurrentShowData.get(mCurrentShowData.keyAt(i));
             for (int j = 0; j < trackPointList.size(); j++) {
                 points.add(trackPointList.get(j).getLocation());
             }
