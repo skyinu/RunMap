@@ -54,7 +54,7 @@ android {
             def outputFile = output.outputFile
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
                 //这里修改apk文件名
-                def fileName = "RunMap_V${defaultConfig.versionName}.apk"
+                def fileName = "RunMap_V${defaultConfig.versionName}_${variant.buildType.name}.apk"
                 output.outputFile = new File(outputFile.parent, fileName)
             }
         }
