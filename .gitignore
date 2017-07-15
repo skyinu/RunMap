@@ -10,4 +10,4 @@
 *.jks
 /app/*.jks
 gradle.properties
-
+/.idea

@@ -29,6 +29,7 @@ public class GlobalApplication extends Application {
             return;
         }
         LeakCanary.install(this);
+//        WirelessLog.getInstance().catchLogsPeriod("192.168.18.7", 10, TimeUnit.SECONDS);
     }
 
     public static Context getAppContext(){
