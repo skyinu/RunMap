@@ -24,12 +24,12 @@ public class GlobalApplication extends Application {
         if(!TextUtils.isEmpty(processName)&& getPackageName().equals(processName)) {
             mAppContext = this;
             init();
+            CFLog.initMonitor();
         }
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
         LeakCanary.install(this);
-//        WirelessLog.getInstance().catchLogsPeriod("192.168.18.7", 10, TimeUnit.SECONDS);
     }
 
     public static Context getAppContext(){

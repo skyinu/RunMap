@@ -15,6 +15,15 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-dontwarn retrofit2.Platform$Java8
+-keepattributes Signature
+#保持native方法不混淆
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
 -keep   class com.amap.api.maps.**{*;}
 -keep   class com.autonavi.amap.mapcore.*{*;}
 -keep   class com.amap.api.trace.**{*;}

@@ -29,6 +29,7 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
 import com.stdnull.runmap.GlobalApplication;
 import com.stdnull.runmap.R;
+import com.stdnull.runmap.common.AppConfig;
 import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
@@ -138,8 +139,8 @@ public class TrackPresenterImpl implements ITrackPresenter, IOnNewLocation, IGps
 
     @Override
     public void registerWXShareAPI(Context context) {
-        mWxApi = WXAPIFactory.createWXAPI(context, RMConfiguration.WEIXIN_APP_ID,true);
-        CFLog.e("Share","register = " + mWxApi.registerApp(RMConfiguration.WEIXIN_APP_ID));
+        mWxApi = WXAPIFactory.createWXAPI(context, AppConfig.getWeixinAppId(),true);
+        CFLog.e("Share","register = " + mWxApi.registerApp(AppConfig.getWeixinAppId()));
     }
 
     @Override

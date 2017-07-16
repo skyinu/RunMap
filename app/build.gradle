@@ -21,6 +21,7 @@ android {
 
     sourceSets {
         main {
+            jni.srcDirs = []
             jniLibs.srcDirs = ['libs']
         }
     }
@@ -75,4 +76,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.6.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     debugCompile project(':logcatch')
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
 }

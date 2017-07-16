@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.stdnull.runmap.GlobalApplication;
 import com.stdnull.runmap.common.RMConfiguration;
 
 /**
@@ -57,5 +58,13 @@ public final class SystemUtils {
             }
         }
         return processName;
+    }
+
+    public static String getDbPath(){
+        StringBuilder dbPath = new StringBuilder("/data/data/");
+        dbPath.append(GlobalApplication.getAppContext().getPackageName());
+        dbPath.append("/databases");
+        dbPath.append("/" + RMConfiguration.DATABASE_NAME);
+        return dbPath.toString();
     }
 }

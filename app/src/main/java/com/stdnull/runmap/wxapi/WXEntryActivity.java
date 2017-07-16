@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.stdnull.runmap.R;
-import com.stdnull.runmap.common.RMConfiguration;
+import com.stdnull.runmap.common.AppConfig;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -21,7 +21,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-		api = WXAPIFactory.createWXAPI(this, RMConfiguration.WEIXIN_APP_ID, false);
+		api = WXAPIFactory.createWXAPI(this, AppConfig.getWeixinAppId(), false);
 		try {
 			api.handleIntent(getIntent(), this);
 		} catch (Exception e) {

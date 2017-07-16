@@ -37,22 +37,22 @@ public class BuildingActivity extends BaseActivity implements IBuildActivity {
         mPresenter.genarateGraph();
     }
 
-    public static List<LatLng> test = new ArrayList<>();
-
-    static {
-        test.add(new LatLng(31.7029985115958, 117.92576410224807));
-        test.add(new LatLng(32.7029985115958, 120.92576410224807));
-        test.add(new LatLng(34.7029985115958, 119.92576410224807));
-        test.add(new LatLng(31.7029985115958, 118.92576410224807));
-        test.add(new LatLng(33.7029985115958, 116.92576410224807));
-        test.add(new LatLng(36.7029985115958, 122.92576410224807));
-        test.add(new LatLng(37.7029985115958, 123.92576410224807));
-        test.add(new LatLng(38.7029985115958, 124.92576410224807));
-        test.add(new LatLng(39.7029985115958, 125.92576410224807));
-        test.add(new LatLng(40.7029985115958, 126.92576410224807));
-        test.add(new LatLng(30.7029985115958, 115.92576410224807));
-        test.add(new LatLng(32.7029985115958, 118.92576410224807));
-    }
+//    public static List<LatLng> test = new ArrayList<>();
+//
+//    static {
+//        test.add(new LatLng(31.7029985115958, 117.92576410224807));
+//        test.add(new LatLng(32.7029985115958, 120.92576410224807));
+//        test.add(new LatLng(34.7029985115958, 119.92576410224807));
+//        test.add(new LatLng(31.7029985115958, 118.92576410224807));
+//        test.add(new LatLng(33.7029985115958, 116.92576410224807));
+//        test.add(new LatLng(36.7029985115958, 122.92576410224807));
+//        test.add(new LatLng(37.7029985115958, 123.92576410224807));
+//        test.add(new LatLng(38.7029985115958, 124.92576410224807));
+//        test.add(new LatLng(39.7029985115958, 125.92576410224807));
+//        test.add(new LatLng(40.7029985115958, 126.92576410224807));
+//        test.add(new LatLng(30.7029985115958, 115.92576410224807));
+//        test.add(new LatLng(32.7029985115958, 118.92576410224807));
+//    }
 
 
     @Override

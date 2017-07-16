@@ -31,8 +31,6 @@ public final class RMConfiguration {
 
     public static final int MAP_PADDING = 120;
 
-    public static final String WEIXIN_APP_ID = "wx80d09d1ee6a69b27";
-
     public static final int FORCE_COUNT = 60;
 
     public static final int LOW_SPEED_COLOR = Color.parseColor("#06ff00");

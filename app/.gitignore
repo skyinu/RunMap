@@ -1,2 +1,4 @@
 /build
 *.jks
+/src/main/libs
+/src/main/obj

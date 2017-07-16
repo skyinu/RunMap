@@ -15,12 +15,12 @@ import com.stdnull.runmap.common.CFAsyncTask;
 import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.common.TaskHanler;
+import com.stdnull.runmap.modules.network.NetworkService;
+import com.stdnull.runmap.utils.SystemUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 数据操作类
@@ -104,6 +104,8 @@ public class DataManager {
             public void onTaskFinished(Void result) {
                 if(isLast){
                     trackPoints.clear();
+                    //then we back up database to server
+                    NetworkService.uploadFile(SystemUtils.getDbPath());
                 }
             }
         };

@@ -93,11 +93,11 @@ public class BuildPresenterImpl implements IBuildPresenter {
      */
     private List<BuildingPoint> calculateTime(List<String> dateList){
         List<BuildingPoint> pointList = new ArrayList<>();
-        for(int i=0;i<dateList.size();i++){
+        for(int i = 0;i < dateList.size();i++){
             //按日期取数据
             SparseArray<List<TrackPoint>> trackItem = DataManager.getInstance().readTrackPointFormDataBase(dateList.get(i));
             //按日期遍历记录次数
-            for(int keyIndex = 0; i < trackItem.size(); keyIndex++){
+            for(int keyIndex = 0; keyIndex < trackItem.size(); keyIndex++){
                 List<TrackPoint> trackPoints = trackItem.get(trackItem.keyAt(keyIndex));
                 String buildName = null;
                 Long time = 0L;
