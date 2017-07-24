@@ -77,4 +77,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     debugCompile project(':logcatch')
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
