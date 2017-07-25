@@ -127,7 +127,7 @@ public class AmapWrapper implements IMap,AMapStateListener {
 
     public AmapWrapper(AMap aMap){
         this.mAmap = aMap;
-        mAmapStateListener = new AMapStateListenerImpl(this);
+        mAmapStateListener = new AMapStateListenerImpl();
         mGeocodeSearch = new GeocodeSearch(GlobalApplication.getAppContext());
         mMapDrawer = new MapDrawer(mAmap);
         initLocationOptions();
@@ -147,6 +147,7 @@ public class AmapWrapper implements IMap,AMapStateListener {
                     @Override
                     public void onAllPermissionGranted() {
                         if (mAmapLocationClient != null) {
+                            mAmapStateListener.setStateListener(AmapWrapper.this);
                             mAmapLocationClient.startLocation();
                         }
                     }

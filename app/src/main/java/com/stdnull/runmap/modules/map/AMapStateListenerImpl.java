@@ -23,9 +23,13 @@ class AMapStateListenerImpl implements LocationSource,AMapLocationListener,AMap.
     private OnLocationChangedListener mLocationChangedListener;
 
     private AMapStateListener mStateListener;
-    public AMapStateListenerImpl(@NonNull AMapStateListener stateListener){
+    public AMapStateListenerImpl(){
+    }
+
+    public void setStateListener(@NonNull AMapStateListener stateListener) {
         this.mStateListener = stateListener;
     }
+
     @Override
     public void activate(OnLocationChangedListener onLocationChangedListener) {
         CFLog.i("TAG","activate");
@@ -42,6 +46,7 @@ class AMapStateListenerImpl implements LocationSource,AMapLocationListener,AMap.
         CFLog.i("TAG","deactivate");
         mStateListener.notifyServiceDeactivate();
         mLocationChangedListener = null;
+        mStateListener = null;
         GlobalApplication.getAppContext().getContentResolver()
                 .unregisterContentObserver(mGpsMonitor);
     }

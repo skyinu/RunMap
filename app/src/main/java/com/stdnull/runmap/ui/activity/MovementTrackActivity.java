@@ -169,6 +169,7 @@ public class MovementTrackActivity extends BaseActivity implements IMovementTrac
     public void dismissRefresh() {
         mLocationProgressLayout.setRefreshing(false);
         mLocationProgressLayout.setEnabled(false);
+        mBtnActivityLayoutChange.setEnabled(true);
         //for experience, init layout here
         inflateDataUiLayout();
     }

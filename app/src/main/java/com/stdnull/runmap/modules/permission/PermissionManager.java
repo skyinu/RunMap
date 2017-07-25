@@ -25,7 +25,10 @@ public class PermissionManager {
     public void requestPermission(Activity activity, String[]permissons, PermissionCallBack callBack){
         PermissionRequest request = new PermissionRequest(activity,permissons,callBack);
         mCurrentRequest.add(request);
-        request.startRequest();
+        //remove data to avoid memory leak
+        if(request.startRequest()){
+            mCurrentRequest.remove(request);
+        }
     }
 
     public void handlePermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){

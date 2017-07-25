@@ -20,7 +20,7 @@ public class PermissionRequest{
         this.mRequestPermission = permissions;
     }
 
-    public void startRequest(){
+    boolean startRequest(){
         boolean flag = false;
         for(int i = 0; i< mRequestPermission.length; i++){
             if(PackageManager.PERMISSION_DENIED == activity.checkCallingOrSelfPermission(mRequestPermission[i])){
@@ -30,10 +30,12 @@ public class PermissionRequest{
         }
         if(!flag){
             mCallBack.onAllPermissionGranted();
+            return true;
         }
         else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             activity.requestPermissions(mRequestPermission, PermissionManager.PERMISSION_CODE);
         }
+        return false;
     }
 
     public PermissionCallBack getCallBack() {

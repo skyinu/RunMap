@@ -89,7 +89,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
-            android:background="@mipmap/quit_map_ui" />
+            android:background="@mipmap/quit_map_ui"
+            android:enabled="false"/>
     </RelativeLayout>
 
 
