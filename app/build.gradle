@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply from: gradle.rootProject.rootDir.absolutePath + '\\gradle\\utils.gradle'
+apply from: gradle.rootProject.rootDir.absolutePath + File.separator +'gradle'+ File.separator +'utils.gradle'
 
 android {
     compileSdkVersion 24
