@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
-apply from: gradle.rootProject.rootDir.absolutePath + File.separator +'gradle'+ File.separator +'utils.gradle'
-
+apply plugin: 'simplify'
 android {
     compileSdkVersion 24
     buildToolsVersion "25.0.0"
@@ -77,6 +76,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.6.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     debugCompile project(':logcatch')
+    compile project(':v2api')
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

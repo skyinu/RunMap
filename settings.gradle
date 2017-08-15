@@ -1,1 +1,1 @@
-include ':app', ':logcatch'
+include ':app', ':logcatch', ':v2api'

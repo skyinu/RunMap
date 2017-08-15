@@ -1,0 +1,16 @@
+
+def sourceJarLibDir = gradle.rootProject.rootDir.absolutePath + File.separator + "build" +
+         File.separator + "libs" + File.separator +  (project.name + "." + project.version + ".jar")
+def destNativeLibDir = "D:\\software\\androidCode\\RunMap\\gradle" + File.separator + (project.name + "." + project.version + ".jar")
+
+copyLibs(sourceJarLibDir, destNativeLibDir)
+
+def copyLibs(sourceDir, destDir) {
+    def sourceFile = new File(sourceDir)
+    def destFile = new File(destDir)
+    destFile.withOutputStream { os ->
+        sourceFile.withInputStream { ins ->
+            os << ins
+        }
+    }
+}
