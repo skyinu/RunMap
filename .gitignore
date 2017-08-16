@@ -11,7 +11,6 @@
 /app/*.jks
 gradle.properties
 /.idea
-/module/.idea
 /module/.gradle
 /module/build
 /gradle/*.jar
