@@ -7,7 +7,7 @@ import org.gradle.api.tasks.TaskAction
  * Created by chen on 2017/8/15.
  */
 class NativeSoCopyTask extends DefaultTask {
-    String group = "simplify";
+    String group = "simplify"
     @TaskAction
     def copy() {
         println "start copy native so library"
@@ -26,6 +26,9 @@ class NativeSoCopyTask extends DefaultTask {
                     copyLibs("libconfig.so", sourceNativeLibDir, destNativeLibDir)
                 }
             } catch (Exception ex) {
+                if (ex instanceof  FileNotFoundException && !System.getProperty("os.name").contains("Windows")){
+                    println "maybe you can ignore this error, it doesn't affect your project"
+                }
                 println "copy failed " + ex
             }
         }
@@ -37,17 +40,15 @@ class NativeSoCopyTask extends DefaultTask {
         String cmdDir = getProject().rootProject.rootDir.absolutePath + File.separator + "gradle"+
                 File.separator + "command" + File.separator
         def cmd = ""
-        println "cmdDir is "+cmdDir
         if(System.getProperty("os.name").contains("Windows")){
             cmd = "cmd /c " + cmdDir + "sh-ndk-build.bat " + sourceNativeLibDir + " " + Utils.findNdkLocation(getProject())
         }
         else{
-            cmd += "./" + cmdDir + "sh-ndk-build-sh " + sourceNativeLibDir + " " + Utils.findNdkLocation(getProject())
+            cmd += "sh " + cmdDir + "sh-ndk-build-sh " + sourceNativeLibDir + " " + Utils.findNdkLocation(getProject())
         }
         println "cmd is " + cmd
         cmd.execute().waitFor()
         callback()
-
     }
 
     def copyLibs(libName, sourceDir, destDir) {

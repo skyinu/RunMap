@@ -116,21 +116,21 @@
       <file leaf-file-name="SimplifyPluginMain.groovy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/groovy/com/stdnull/SimplifyPluginMain.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="14" column="29" lean-forward="false" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+            <state relative-caret-position="253">
+              <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
               <folding>
                 <element signature="e#21#49#0" expanded="true" />
-                <marker date="1502977933887" expanded="true" signature="250:260" ph="{...}" />
-                <marker date="1502977933887" expanded="true" signature="466:622" ph="{...}" />
+                <marker date="1502982636280" expanded="true" signature="250:260" ph="{...}" />
+                <marker date="1502982636280" expanded="true" signature="488:644" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Utils.groovy" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Utils.groovy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/groovy/com/stdnull/Utils.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
+            <state relative-caret-position="220">
               <caret line="11" column="37" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="37" />
               <folding />
             </state>
@@ -140,11 +140,33 @@
       <file leaf-file-name="NativeSoCopyTask.groovy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/groovy/com/stdnull/NativeSoCopyTask.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+            <state relative-caret-position="180">
+              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding>
                 <element signature="e#21#54#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SkipTask.groovy" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/groovy/com/stdnull/SkipTask.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+              <folding>
+                <element signature="e#21#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Collection.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/util/Collection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="178" column="12" lean-forward="false" selection-start-line="178" selection-start-column="12" selection-end-line="178" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -557,9 +579,10 @@
         <option value="$PROJECT_DIR$/src/main/groovy/com/stdnull/BaseGroupedTask.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/utils.gradle" />
-        <option value="$PROJECT_DIR$/src/main/groovy/com/stdnull/SimplifyPluginMain.groovy" />
-        <option value="$PROJECT_DIR$/src/main/groovy/com/stdnull/NativeSoCopyTask.groovy" />
         <option value="$PROJECT_DIR$/src/main/groovy/com/stdnull/Utils.groovy" />
+        <option value="$PROJECT_DIR$/src/main/groovy/com/stdnull/NativeSoCopyTask.groovy" />
+        <option value="$PROJECT_DIR$/src/main/groovy/com/stdnull/SimplifyPluginMain.groovy" />
+        <option value="$PROJECT_DIR$/src/main/groovy/com/stdnull/SkipTask.groovy" />
       </list>
     </option>
   </component>
@@ -982,6 +1005,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1370" height="735" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -993,7 +1017,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890365" sideWeight="0.48778626" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2687023" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3183206" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3183206" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24961832" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1032,8 +1056,8 @@
           <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
           <folding>
             <element signature="e#21#49#0" expanded="true" />
-            <marker date="1502977933887" expanded="true" signature="250:260" ph="{...}" />
-            <marker date="1502977933887" expanded="true" signature="466:622" ph="{...}" />
+            <marker date="1502982636280" expanded="true" signature="250:260" ph="{...}" />
+            <marker date="1502982636280" expanded="true" signature="488:644" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1102,8 +1126,8 @@
           <caret line="13" column="26" lean-forward="false" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
           <folding>
             <element signature="e#21#49#0" expanded="true" />
-            <marker date="1502977933887" expanded="true" signature="250:260" ph="{...}" />
-            <marker date="1502977933887" expanded="true" signature="466:622" ph="{...}" />
+            <marker date="1502982636280" expanded="true" signature="250:260" ph="{...}" />
+            <marker date="1502982636280" expanded="true" signature="488:644" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1157,8 +1181,8 @@
           <caret line="13" column="26" lean-forward="false" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
           <folding>
             <element signature="e#21#49#0" expanded="true" />
-            <marker date="1502977933887" expanded="true" signature="250:260" ph="{...}" />
-            <marker date="1502977933887" expanded="true" signature="466:622" ph="{...}" />
+            <marker date="1502982636280" expanded="true" signature="250:260" ph="{...}" />
+            <marker date="1502982636280" expanded="true" signature="488:644" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1203,8 +1227,8 @@
           <caret line="3" column="29" lean-forward="false" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
           <folding>
             <element signature="e#21#49#0" expanded="true" />
-            <marker date="1502977933887" expanded="true" signature="250:260" ph="{...}" />
-            <marker date="1502977933887" expanded="true" signature="466:622" ph="{...}" />
+            <marker date="1502982636280" expanded="true" signature="250:260" ph="{...}" />
+            <marker date="1502982636280" expanded="true" signature="488:644" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1257,8 +1281,8 @@
           <caret line="3" column="29" lean-forward="false" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
           <folding>
             <element signature="e#21#49#0" expanded="true" />
-            <marker date="1502977933887" expanded="true" signature="250:260" ph="{...}" />
-            <marker date="1502977933887" expanded="true" signature="466:622" ph="{...}" />
+            <marker date="1502982636280" expanded="true" signature="250:260" ph="{...}" />
+            <marker date="1502982636280" expanded="true" signature="488:644" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1339,33 +1363,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/groovy/com/stdnull/Utils.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="37" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/util/Collection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="178" column="12" lean-forward="false" selection-start-line="178" selection-start-column="12" selection-end-line="178" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/groovy/com/stdnull/SimplifyPluginMain.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+          <folding>
+            <element signature="e#21#49#0" expanded="true" />
+            <marker date="1502982636280" expanded="true" signature="250:260" ph="{...}" />
+            <marker date="1502982636280" expanded="true" signature="488:644" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/groovy/com/stdnull/NativeSoCopyTask.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+        <state relative-caret-position="180">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
             <element signature="e#21#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/groovy/com/stdnull/SimplifyPluginMain.groovy">
+    <entry file="file://$PROJECT_DIR$/src/main/groovy/com/stdnull/SkipTask.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="14" column="29" lean-forward="false" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+        <state relative-caret-position="190">
+          <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
           <folding>
-            <element signature="e#21#49#0" expanded="true" />
-            <marker date="1502977933887" expanded="true" signature="250:260" ph="{...}" />
-            <marker date="1502977933887" expanded="true" signature="466:622" ph="{...}" />
+            <element signature="e#21#54#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/groovy/com/stdnull/Utils.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="11" column="37" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
