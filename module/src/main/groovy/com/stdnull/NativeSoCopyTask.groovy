@@ -42,7 +42,7 @@ class NativeSoCopyTask extends DefaultTask {
             cmd = "cmd /c " + cmdDir + "sh-ndk-build.bat " + sourceNativeLibDir
         }
         else{
-
+            cmd = "./" + cmdDir + "sh-ndk-build-sh " + sourceNativeLibDir
         }
         println "cmd is "+cmd
         cmd.execute().waitFor()
