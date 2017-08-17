@@ -36,15 +36,15 @@ class NativeSoCopyTask extends DefaultTask {
                 File.separator + "src" + File.separator + "main" + File.separator + "jni"
         String cmdDir = getProject().rootProject.rootDir.absolutePath + File.separator + "gradle"+
                 File.separator + "command" + File.separator
-        String cmd = ""
+        def cmd = ""
         println "cmdDir is "+cmdDir
         if(System.getProperty("os.name").contains("Windows")){
-            cmd = "cmd /c " + cmdDir + "sh-ndk-build.bat " + sourceNativeLibDir
+            cmd = "cmd /c " + cmdDir + "sh-ndk-build.bat " + sourceNativeLibDir + " " + Utils.findNdkLocation(getProject())
         }
         else{
-            cmd = "./" + cmdDir + "sh-ndk-build-sh " + sourceNativeLibDir
+            cmd += "./" + cmdDir + "sh-ndk-build-sh " + sourceNativeLibDir + " " + Utils.findNdkLocation(getProject())
         }
-        println "cmd is "+cmd
+        println "cmd is " + cmd
         cmd.execute().waitFor()
         callback()
 

@@ -1,2 +1,2 @@
 cd %1
-ndk-build
+call %2 ndk-build

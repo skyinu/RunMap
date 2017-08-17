@@ -1,16 +1,15 @@
-
-def sourceJarLibDir = gradle.rootProject.rootDir.absolutePath + File.separator + "build" +
-         File.separator + "libs" + File.separator +  (project.name + "-" + project.version + ".jar")
-def destNativeLibDir = gradle.rootProject.rootDir.parentFile.absolutePath + File.separator + "gradle"
-
-copyLibs(sourceJarLibDir, destNativeLibDir)
-
-def copyLibs(sourceDir, destDir) {
-    def sourceFile = new File(sourceDir)
-    def destFile = new File(destDir)
+gradle.rootProject.tasks["build"].doLast {
+    def sourceJarLibDir = gradle.rootProject.rootDir.absolutePath + File.separator + "build" +
+            File.separator + "libs" + File.separator + (project.name + "-" + project.version + ".jar")
+    def destNativeLibDir = gradle.rootProject.rootDir.parentFile.absolutePath + File.separator + "gradle" +
+            File.separator + (project.name + "-" + project.version + ".jar")
+    println "hell run"
+    def sourceFile = new File(sourceJarLibDir)
+    def destFile = new File(destNativeLibDir)
     destFile.withOutputStream { os ->
         sourceFile.withInputStream { ins ->
             os << ins
         }
     }
+
 }
