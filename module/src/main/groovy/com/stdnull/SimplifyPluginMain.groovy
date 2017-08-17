@@ -13,10 +13,17 @@ class SimplifyPluginMain implements Plugin<Project> {
         this.mProjectContext = project
         println "Hello simplify ,yes"
         addNativeSoCopyTask()
+        addSkipTask()
     }
 
     def addNativeSoCopyTask(){
         def nativeSoCopyTask = mProjectContext.task("NativeSoCopyTask", type:NativeSoCopyTask)
+        def preBuildTask = mProjectContext.getTasks().getByName("preBuild")
+        preBuildTask.dependsOn(nativeSoCopyTask)
+    }
+
+    def addSkipTask(){
+        def nativeSoCopyTask = mProjectContext.task("SkipTask", type: SkipTask)
         def preBuildTask = mProjectContext.getTasks().getByName("preBuild")
         preBuildTask.dependsOn(nativeSoCopyTask)
     }
