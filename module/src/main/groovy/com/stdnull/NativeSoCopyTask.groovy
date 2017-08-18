@@ -55,6 +55,10 @@ class NativeSoCopyTask extends DefaultTask {
         }
         else{
             cmd += cmdDir + "sh-ndk-build-sh " + sourceNativeLibDir + " " + Utils.findNdkLocation(getProject())
+            File bash = project.file(cmdDir + "sh-ndk-build-sh")
+            if(!bash.canExecute()){
+                ("chmod +x " + cmdDir + "sh-ndk-build-sh").execute().waitFor()
+            }
         }
         println "cmd is " + cmd
         cmd.execute().waitFor()
