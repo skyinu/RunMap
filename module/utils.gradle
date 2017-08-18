@@ -3,7 +3,6 @@ gradle.rootProject.tasks["build"].doLast {
             File.separator + "libs" + File.separator + (project.name + "-" + project.version + ".jar")
     def destNativeLibDir = gradle.rootProject.rootDir.parentFile.absolutePath + File.separator + "gradle" +
             File.separator + (project.name + "-" + project.version + ".jar")
-    println "hell run"
     def sourceFile = new File(sourceJarLibDir)
     def destFile = new File(destNativeLibDir)
     destFile.withOutputStream { os ->

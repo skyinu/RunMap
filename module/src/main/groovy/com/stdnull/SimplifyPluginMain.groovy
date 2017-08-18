@@ -11,7 +11,7 @@ class SimplifyPluginMain implements Plugin<Project> {
     @Override
     void apply(Project project) {
         this.mProjectContext = project
-        println "Hello simplify ,yes"
+        println "Hello simplify"
         addNativeSoCopyTask()
         addSkipTask()
     }
