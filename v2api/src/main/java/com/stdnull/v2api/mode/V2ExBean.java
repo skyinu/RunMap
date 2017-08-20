@@ -3,22 +3,24 @@ package com.stdnull.v2api.mode;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by chen on 2017/8/20.
  */
 
 public class V2ExBean implements Parcelable{
-    private int id;
-    private String title;
-    private String url;
-    private String content;
-    private String content_rendered;
-    private int replies;
-    private MemberBean member;
-    private NodeBean node;
-    private int created;
-    private int last_modified;
-    private int last_touched;
+    private @SerializedName("id") int id;
+    private @SerializedName("title") String title;
+    private @SerializedName("url") String url;
+    private @SerializedName("content") String content;
+    private @SerializedName("content_rendered") String content_rendered;
+    private @SerializedName("replies") int replies;
+    private @SerializedName("member") MemberBean member;
+    private @SerializedName("node") NodeBean node;
+    private @SerializedName("created") int created;
+    private @SerializedName("last_modified") int last_modified;
+    private @SerializedName("last_touched")  int last_touched;
 
     protected V2ExBean(Parcel in) {
         id = in.readInt();

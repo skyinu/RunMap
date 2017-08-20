@@ -3,6 +3,8 @@ package com.stdnull.v2api.mode;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class MemberBean implements Parcelable{
         /**
          * id : 85472
@@ -13,12 +15,12 @@ public class MemberBean implements Parcelable{
          * avatar_large : //v2ex.assets.uxengine.net/avatar/18e8/9ec0/85472_large.png?m=1431938120
          */
 
-        private int id;
-        private String username;
-        private String tagline;
-        private String avatar_mini;
-        private String avatar_normal;
-        private String avatar_large;
+        private @SerializedName("id") int id;
+        private @SerializedName("username") String username;
+        private @SerializedName("tagline") String tagline;
+        private @SerializedName("avatar_mini") String avatar_mini;
+        private @SerializedName("avatar_normal") String avatar_normal;
+        private @SerializedName("avatar_large") String avatar_large;
 
     protected MemberBean(Parcel in) {
         id = in.readInt();

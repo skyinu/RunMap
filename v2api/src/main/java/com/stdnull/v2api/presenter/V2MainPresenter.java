@@ -27,12 +27,13 @@ public class V2MainPresenter {
         this.mApiImpl = new ApiImpl();
         this.mV2MainFragModel = new V2MainFragModel();
     }
-    public void requestV2Hot() {
-        if(mV2MainFragModel.getContentListModel() != null){
+    public void requestV2Hot(boolean force) {
+        if(mV2MainFragModel.getContentListModel() != null && !force){
             mV2MainFragment.showContent(mV2MainFragModel.getContentListModel());
             CFLog.i("V2MainPresenter", "don't need to request data");
             return;
         }
+        mV2MainFragment.startRefresh();
         mApiImpl.listHost(new Callback<List<V2ExBean>>() {
             @Override
             public void onResponse(Call<List<V2ExBean>> call, Response<List<V2ExBean>> response) {
@@ -42,6 +43,7 @@ public class V2MainPresenter {
 
             @Override
             public void onFailure(Call<List<V2ExBean>> call, Throwable t) {
+                mV2MainFragment.stopRefresh();
                 Toast.makeText(mV2MainFragment.getActivityContext()
                         , "网络错误", Toast.LENGTH_SHORT).show();
             }

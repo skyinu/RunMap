@@ -3,6 +3,8 @@ package com.stdnull.v2api.mode;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class NodeBean implements Parcelable{
         /**
          * id : 108
@@ -16,15 +18,15 @@ public class NodeBean implements Parcelable{
          * avatar_large : //v2ex.assets.uxengine.net/navatar/a3c6/5c29/108_large.png?m=1501496420
          */
 
-        private int id;
-        private String name;
-        private String title;
-        private String title_alternative;
-        private String url;
-        private int topics;
-        private String avatar_mini;
-        private String avatar_normal;
-        private String avatar_large;
+        private @SerializedName("id") int id;
+        private @SerializedName("name") String name;
+        private @SerializedName("title") String title;
+        private @SerializedName("title_alternative") String title_alternative;
+        private @SerializedName("url") String url;
+        private @SerializedName("topics") int topics;
+        private @SerializedName("avatar_mini") String avatar_mini;
+        private @SerializedName("avatar_normal") String avatar_normal;
+        private @SerializedName("avatar_large") String avatar_large;
 
     protected NodeBean(Parcel in) {
         id = in.readInt();
