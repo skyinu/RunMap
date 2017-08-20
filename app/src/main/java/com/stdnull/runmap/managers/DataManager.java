@@ -8,11 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.SparseArray;
 
 import com.amap.api.maps.model.LatLng;
+import com.stdnull.baselib.common.CFLog;
 import com.stdnull.runmap.GlobalApplication;
 import com.stdnull.runmap.model.LocationDataBase;
 import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.common.CFAsyncTask;
-import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.common.TaskHanler;
 import com.stdnull.runmap.modules.network.NetworkService;

@@ -8,8 +8,8 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.LocationSource;
+import com.stdnull.baselib.common.CFLog;
 import com.stdnull.runmap.GlobalApplication;
-import com.stdnull.runmap.common.CFLog;
 
 /**
  * 接口实现类

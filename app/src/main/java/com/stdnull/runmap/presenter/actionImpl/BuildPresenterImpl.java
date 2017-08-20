@@ -5,8 +5,8 @@ import android.util.SparseArray;
 import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
+import com.stdnull.baselib.common.CFLog;
 import com.stdnull.runmap.common.CFAsyncTask;
-import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.common.TaskHanler;
 import com.stdnull.runmap.managers.DataManager;
@@ -19,8 +19,6 @@ import com.stdnull.runmap.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by chen on 2017/6/3.

@@ -11,8 +11,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 import android.widget.RemoteViews;
 
+import com.stdnull.baselib.common.CFLog;
 import com.stdnull.runmap.R;
-import com.stdnull.runmap.common.CFLog;
 
 /**
  * 前台服务

@@ -4,6 +4,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ConfigurationContainer
 import org.gradle.api.artifacts.DependencySet
+import org.gradle.api.file.FileTree
 import org.gradle.api.tasks.TaskAction
 
 /**
@@ -41,9 +42,19 @@ class DependenciesPrintTask extends DefaultTask{
 //                println "dependency:" + it + "is null"
                 return
             }
-            println "project " + item.name + "'s dependency:" + it + "'s dependency list is "
+            logger.error "project " + item.name + "'s dependency:" + it + "'s dependency list is "
             dependencies.each {
-                println "-" + it.group + ":" + it.name + ":" + it.version
+                println "type is" + it
+                FileTree files = it.properties.get("files")
+                if(files) {
+                    files.files.each {
+                        logger.error("-" + it.name)
+                    }
+                }
+                else{
+                    logger.error("-" + it.group + ":" + it.name + ":" + it.version)
+                }
+
             }
         }
     }

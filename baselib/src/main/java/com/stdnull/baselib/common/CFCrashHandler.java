@@ -1,4 +1,4 @@
-package com.stdnull.runmap.common;
+package com.stdnull.baselib.common;
 
 /**
  * Created by chen on 2017/6/7.

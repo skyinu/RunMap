@@ -1,8 +1,9 @@
-package com.stdnull.runmap.common;
+package com.stdnull.baselib.common;
 
 import android.util.Log;
 
-import com.stdnull.runmap.BuildConfig;
+
+import com.stdnull.baselib.BuildConfig;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
@@ -19,7 +20,7 @@ public class CFLog {
     public static void initMonitor(){
         if(DEBUG){
             try {
-                Class wirelessLogClass = Class.forName("com.stdnull.logcatch.WirelessLog");
+                Class wirelessLogClass = Class.forName("com.stdnull.baselib.logcatch.WirelessLog");
                 Method instanceMethod = wirelessLogClass.getDeclaredMethod("getInstance");
                 mWirelessLog = instanceMethod.invoke(wirelessLogClass);
                 Method catchLogsPeriod = wirelessLogClass.getDeclaredMethod("catchLogsPeriod",String.class, int.class,  TimeUnit.class);

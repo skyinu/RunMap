@@ -1,7 +1,7 @@
 package com.stdnull.runmap.modules.network;
 
+import com.stdnull.baselib.common.CFLog;
 import com.stdnull.runmap.common.AppConfig;
-import com.stdnull.runmap.common.CFLog;
 
 import java.io.File;
 import okhttp3.MediaType;

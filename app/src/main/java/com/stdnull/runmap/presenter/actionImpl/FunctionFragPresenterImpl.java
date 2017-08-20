@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 
+import com.stdnull.baselib.common.CFLog;
 import com.stdnull.runmap.GlobalApplication;
 import com.stdnull.runmap.R;
-import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.presenter.action.IFunctionFragPresenter;
 import com.stdnull.runmap.ui.activity.BaseActivity;

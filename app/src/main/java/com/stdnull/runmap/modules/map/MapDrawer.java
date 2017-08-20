@@ -14,9 +14,9 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.maps.utils.overlay.SmoothMoveMarker;
+import com.stdnull.baselib.common.CFLog;
 import com.stdnull.runmap.GlobalApplication;
 import com.stdnull.runmap.R;
-import com.stdnull.runmap.common.CFLog;
 import com.stdnull.runmap.common.RMConfiguration;
 import com.stdnull.runmap.model.BuildingPoint;
 

@@ -4,8 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 import com.squareup.leakcanary.LeakCanary;
-import com.stdnull.runmap.common.CFCrashHandler;
-import com.stdnull.runmap.common.CFLog;
+import com.stdnull.baselib.common.CFCrashHandler;
+import com.stdnull.baselib.common.CFLog;
 import com.stdnull.runmap.lifecircle.LifeCycleMonitor;
 import com.stdnull.runmap.utils.SystemUtils;
 

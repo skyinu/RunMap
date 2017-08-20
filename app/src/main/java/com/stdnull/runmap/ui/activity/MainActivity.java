@@ -19,7 +19,7 @@ public class MainActivity extends BaseActivity implements IMainActivity {
     private ViewPager mFragmentContainer;
     private PagerIndicator mPagerIndicator;
     private FragmentAdapter mFragmentAdapter;
-    private static String[] mFragmentTitles = new String[]{"轨迹","我的"};
+    private static String[] mFragmentTitles = new String[]{"轨迹","我的","V2"};
     private IMainPresenter mMainPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

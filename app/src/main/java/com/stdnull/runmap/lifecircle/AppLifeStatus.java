@@ -5,7 +5,8 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import com.stdnull.runmap.common.CFLog;
+
+import com.stdnull.baselib.common.CFLog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
