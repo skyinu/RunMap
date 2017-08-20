@@ -24,14 +24,14 @@ class SimplifyPluginMain implements Plugin<Project> {
     }
 
     def addSkipTask(){
-        def nativeSoCopyTask = mProjectContext.task("SkipTask", type: SkipTask)
+        def skipTask = mProjectContext.task("SkipTask", type: SkipTask)
         def preBuildTask = mProjectContext.getTasks().getByName("preBuild")
-        preBuildTask.dependsOn(nativeSoCopyTask)
+        preBuildTask.dependsOn(skipTask)
     }
 
     def addPrintDenpenciesTask(){
-        def nativeSoCopyTask = mProjectContext.task("DependenciesPrintTask", type: DependenciesPrintTask)
+        def dependenciesPrintTask = mProjectContext.task("DependenciesPrintTask", type: DependenciesPrintTask)
         def preBuildTask = mProjectContext.getTasks().getByName("preBuild")
-        preBuildTask.dependsOn(nativeSoCopyTask)
+        preBuildTask.dependsOn(dependenciesPrintTask)
     }
 }
