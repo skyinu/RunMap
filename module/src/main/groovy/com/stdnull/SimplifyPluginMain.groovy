@@ -11,9 +11,10 @@ class SimplifyPluginMain implements Plugin<Project> {
     @Override
     void apply(Project project) {
         this.mProjectContext = project
-        println "Hello simplify ,yes"
+        println "Hello simplify"
         addNativeSoCopyTask()
         addSkipTask()
+        addPrintDenpenciesTask()
     }
 
     def addNativeSoCopyTask(){
@@ -23,8 +24,14 @@ class SimplifyPluginMain implements Plugin<Project> {
     }
 
     def addSkipTask(){
-        def nativeSoCopyTask = mProjectContext.task("SkipTask", type: SkipTask)
+        def skipTask = mProjectContext.task("SkipTask", type: SkipTask)
         def preBuildTask = mProjectContext.getTasks().getByName("preBuild")
-        preBuildTask.dependsOn(nativeSoCopyTask)
+        preBuildTask.dependsOn(skipTask)
+    }
+
+    def addPrintDenpenciesTask(){
+        def dependenciesPrintTask = mProjectContext.task("DependenciesPrintTask", type: DependenciesPrintTask)
+        def preBuildTask = mProjectContext.getTasks().getByName("preBuild")
+        preBuildTask.dependsOn(dependenciesPrintTask)
     }
 }

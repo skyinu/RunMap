@@ -1,6 +1,8 @@
 package com.stdnull
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
 /**
@@ -8,6 +10,17 @@ import org.gradle.api.tasks.TaskAction
  */
 class NativeSoCopyTask extends DefaultTask {
     String group = "simplify"
+
+    @InputDirectory
+    File getCppSource(){
+        return project.file("src/main/jni")
+    }
+
+    @OutputDirectory
+    File getOutputDir(){
+        return project.file("libs/armeabi-v7a")
+    }
+
     @TaskAction
     def copy() {
         println "start copy native so library"
@@ -26,9 +39,6 @@ class NativeSoCopyTask extends DefaultTask {
                     copyLibs("libconfig.so", sourceNativeLibDir, destNativeLibDir)
                 }
             } catch (Exception ex) {
-                if (ex instanceof  FileNotFoundException && !System.getProperty("os.name").contains("Windows")){
-                    println "maybe you can ignore this error, it doesn't affect your project"
-                }
                 println "copy failed " + ex
             }
         }
@@ -44,7 +54,11 @@ class NativeSoCopyTask extends DefaultTask {
             cmd = "cmd /c " + cmdDir + "sh-ndk-build.bat " + sourceNativeLibDir + " " + Utils.findNdkLocation(getProject())
         }
         else{
-            cmd += "sh " + cmdDir + "sh-ndk-build-sh " + sourceNativeLibDir + " " + Utils.findNdkLocation(getProject())
+            cmd += cmdDir + "sh-ndk-build-sh " + sourceNativeLibDir + " " + Utils.findNdkLocation(getProject())
+            File bash = project.file(cmdDir + "sh-ndk-build-sh")
+            if(!bash.canExecute()){
+                ("chmod +x " + cmdDir + "sh-ndk-build-sh").execute().waitFor()
+            }
         }
         println "cmd is " + cmd
         cmd.execute().waitFor()
