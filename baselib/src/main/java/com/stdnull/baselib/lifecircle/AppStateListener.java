@@ -1,4 +1,4 @@
-package com.stdnull.runmap.lifecircle;
+package com.stdnull.baselib.lifecircle;
 
 import android.content.Context;
 

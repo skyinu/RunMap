@@ -1,4 +1,4 @@
-package com.stdnull.runmap.utils;
+package com.stdnull.baselib.utils;
 
 /**
  * 字符串处理工具类

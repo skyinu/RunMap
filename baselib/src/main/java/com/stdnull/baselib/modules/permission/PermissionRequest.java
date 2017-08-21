@@ -1,4 +1,4 @@
-package com.stdnull.runmap.modules.permission;
+package com.stdnull.baselib.modules.permission;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;

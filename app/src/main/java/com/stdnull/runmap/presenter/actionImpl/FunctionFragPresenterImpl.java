@@ -6,14 +6,14 @@ import android.content.SharedPreferences;
 import android.provider.Settings;
 
 import com.stdnull.baselib.common.CFLog;
-import com.stdnull.runmap.GlobalApplication;
+import com.stdnull.baselib.GlobalApplication;
 import com.stdnull.runmap.R;
-import com.stdnull.runmap.common.RMConfiguration;
+import com.stdnull.baselib.common.RMConfiguration;
 import com.stdnull.runmap.presenter.action.IFunctionFragPresenter;
-import com.stdnull.runmap.ui.activity.BaseActivity;
+import com.stdnull.baselib.BaseActivity;
 import com.stdnull.runmap.ui.activity.MovementTrackActivity;
 import com.stdnull.runmap.ui.uibehavior.IFunctionFragment;
-import com.stdnull.runmap.utils.SystemUtils;
+import com.stdnull.baselib.utils.SystemUtils;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

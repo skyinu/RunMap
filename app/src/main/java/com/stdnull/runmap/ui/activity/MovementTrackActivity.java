@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapFragment;
+import com.stdnull.baselib.BaseActivity;
 import com.stdnull.runmap.R;
 import com.stdnull.runmap.model.IMoveTrack;
 import com.stdnull.runmap.model.MoveTrackModel;
@@ -58,7 +59,7 @@ public class MovementTrackActivity extends BaseActivity implements IMovementTrac
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track);
         bindView();

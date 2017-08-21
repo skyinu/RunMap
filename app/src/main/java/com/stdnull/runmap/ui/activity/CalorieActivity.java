@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.stdnull.baselib.BaseActivity;
 import com.stdnull.runmap.R;
 
 import butterknife.BindView;
@@ -15,7 +16,7 @@ import butterknife.OnTextChanged;
  * Created by chen on 2017/2/14.
  */
 
-public class CalorieActivity extends BaseActivity{
+public class CalorieActivity extends BaseActivity {
     @BindView(R.id.edit_weight)
     protected EditText mEditWeight;
     @BindView(R.id.edit_distance)
@@ -23,7 +24,7 @@ public class CalorieActivity extends BaseActivity{
     @BindView(R.id.text_calorie)
     protected TextView mTvCalorie;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calorie);
         ButterKnife.bind(this);

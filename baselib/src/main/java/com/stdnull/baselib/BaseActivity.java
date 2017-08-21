@@ -1,4 +1,4 @@
-package com.stdnull.runmap.ui.activity;
+package com.stdnull.baselib;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,9 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.stdnull.baselib.common.CFLog;
-import com.stdnull.runmap.R;
-import com.stdnull.runmap.lifecircle.LifeCycleMonitor;
-import com.stdnull.runmap.modules.permission.PermissionManager;
+import com.stdnull.baselib.lifecircle.LifeCycleMonitor;
+import com.stdnull.baselib.modules.permission.PermissionManager;
 
 /**
  * 所有Activity的基类

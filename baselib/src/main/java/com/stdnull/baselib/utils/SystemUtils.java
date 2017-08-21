@@ -1,4 +1,4 @@
-package com.stdnull.runmap.utils;
+package com.stdnull.baselib.utils;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -9,8 +9,8 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.stdnull.runmap.GlobalApplication;
-import com.stdnull.runmap.common.RMConfiguration;
+import com.stdnull.baselib.GlobalApplication;
+import com.stdnull.baselib.common.RMConfiguration;
 
 /**
  * 系统服务查询工具类

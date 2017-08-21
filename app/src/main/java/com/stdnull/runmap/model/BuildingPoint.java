@@ -2,8 +2,8 @@ package com.stdnull.runmap.model;
 
 import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.model.LatLng;
-import com.stdnull.runmap.common.RMConfiguration;
-import com.stdnull.runmap.utils.StringUtils;
+import com.stdnull.baselib.common.RMConfiguration;
+import com.stdnull.baselib.utils.StringUtils;
 
 /**
  * 数据库存储数据实体类

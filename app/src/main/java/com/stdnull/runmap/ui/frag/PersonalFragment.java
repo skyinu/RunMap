@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.stdnull.runmap.R;
-import com.stdnull.runmap.ui.activity.BaseActivity;
+import com.stdnull.baselib.BaseActivity;
 import com.stdnull.runmap.ui.activity.BuildingActivity;
 import com.stdnull.runmap.ui.activity.CalorieActivity;
 import com.stdnull.runmap.ui.activity.ReviewActivity;

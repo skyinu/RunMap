@@ -8,15 +8,12 @@ import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapFragment;
-import com.amap.api.maps.model.LatLng;
+import com.stdnull.baselib.BaseActivity;
 import com.stdnull.runmap.R;
 import com.stdnull.runmap.modules.map.AmapWrapper;
 import com.stdnull.runmap.presenter.action.IBuildPresenter;
 import com.stdnull.runmap.presenter.actionImpl.BuildPresenterImpl;
 import com.stdnull.runmap.ui.uibehavior.IBuildActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 停留地点分布图页面
@@ -26,7 +23,7 @@ import java.util.List;
 public class BuildingActivity extends BaseActivity implements IBuildActivity {
     private IBuildPresenter mPresenter;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_build);
         AMap mAmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();

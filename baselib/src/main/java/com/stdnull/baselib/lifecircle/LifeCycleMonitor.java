@@ -1,10 +1,10 @@
-package com.stdnull.runmap.lifecircle;
+package com.stdnull.baselib.lifecircle;
 
 import android.app.Activity;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
-import com.stdnull.runmap.ui.activity.BaseActivity;
+import com.stdnull.baselib.BaseActivity;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -8,8 +8,8 @@ import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.utils.overlay.SmoothMoveMarker;
 import com.stdnull.baselib.common.CFLog;
-import com.stdnull.runmap.common.CFAsyncTask;
-import com.stdnull.runmap.common.TaskHanler;
+import com.stdnull.baselib.common.CFAsyncTask;
+import com.stdnull.baselib.common.TaskHanler;
 import com.stdnull.runmap.managers.DataManager;
 import com.stdnull.runmap.model.IReview;
 import com.stdnull.runmap.model.ReviewModel;
@@ -18,7 +18,7 @@ import com.stdnull.runmap.modules.map.IMap;
 import com.stdnull.runmap.presenter.action.IReviewPresenter;
 import com.stdnull.runmap.ui.uibehavior.IReviewActivity;
 import com.stdnull.runmap.ui.activity.ReviewActivity;
-import com.stdnull.runmap.utils.StringUtils;
+import com.stdnull.baselib.utils.StringUtils;
 
 import java.util.List;
 

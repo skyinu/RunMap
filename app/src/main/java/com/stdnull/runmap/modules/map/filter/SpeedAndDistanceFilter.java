@@ -5,7 +5,7 @@ import android.os.SystemClock;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.model.LatLng;
-import com.stdnull.runmap.common.RMConfiguration;
+import com.stdnull.baselib.common.RMConfiguration;
 
 /**
  * Created by chen on 2017/6/3.

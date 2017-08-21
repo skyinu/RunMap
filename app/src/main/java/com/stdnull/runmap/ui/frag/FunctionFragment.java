@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.stdnull.runmap.R;
 import com.stdnull.runmap.presenter.actionImpl.FunctionFragPresenterImpl;
 import com.stdnull.runmap.presenter.action.IFunctionFragPresenter;
-import com.stdnull.runmap.ui.activity.BaseActivity;
+import com.stdnull.baselib.BaseActivity;
 import com.stdnull.runmap.ui.uibehavior.IFunctionFragment;
 
 /**

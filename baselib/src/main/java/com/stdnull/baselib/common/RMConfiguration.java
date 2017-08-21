@@ -1,4 +1,4 @@
-package com.stdnull.runmap.common;
+package com.stdnull.baselib.common;
 
 import android.graphics.Color;
 

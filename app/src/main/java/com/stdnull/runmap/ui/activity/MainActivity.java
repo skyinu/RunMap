@@ -3,6 +3,7 @@ package com.stdnull.runmap.ui.activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
+import com.stdnull.baselib.BaseActivity;
 import com.stdnull.runmap.R;
 import com.stdnull.runmap.presenter.action.IMainPresenter;
 import com.stdnull.runmap.presenter.actionImpl.MainPresenterImpl;
@@ -22,7 +23,7 @@ public class MainActivity extends BaseActivity implements IMainActivity {
     private static String[] mFragmentTitles = new String[]{"轨迹","我的","V2"};
     private IMainPresenter mMainPresenter;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();

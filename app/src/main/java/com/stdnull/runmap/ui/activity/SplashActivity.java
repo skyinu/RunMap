@@ -3,6 +3,7 @@ package com.stdnull.runmap.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.stdnull.baselib.BaseActivity;
 import com.stdnull.runmap.R;
 import com.stdnull.runmap.presenter.action.ISplashPresenter;
 import com.stdnull.runmap.presenter.actionImpl.SplashPresenterImpl;
@@ -16,7 +17,7 @@ import com.stdnull.runmap.ui.uibehavior.ISplashActivity;
 public class SplashActivity extends BaseActivity implements ISplashActivity {
     private ISplashPresenter mSplashPresenter;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         mSplashPresenter = new SplashPresenterImpl(this);

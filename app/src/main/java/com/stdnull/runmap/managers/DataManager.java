@@ -9,14 +9,14 @@ import android.util.SparseArray;
 
 import com.amap.api.maps.model.LatLng;
 import com.stdnull.baselib.common.CFLog;
-import com.stdnull.runmap.GlobalApplication;
+import com.stdnull.baselib.GlobalApplication;
 import com.stdnull.runmap.model.LocationDataBase;
 import com.stdnull.runmap.model.TrackPoint;
-import com.stdnull.runmap.common.CFAsyncTask;
-import com.stdnull.runmap.common.RMConfiguration;
-import com.stdnull.runmap.common.TaskHanler;
+import com.stdnull.baselib.common.CFAsyncTask;
+import com.stdnull.baselib.common.RMConfiguration;
+import com.stdnull.baselib.common.TaskHanler;
 import com.stdnull.runmap.modules.network.NetworkService;
-import com.stdnull.runmap.utils.SystemUtils;
+import com.stdnull.baselib.utils.SystemUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;

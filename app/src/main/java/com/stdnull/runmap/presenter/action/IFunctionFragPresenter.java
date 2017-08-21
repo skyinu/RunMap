@@ -2,7 +2,7 @@ package com.stdnull.runmap.presenter.action;
 
 import android.content.Context;
 
-import com.stdnull.runmap.ui.activity.BaseActivity;
+import com.stdnull.baselib.BaseActivity;
 
 /**
  * Created by chen on 2017/5/31.
