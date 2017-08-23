@@ -45,6 +45,9 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
 
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
+        if(mContents == null || mContents.isEmpty()){
+            return;
+        }
         V2ExBean v2ExBean = mContents.get(position);
         holder.mMessageBrief.setText(v2ExBean.getTitle());
         holder.mTopic.setText(v2ExBean.getNode().getTitle());

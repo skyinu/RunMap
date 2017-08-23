@@ -21,6 +21,8 @@ public class V2ExBean implements Parcelable{
     private @SerializedName("created") int created;
     private @SerializedName("last_modified") int last_modified;
     private @SerializedName("last_touched")  int last_touched;
+
+
     protected V2ExBean(Parcel in) {
         id = in.readInt();
         title = in.readString();
@@ -28,6 +30,8 @@ public class V2ExBean implements Parcelable{
         content = in.readString();
         content_rendered = in.readString();
         replies = in.readInt();
+        member = in.readParcelable(MemberBean.class.getClassLoader());
+        node = in.readParcelable(NodeBean.class.getClassLoader());
         created = in.readInt();
         last_modified = in.readInt();
         last_touched = in.readInt();
@@ -146,6 +150,8 @@ public class V2ExBean implements Parcelable{
         parcel.writeString(content);
         parcel.writeString(content_rendered);
         parcel.writeInt(replies);
+        parcel.writeParcelable(member, i);
+        parcel.writeParcelable(node, i);
         parcel.writeInt(created);
         parcel.writeInt(last_modified);
         parcel.writeInt(last_touched);

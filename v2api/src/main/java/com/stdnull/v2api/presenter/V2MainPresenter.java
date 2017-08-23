@@ -42,6 +42,12 @@ public class V2MainPresenter {
                 mV2MainFragModel.addContentListModel(response.body());
                 mV2MainFragment.showContent(mV2MainFragModel.getContentListModel(), !stopRefresh);
             }
+
+            @Override
+            public void onFailure(Call<List<V2ExBean>> call, Throwable t) {
+                super.onFailure(call, t);
+                mV2MainFragment.showContent(mV2MainFragModel.getContentListModel(), true);
+            }
         });
 
         mApiImpl.listLastest(new BaseCallBack<List<V2ExBean>>() {
@@ -50,6 +56,11 @@ public class V2MainPresenter {
                 boolean stopRefresh = mV2MainFragModel.isModelEmpty();
                 mV2MainFragModel.addContentListModel(response.body());
                 mV2MainFragment.showContent(mV2MainFragModel.getContentListModel(), !stopRefresh);
+            }
+            @Override
+            public void onFailure(Call<List<V2ExBean>> call, Throwable t) {
+                super.onFailure(call, t);
+                mV2MainFragment.showContent(mV2MainFragModel.getContentListModel(), true);
             }
         });
 
