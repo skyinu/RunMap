@@ -57,12 +57,13 @@ public class V2MainFragment extends Fragment implements IV2MainFragment, SwipeRe
                 builder()
                 .v2MainModule(new V2MainModule(this))
                 .build().inject(this);
+        mV2MainPresenter.restore(savedInstanceState);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mV2MainPresenter.restore(outState);
+        mV2MainPresenter.save(outState);
     }
 
     @Nullable

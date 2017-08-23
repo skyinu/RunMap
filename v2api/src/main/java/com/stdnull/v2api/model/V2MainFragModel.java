@@ -25,7 +25,7 @@ public class V2MainFragModel {
     }
 
     public boolean isModelEmpty(){
-        return mContentListModel.isEmpty();
+        return mContentListModel.isEmpty() ;
     }
 
     public void clearModel(){
@@ -35,6 +35,9 @@ public class V2MainFragModel {
         bundle.putParcelableArrayList(KEY_V2EXBEAN, (ArrayList<? extends Parcelable>) mContentListModel);
     }
     public boolean restore(Bundle bundle){
+        if(bundle == null){
+            return false;
+        }
         mContentListModel = bundle.getParcelableArrayList(KEY_V2EXBEAN);
         return mContentListModel != null && !mContentListModel.isEmpty();
     }
