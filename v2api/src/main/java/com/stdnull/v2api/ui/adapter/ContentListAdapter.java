@@ -9,10 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.stdnull.baselib.utils.TimeUtils;
 import com.stdnull.v2api.R;
 import com.stdnull.v2api.R2;
-import com.stdnull.v2api.mode.V2ExBean;
-
+import com.stdnull.v2api.model.V2ExBean;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -45,7 +45,14 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         V2ExBean v2ExBean = mContents.get(position);
         holder.mMessageBrief.setText(v2ExBean.getTitle());
-//        Picasso.with(mContext).load(v2ExBean.)
+        holder.mTopic.setText(v2ExBean.getNode().getTitle());
+        holder.mPromulgator.setText(v2ExBean.getMember().getUsername());
+        holder.mLatestReplyTime.setText(TimeUtils.calculateTimeGap(v2ExBean.getLast_touched()));
+        holder.mReplyCount.setText(Integer.toString(v2ExBean.getReplies()));
+        Picasso.with(mContext)
+                .load("http:" + v2ExBean.getMember().getAvatar_normal())
+                .fit()
+                .into(holder.mMessgeImage);
     }
 
     @Override
@@ -62,6 +69,14 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
         ImageView mMessgeImage;
         @BindView(R2.id.v2_item_text_brief)
         TextView mMessageBrief;
+        @BindView(R2.id.v2_topic_view)
+        TextView mTopic;
+        @BindView(R2.id.v2_promulgator_view)
+        TextView mPromulgator;
+        @BindView(R2.id.v2_latest_reply_time_view)
+        TextView mLatestReplyTime;
+        @BindView(R2.id.v2_reply_count)
+        TextView mReplyCount;
 
         public ItemViewHolder(View itemView) {
             super(itemView);

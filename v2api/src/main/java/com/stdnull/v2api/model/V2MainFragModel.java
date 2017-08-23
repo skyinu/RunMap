@@ -1,4 +1,4 @@
-package com.stdnull.v2api.mode;
+package com.stdnull.v2api.model;
 
 import android.os.Bundle;
 import android.os.Parcelable;

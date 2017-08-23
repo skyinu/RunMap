@@ -29,4 +29,8 @@
     <string name="string_calorie_unit">卡路里(千卡)</string>
     <string name="hint_input_weight">请输入体重</string>
     <string name="hint_input_distance">请输入距离</string>
+    <string name="v2_time_gap_hint_second">%d秒前</string>
+    <string name="v2_time_gap_hint_minute">%d分钟前</string>
+    <string name="v2_time_gap_hint_hour">%1$d小时%2$d分钟之前</string>
+    <string name="v2_time_gap_hint_long">%d天前</string>
 </resources>
