@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.stdnull.baselib.utils.TimeUtils;
 import com.stdnull.v2api.R;
 import com.stdnull.v2api.R2;
 import com.stdnull.v2api.model.V2ExBean;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -42,7 +44,7 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ItemViewHolder holder, int position) {
+    public void onBindViewHolder(final ItemViewHolder holder, int position) {
         V2ExBean v2ExBean = mContents.get(position);
         holder.mMessageBrief.setText(v2ExBean.getTitle());
         holder.mTopic.setText(v2ExBean.getNode().getTitle());
@@ -51,8 +53,18 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
         holder.mReplyCount.setText(Integer.toString(v2ExBean.getReplies()));
         Picasso.with(mContext)
                 .load("http:" + v2ExBean.getMember().getAvatar_normal())
-                .fit()
                 .into(holder.mMessgeImage);
+        holder.mPostItemContent.setVisibility(View.GONE);
+        holder.mPostItemContent.setText(v2ExBean.getContent());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //don't care the real state
+                holder.mPostItemContent.setVisibility(View.VISIBLE);
+                holder.mPostItemContent.startAnimation(
+                        AnimationUtils.loadAnimation(mContext, R.anim.v2_content_show_anim));
+            }
+        });
     }
 
     @Override
@@ -77,6 +89,8 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
         TextView mLatestReplyTime;
         @BindView(R2.id.v2_reply_count)
         TextView mReplyCount;
+        @BindView(R2.id.post_item_content)
+        TextView mPostItemContent;
 
         public ItemViewHolder(View itemView) {
             super(itemView);

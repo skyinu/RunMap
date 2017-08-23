@@ -29,10 +29,11 @@ public class ApiImpl {
         V2Hot v2Hot = retrofit.create(V2Hot.class);
         Call<List<V2ExBean>> call = v2Hot.listHost();
         call.enqueue(callback);
-        return;
     }
 
-    public Call<ResponseBody> listLastest(){
-        return null;
+    public void listLastest(Callback<List<V2ExBean>> callback){
+        V2Lastest v2Lastest = retrofit.create(V2Lastest.class);
+        Call<List<V2ExBean>> call = v2Lastest.listLastest();
+        call.enqueue(callback);
     }
 }

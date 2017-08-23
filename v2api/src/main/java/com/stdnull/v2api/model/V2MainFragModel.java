@@ -12,21 +12,30 @@ import java.util.List;
 
 public class V2MainFragModel {
     private static final String KEY_V2EXBEAN = "KEY_V2EXBEAN";
-    private List<V2ExBean> mContentListModel;
+    private List<V2ExBean> mContentListModel = new ArrayList<>();
 
     public List<V2ExBean> getContentListModel() {
         return mContentListModel;
     }
 
-    public void setContentListModel(List<V2ExBean> contentListModel) {
-        this.mContentListModel = contentListModel;
+    public void addContentListModel(List<V2ExBean> contentListModel) {
+        if(contentListModel != null) {
+            this.mContentListModel.addAll(contentListModel);
+        }
     }
 
+    public boolean isModelEmpty(){
+        return mContentListModel.isEmpty();
+    }
+
+    public void clearModel(){
+        mContentListModel.clear();
+    }
     public void save(Bundle bundle){
         bundle.putParcelableArrayList(KEY_V2EXBEAN, (ArrayList<? extends Parcelable>) mContentListModel);
     }
     public boolean restore(Bundle bundle){
         mContentListModel = bundle.getParcelableArrayList(KEY_V2EXBEAN);
-        return mContentListModel != null;
+        return mContentListModel != null && !mContentListModel.isEmpty();
     }
 }

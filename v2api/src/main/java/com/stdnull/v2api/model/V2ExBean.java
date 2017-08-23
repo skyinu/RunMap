@@ -21,7 +21,6 @@ public class V2ExBean implements Parcelable{
     private @SerializedName("created") int created;
     private @SerializedName("last_modified") int last_modified;
     private @SerializedName("last_touched")  int last_touched;
-
     protected V2ExBean(Parcel in) {
         id = in.readInt();
         title = in.readString();

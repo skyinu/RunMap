@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -79,14 +80,17 @@ public class V2MainFragment extends Fragment implements IV2MainFragment, SwipeRe
                 getResources().getColor(R.color.colorPrimary));
         mRefreshLayout.setOnRefreshListener(this);
         mContentRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mContentRecycleView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         mContentRecycleView.setAdapter(mContentListAdapter);
-        mV2MainPresenter.requestV2Hot(false);
+        mV2MainPresenter.requestV2FeedData(false);
         mContentRecycleView.addOnScrollListener(new TopItemListener());
     }
 
     @Override
-    public void showContent(List<V2ExBean> content) {
-        stopRefresh();
+    public void showContent(List<V2ExBean> content, boolean stopRefresh) {
+        if(stopRefresh) {
+            stopRefresh();
+        }
         mContentListAdapter.setContents(content);
         mContentListAdapter.notifyDataSetChanged();
     }
@@ -108,7 +112,7 @@ public class V2MainFragment extends Fragment implements IV2MainFragment, SwipeRe
 
     @Override
     public void onRefresh() {
-        mV2MainPresenter.requestV2Hot(true);
+        mV2MainPresenter.requestV2FeedData(true);
     }
 
     class TopItemListener extends RecyclerView.OnScrollListener{

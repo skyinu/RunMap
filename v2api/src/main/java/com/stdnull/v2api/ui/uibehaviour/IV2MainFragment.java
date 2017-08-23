@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public interface IV2MainFragment {
-    void showContent(List<V2ExBean> content);
+    void showContent(List<V2ExBean> content, boolean stopRefresh);
     Context getActivityContext();
     void startRefresh();
     void stopRefresh();
