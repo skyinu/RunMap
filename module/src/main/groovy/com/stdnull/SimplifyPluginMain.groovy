@@ -20,7 +20,7 @@ class SimplifyPluginMain implements Plugin<Project> {
     @Override
     void apply(Project project) {
         this.mProjectContext = project
-        println "Hello simplify"
+        println "Hello simplify, project is " + project.name
         Configuration mcConfiguration = project.configurations.create(CUSTOM_DEPENDENCE)
         project.gradle.addListener(new McDependenceResolveListener(mProjectContext, mcConfiguration))
 

@@ -11,6 +11,12 @@ import org.gradle.api.tasks.TaskAction
 class NativeSoCopyTask extends DefaultTask {
     String group = "simplify"
 
+    NativeSoCopyTask(){
+        if(project.name != "app"){
+            setEnabled(false)
+        }
+    }
+
     @InputDirectory
     File getCppSource(){
         return project.file("src/main/jni")
