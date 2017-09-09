@@ -16,21 +16,25 @@ class DependenciesPrintTask extends DefaultTask{
     @TaskAction
     def printDepencies(){
         if(!project.tasks.assemble.didWork) {
-            printAllDepencies()
+            printAllDepencies(project)
             return
         }
         project.tasks.assemble{
             doLast {
                 println "after assemble-dependency is "
-                printAllDepencies()
+                printAllDepencies(project)
             }
         }
     }
 
-    def printAllDepencies(){
-        def rootProject = project.getRootProject()
-        rootProject.allprojects.each {
-            printDepencies(it)
+    def printAllDepencies(Project curProject){
+//        def rootProject = project.getRootProject()
+//        rootProject.allprojects.each {
+//            printDepencies(it)
+//        }
+        printDepencies(curProject)
+        curProject.childProjects.each {
+            printAllDepencies(it)
         }
     }
 
