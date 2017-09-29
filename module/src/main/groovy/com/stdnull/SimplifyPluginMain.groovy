@@ -36,6 +36,11 @@ class SimplifyPluginMain implements Plugin<Project> {
     }
 
     def addSkipTask() {
+        if(!mProjectContext.hasProperty("skip.enable") || !properties.get("skip.enable")){
+            println "skip task is disable"
+            return
+        }
+        println "skip task is enable"
         def skipTask = mProjectContext.task("SkipTask", type: SkipTask)
         def preBuildTask = mProjectContext.getTasks().getByName("preBuild")
         preBuildTask.dependsOn(skipTask)
