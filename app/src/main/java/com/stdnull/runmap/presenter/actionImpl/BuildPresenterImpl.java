@@ -19,6 +19,11 @@ import com.stdnull.baselib.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by chen on 2017/6/3.
@@ -49,9 +54,9 @@ public class BuildPresenterImpl implements IBuildPresenter {
 
     @Override
     public void genarateGraph() {
-        CFAsyncTask<List<BuildingPoint>> task = new CFAsyncTask<List<BuildingPoint>>() {
+        Observable.fromCallable(new Callable<List<BuildingPoint>>() {
             @Override
-            public List<BuildingPoint> onTaskExecuted(Object... params) {
+            public List<BuildingPoint> call() throws Exception {
                 List<String> dateList = DataManager.getInstance().queryDataTime();
                 if(dateList.isEmpty()){
                     return null;
@@ -68,20 +73,20 @@ public class BuildPresenterImpl implements IBuildPresenter {
                 CFLog.e("Build","point = "+res.toString());
                 return res;
             }
-
-            @Override
-            public void onTaskFinished(List<BuildingPoint> result) {
-                mBuildPoints = result;
-                //还没有数据记录
-                if(mBuildPoints == null || mBuildPoints.isEmpty()){
-                    mBuildActivity.showEmptyLayout();
-                    return;
-                }
-                mapInstance.drawMarkers(mBuildPoints);
-
-            }
-        };
-        TaskHanler.getInstance().sendTask(task);
+        }).subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<BuildingPoint>>() {
+                    @Override
+                    public void call(List<BuildingPoint> buildingPoints) {
+                        mBuildPoints = buildingPoints;
+                        //还没有数据记录
+                        if(mBuildPoints == null || mBuildPoints.isEmpty()){
+                            mBuildActivity.showEmptyLayout();
+                            return;
+                        }
+                        mapInstance.drawMarkers(mBuildPoints);
+                    }
+                });
     }
 
     /**

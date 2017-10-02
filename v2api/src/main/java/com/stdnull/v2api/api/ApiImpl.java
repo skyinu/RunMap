@@ -3,10 +3,7 @@ package com.stdnull.v2api.api;
 import com.stdnull.v2api.model.V2ExBean;
 
 import java.util.List;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -25,15 +22,13 @@ public class ApiImpl {
                 .build();
     }
 
-    public void listHost(Callback<List<V2ExBean>> callback){
+    public Call<List<V2ExBean>> listHost(){
         V2Hot v2Hot = retrofit.create(V2Hot.class);
-        Call<List<V2ExBean>> call = v2Hot.listHost();
-        call.enqueue(callback);
+        return v2Hot.listHost();
     }
 
-    public void listLastest(Callback<List<V2ExBean>> callback){
+    public Call<List<V2ExBean>> listLastest(){
         V2Lastest v2Lastest = retrofit.create(V2Lastest.class);
-        Call<List<V2ExBean>> call = v2Lastest.listLastest();
-        call.enqueue(callback);
+        return v2Lastest.listLastest();
     }
 }

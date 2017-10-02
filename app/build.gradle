@@ -44,6 +44,7 @@ android {
         release {
             setSigningConfig signingConfigs.release
             minifyEnabled true
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {

@@ -88,9 +88,9 @@ public class V2MainFragment extends Fragment implements IV2MainFragment, SwipeRe
     }
 
     @Override
-    public void showContent(List<V2ExBean> content, boolean stopRefresh) {
-        if(stopRefresh) {
-            stopRefresh();
+    public void showContent(List<V2ExBean> content) {
+        if(content.isEmpty()){
+            return;
         }
         mContentListAdapter.setContents(content);
         mContentListAdapter.notifyDataSetChanged();
@@ -124,7 +124,7 @@ public class V2MainFragment extends Fragment implements IV2MainFragment, SwipeRe
             if (layoutManager instanceof LinearLayoutManager) {
                 LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
                 int firstItemPosition = linearManager.findFirstVisibleItemPosition();
-                if(firstItemPosition == 0){
+                if(firstItemPosition == 0 || mContentListAdapter.getItemCount() == 0){
                     mRefreshLayout.setEnabled(true);
                     CFLog.e("V2MainFragment", "arrive top");
                 }

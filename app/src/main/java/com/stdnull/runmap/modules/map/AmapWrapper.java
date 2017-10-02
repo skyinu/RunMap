@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -23,9 +22,7 @@ import com.amap.api.services.geocoder.RegeocodeAddress;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.stdnull.baselib.common.CFLog;
 import com.stdnull.baselib.GlobalApplication;
-import com.stdnull.baselib.common.CFAsyncTask;
 import com.stdnull.baselib.common.RMConfiguration;
-import com.stdnull.baselib.common.TaskHanler;
 import com.stdnull.runmap.model.BuildingPoint;
 import com.stdnull.runmap.model.TrackPoint;
 import com.stdnull.runmap.modules.map.filter.ILocationFilter;
@@ -39,6 +36,11 @@ import com.stdnull.baselib.utils.SystemUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observable;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by chen on 2017/6/1.
@@ -230,28 +232,47 @@ public class AmapWrapper implements IMap,AMapStateListener {
 
     @Override
     public void requestRegeoAddress(AMapLocation aMapLocation, final TrackPoint trackPoint) {
-        CFAsyncTask<RegeocodeAddress> task = new CFAsyncTask<RegeocodeAddress>() {
-            @Override
-            public RegeocodeAddress onTaskExecuted(Object... params) {
-                if(!SystemUtils.isNetworkEnable(GlobalApplication.getAppContext())){
-                    return null;
-                }
-                return regeocodeAddress((LatLonPoint) params[0]);
-            }
-
-            @Override
-            public void onTaskFinished(RegeocodeAddress result) {
-                if (result == null) {
-                    return;
-                }
-                trackPoint.setBuildName(result.getBuilding());
-                CFLog.e("TAG", "regeo building =" + result.getBuilding()
-                        + "district = " + result.getDistrict() + " neiberhood = " + result.getNeighborhood()
-                        + "street = " + result.getStreetNumber());
-            }
-        };
-        LatLonPoint point = new LatLonPoint(aMapLocation.getLatitude(), aMapLocation.getLongitude());
-        TaskHanler.getInstance().sendTask(task, point);
+        Observable.just(aMapLocation)
+                .subscribeOn(Schedulers.io())
+                .map(new Func1<AMapLocation, LatLonPoint>() {
+                    @Override
+                    public LatLonPoint call(AMapLocation aMapLocation) {
+                        return new LatLonPoint(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+                    }
+                })
+                .filter(new Func1<LatLonPoint, Boolean>() {
+                    @Override
+                    public Boolean call(LatLonPoint latLonPoint) {
+                        if(!SystemUtils.isNetworkEnable(GlobalApplication.getAppContext())){
+                            return false;
+                        }
+                        return true;
+                    }
+                })
+                .map(new Func1<LatLonPoint, RegeocodeAddress>() {
+                    @Override
+                    public RegeocodeAddress call(LatLonPoint latLonPoint) {
+                        RegeocodeQuery query = new RegeocodeQuery(latLonPoint, 200,GeocodeSearch.AMAP);
+                        try {
+                            return mGeocodeSearch.getFromLocation(query);
+                        } catch (AMapException e) {
+                            CFLog.e(this.getClass().getName(),"Regeocode failed");
+                        }
+                        return null;
+                    }
+                })
+                .subscribe(new Action1<RegeocodeAddress>() {
+                    @Override
+                    public void call(RegeocodeAddress result) {
+                        if (result == null) {
+                            return;
+                        }
+                        trackPoint.setBuildName(result.getBuilding());
+                        CFLog.e("TAG", "regeo building =" + result.getBuilding()
+                                + "district = " + result.getDistrict() + " neiberhood = " + result.getNeighborhood()
+                                + "street = " + result.getStreetNumber());
+                    }
+                });
     }
 
     @Override
@@ -325,15 +346,5 @@ public class AmapWrapper implements IMap,AMapStateListener {
     @Override
     public void drawMarkers(List<BuildingPoint> buildingPointList) {
         mMapDrawer.drawMarkers(buildingPointList);
-    }
-
-    private RegeocodeAddress regeocodeAddress(LatLonPoint latLonPoint){
-        RegeocodeQuery query = new RegeocodeQuery(latLonPoint, 200,GeocodeSearch.AMAP);
-        try {
-            return mGeocodeSearch.getFromLocation(query);
-        } catch (AMapException e) {
-            CFLog.e(this.getClass().getName(),"Regeocode failed");
-        }
-        return null;
     }
 }
