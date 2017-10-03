@@ -6,6 +6,9 @@ buildscript {
         flatDir{
             dirs 'gradle'
         }
+        maven {
+            url 'https://dl.google.com/dl/android/maven2/'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
@@ -21,6 +24,9 @@ allprojects {
     repositories {
         jcenter()
         mavenCentral()
+        maven {
+            url 'https://dl.google.com/dl/android/maven2/'
+        }
     }
 }
 
@@ -32,5 +38,5 @@ ext{
     compileSdkVersion = 26
     buildToolsVersion = "26.0.1"
     minSdkVersion = 15
-    targetSdkVersion = 24
+    targetSdkVersion = 26
 }
