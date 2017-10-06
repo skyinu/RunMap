@@ -48,3 +48,4 @@
 -keep class com.tencent.mm.sdk.** {
    *;
 }
+-keep class rx.**{*;}
