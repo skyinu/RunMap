@@ -35,8 +35,8 @@ class SimplifyPluginMain implements Plugin<Project> {
     }
 
     def hookProguardResult(){
-        def extractProguardRelease = mProjectContext.getTasks().getByName("transformClassesAndResourcesWithProguardForRelease")
-        def extractProguardDebug = mProjectContext.getTasks().getByName("transformClassesAndResourcesWithProguardForDebug")
+        def extractProguardRelease = mProjectContext.getTasks().findByName("transformClassesAndResourcesWithProguardForRelease")
+        def extractProguardDebug = mProjectContext.getTasks().findByName("transformClassesAndResourcesWithProguardForDebug")
 
         extractProguardRelease?.doLast {
             copyMapping(it)
