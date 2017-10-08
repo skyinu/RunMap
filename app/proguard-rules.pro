@@ -19,6 +19,7 @@
 -dontwarn javax.annotation.**
 -dontwarn retrofit2.Platform$Java8
 -dontwarn com.squareup.okhttp.**
+-dontwarn okhttp3.**
 -keepattributes Signature
 #保持native方法不混淆
 -keepclasseswithmembernames class * {

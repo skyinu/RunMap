@@ -46,21 +46,20 @@ class DependenciesPrintTask extends DefaultTask{
 //                println "dependency:" + it + "is null"
                 return
             }
-            logger.error "project " + item.name + "'s dependency: " + it + "'s dependency list is "
-            def dependenceType = it
+            logger.error "project ${item.name}'s dependency: ${it}'s dependency list is "
             dependencies.each {
                 logger.error "type is " + it
                 FileTree files = it.properties.get("files")
                 if(files) {
                     files.files.each {
-                        logger.error("-" + it.name)
+                        logger.error "- ${it.name}"
                     }
                 }
                 else if(it instanceof ProjectDependency){
-                    logger.error("-" + ((ProjectDependency)it).dependencyProject.name)
+                    logger.error "- ${((ProjectDependency)it).dependencyProject.name}"
                 }
                 else{
-                    logger.error("-" + it.group + ":" + it.name + ":" + it.version)
+                    logger.error "- $it.group : $it.name : $it.version"
                 }
 
             }
