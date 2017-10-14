@@ -1,15 +1,15 @@
 package com.stdnull.v2api.ui.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.stdnull.baselib.utils.TimeUtils;
 import com.stdnull.v2api.R;
 import com.stdnull.v2api.R2;
@@ -54,9 +54,7 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
         holder.mPromulgator.setText(v2ExBean.getMember().getUsername());
         holder.mLatestReplyTime.setText(TimeUtils.calculateTimeGap(v2ExBean.getLast_touched()));
         holder.mReplyCount.setText(Integer.toString(v2ExBean.getReplies()));
-        Picasso.with(mContext)
-                .load("http:" + v2ExBean.getMember().getAvatar_normal())
-                .into(holder.mMessgeImage);
+        holder.mMessgeImage.setImageURI(Uri.parse("http:" + v2ExBean.getMember().getAvatar_normal()));
         holder.mPostItemContent.setVisibility(View.GONE);
         holder.mPostItemContent.setText(v2ExBean.getContent());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +79,7 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
 
     class ItemViewHolder extends RecyclerView.ViewHolder{
         @BindView(R2.id.v2_item_image_view)
-        ImageView mMessgeImage;
+        SimpleDraweeView mMessgeImage;
         @BindView(R2.id.v2_item_text_brief)
         TextView mMessageBrief;
         @BindView(R2.id.v2_topic_view)

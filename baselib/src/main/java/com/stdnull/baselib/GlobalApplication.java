@@ -3,6 +3,7 @@ package com.stdnull.baselib;
 import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.stdnull.baselib.common.CFCrashHandler;
 import com.stdnull.baselib.common.CFLog;
 import com.stdnull.baselib.lifecircle.LifeCycleMonitor;
@@ -25,6 +26,7 @@ public class GlobalApplication extends Application {
             init();
             CFLog.initMonitor();
         }
+        Fresco.initialize(this);
     }
 
     public static Context getAppContext(){

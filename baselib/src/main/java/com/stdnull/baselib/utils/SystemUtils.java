@@ -12,6 +12,10 @@ import android.net.NetworkInfo;
 import com.stdnull.baselib.GlobalApplication;
 import com.stdnull.baselib.common.RMConfiguration;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * 系统服务查询工具类
  * Created by chen on 2017/1/20.
@@ -23,26 +27,26 @@ public final class SystemUtils {
     public static final int STATE_NORMAL = 0x2;
 
     public static int getApplicationState(Context context) throws PackageManager.NameNotFoundException {
-        SharedPreferences sp = context.getSharedPreferences(RMConfiguration.FILE_CONFIG,Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(RMConfiguration.FILE_CONFIG, Context.MODE_PRIVATE);
         String cacheVersion = sp.getString(RMConfiguration.KEY_VERSION, "");
-        PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(),0);
+        PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
         String curVersion = info.versionName + info.versionCode;
-        if(StringUtils.isEmpty(cacheVersion)){
+        if (StringUtils.isEmpty(cacheVersion)) {
             return STATE_INSTALL;
         }
-        if(!curVersion.equals(cacheVersion)){
+        if (!curVersion.equals(cacheVersion)) {
             return STATE_UPDATE;
         }
         return STATE_NORMAL;
     }
 
-    public static boolean isGpsEnabled(Context context){
+    public static boolean isGpsEnabled(Context context) {
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
-    public static boolean isNetworkEnable(Context context){
-        ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isNetworkEnable(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connectivityManager.getActiveNetworkInfo();
         return info != null && info.isAvailable();
     }
@@ -60,11 +64,29 @@ public final class SystemUtils {
         return processName;
     }
 
-    public static String getDbPath(){
+    public static String getDbPath() {
         StringBuilder dbPath = new StringBuilder("/data/data/");
         dbPath.append(GlobalApplication.getAppContext().getPackageName());
         dbPath.append("/databases");
         dbPath.append("/" + RMConfiguration.DATABASE_NAME);
         return dbPath.toString();
+    }
+
+    public static byte[] readAssets(Context context, String path) {
+        try {
+            InputStream inputStream = context.getAssets().open(path);
+            int capacity = inputStream.available() + 4096;
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream(capacity);
+            int read = 0;
+            byte[] data = new byte[4096];
+            while ((read = inputStream.read(data, 0, data.length))!= -1){
+                buffer.write(data, 0, read);
+            }
+            buffer.flush();
+            return buffer.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
