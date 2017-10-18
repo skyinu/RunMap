@@ -17,11 +17,13 @@ import org.gradle.api.tasks.TaskState
  */
 class SimplifyPluginMain implements Plugin<Project> {
     Project mProjectContext
+    SimplifyExtension simplifyExtension
     static final String CUSTOM_DEPENDENCE = "mc"
 
     @Override
     void apply(Project project) {
         this.mProjectContext = project
+        project.extensions.create("simplify", SimplifyExtension)
         println "Hello simplify, project is " + project.name
         Configuration mcConfiguration = project.configurations.create(CUSTOM_DEPENDENCE)
         project.gradle.addListener(new McDependenceResolveListener(mProjectContext, mcConfiguration))
@@ -31,6 +33,23 @@ class SimplifyPluginMain implements Plugin<Project> {
         addPrintDenpenciesTask()
         project.afterEvaluate {
             hookProguardResult()
+            initExtension()
+            configuration()
+        }
+    }
+
+    def initExtension(){
+        simplifyExtension = mProjectContext.extensions.findByName("simplify") as SimplifyExtension
+    }
+
+    def configuration(){
+        if(!simplifyExtension?.skipEnable){
+            def skipTask = mProjectContext.tasks.findByName("SkipTask")
+            skipTask?.enabled = false
+            println "skip task is disable"
+
+        }else {
+            println "skip task is enable"
         }
     }
 
@@ -76,11 +95,6 @@ class SimplifyPluginMain implements Plugin<Project> {
     }
 
     def addSkipTask() {
-        if(!mProjectContext.hasProperty("skip.enable") || !properties.get("skip.enable")){
-            println "skip task is disable"
-            return
-        }
-        println "skip task is enable"
         def skipTask = mProjectContext.task("SkipTask", type: SkipTask)
         def preBuildTask = mProjectContext.getTasks().getByName("preBuild")
         preBuildTask.dependsOn(skipTask)
