@@ -21,13 +21,13 @@ class McDependenceResolveListener implements DependencyResolutionListener{
         mc.dependencies.collect {
             if (it instanceof ProjectDependency) {
                 def moduleName = ((ProjectDependency) it).dependencyProject.name
-                Configuration compile = project.configurations.getByName("compile")
+                Configuration implementation = project.configurations.getByName("implementation")
                 project.logger.error("-" + it.group + " " + moduleName)
-                compile.dependencies.add(project.dependencies.create(project.rootProject.childProjects.get(moduleName)))
+                implementation.dependencies.add(project.dependencies.create(project.rootProject.childProjects.get(moduleName)))
             } else {
                 project.logger.error("-" + it.group + ":" + it.name + ":" + it.version)
-                Configuration compile = project.configurations.getByName("compile")
-                compile.dependencies.add(project.dependencies.create(it.group + ":" + it.name + ":" + it.version))
+                Configuration implementation = project.configurations.getByName("implementation")
+                implementation.dependencies.add(project.dependencies.create(it.group + ":" + it.name + ":" + it.version))
             }
         }
         project.gradle.removeListener(this)

@@ -2,6 +2,7 @@ package com.stdnull
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
@@ -18,6 +19,7 @@ class NativeSoCopyTask extends DefaultTask {
     }
 
     @InputDirectory
+    @Optional
     File getCppSource(){
         return project.file("src/main/jni")
     }

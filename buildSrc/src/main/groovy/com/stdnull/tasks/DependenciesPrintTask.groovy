@@ -28,10 +28,6 @@ class DependenciesPrintTask extends DefaultTask{
     }
 
     def printAllDepencies(Project curProject){
-//        def rootProject = project.getRootProject()
-//        rootProject.allprojects.each {
-//            printDepencies(it)
-//        }
         printDepencies(curProject)
         curProject.childProjects.each {
             printAllDepencies(it)
@@ -43,7 +39,6 @@ class DependenciesPrintTask extends DefaultTask{
         configurations.getNames().each {
             DependencySet dependencies = configurations.getByName(it).dependencies
             if(!dependencies){
-//                println "dependency:" + it + "is null"
                 return
             }
             logger.error "project ${item.name}'s dependency: ${it}'s dependency list is "

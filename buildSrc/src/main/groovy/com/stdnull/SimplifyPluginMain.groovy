@@ -1,16 +1,10 @@
 package com.stdnull
 
-
+import com.stdnull.logger.LoggerWrapper
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.artifacts.Configuration
-import org.gradle.api.artifacts.Dependency
-import org.gradle.api.artifacts.DependencyResolutionListener
-import org.gradle.api.artifacts.FileCollectionDependency
-import org.gradle.api.artifacts.ProjectDependency
-import org.gradle.api.artifacts.ResolvableDependencies
-import org.gradle.api.tasks.TaskState
 
 /**
  * Created by chen on 2017/8/15.
@@ -18,16 +12,18 @@ import org.gradle.api.tasks.TaskState
 class SimplifyPluginMain implements Plugin<Project> {
     Project mProjectContext
     SimplifyExtension simplifyExtension
+    LoggerWrapper loggerWrapper
     static final String CUSTOM_DEPENDENCE = "mc"
 
     @Override
     void apply(Project project) {
         this.mProjectContext = project
         project.extensions.create("simplify", SimplifyExtension)
-        println "Hello simplify, project is " + project.name
+        loggerWrapper = new LoggerWrapper(project.logger)
+        loggerWrapper.info("Hello simplify, project is ${project.name}")
         Configuration mcConfiguration = project.configurations.create(CUSTOM_DEPENDENCE)
         project.gradle.addListener(new McDependenceResolveListener(mProjectContext, mcConfiguration))
-
+        project.android.registerTransform(new MethodCallLogTransform(project, loggerWrapper))
         addNativeSoCopyTask()
         addSkipTask()
         addPrintDenpenciesTask()
@@ -46,10 +42,6 @@ class SimplifyPluginMain implements Plugin<Project> {
         if(!simplifyExtension?.skipEnable){
             def skipTask = mProjectContext.tasks.findByName("SkipTask")
             skipTask?.enabled = false
-            println "skip task is disable"
-
-        }else {
-            println "skip task is enable"
         }
     }
 

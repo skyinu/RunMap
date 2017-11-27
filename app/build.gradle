@@ -46,45 +46,39 @@ android {
             minifyEnabled true
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            matchingFallbacks = ['debug']
         }
         debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             setSigningConfig signingConfigs.debug
-        }
-    }
-
-    android.applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                //这里修改apk文件名
-                def fileName = "RunMap_V${defaultConfig.versionName}_${variant.buildType.name}.apk"
-                output.outputFile = new File(outputFile.parent, fileName)
-            }
+            matchingFallbacks = ['debug']
         }
     }
 
     simplify{
-        skipEnable true
+        skipEnable false
     }
 
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.dagger:dagger:2.11'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     //skip task make this unavailable
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-    mc project(':baselib')
-    mc project(':v2api')
-    mc 'com.jakewharton:butterknife:8.6.0'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    implementation 'com.facebook.fresco:animated-webp:1.5.0'
+    implementation 'com.facebook.fresco:webpsupport:1.5.0'
+    implementation 'com.facebook.fresco:fresco:1.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex:rxjava:1.1.6'
+    implementation 'com.google.dagger:dagger:2.11'
+    implementation "com.jakewharton:butterknife:$butterKnife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnife"
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    implementation project(':baselib')
+    implementation project(':v2api')
 }
