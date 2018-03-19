@@ -35,9 +35,10 @@ dependencies {
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'io.reactivex:rxjava:1.1.6'
     implementation 'com.google.dagger:dagger:2.11'
-    implementation "com.jakewharton:butterknife:$butterKnife"
     implementation 'com.facebook.fresco:fresco:1.5.0'
     implementation 'com.facebook.fresco:animated-webp:1.5.0'
     implementation 'com.facebook.fresco:webpsupport:1.5.0'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.skyinu:gradlebutterknife-annotations:0.0.6'
+    implementation 'com.skyinu:gradlebutterknife:0.0.2'
 }

@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.skyinu.annotations.BindView;
+import com.skyinu.gradlebutterknife.GradleButterKnife;
 import com.stdnull.baselib.common.CFLog;
 import com.stdnull.v2api.R;
 import com.stdnull.v2api.R2;
@@ -26,8 +28,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by chen on 2017/8/20.
@@ -71,7 +71,7 @@ public class V2MainFragment extends Fragment implements IV2MainFragment, SwipeRe
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         mRootView = inflater.inflate(R.layout.v2_main_fragment_layout, container, false);
-        ButterKnife.bind(this, mRootView);
+        GradleButterKnife.bind(this, mRootView);
         initUI();
         return mRootView;
     }

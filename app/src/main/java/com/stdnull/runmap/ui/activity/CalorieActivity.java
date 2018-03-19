@@ -1,15 +1,16 @@
 package com.stdnull.runmap.ui.activity;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.skyinu.annotations.BindView;
+import com.skyinu.annotations.OnTextChanged;
+import com.skyinu.gradlebutterknife.GradleButterKnife;
 import com.stdnull.baselib.BaseActivity;
 import com.stdnull.runmap.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnTextChanged;
 
 /**
  * 距离转卡路里页面
@@ -27,12 +28,12 @@ public class CalorieActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calorie);
-        ButterKnife.bind(this);
+        GradleButterKnife.bind(this);
     }
 
     @OnTextChanged(value = {R.id.edit_weight, R.id.edit_distance},
-            callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    public void afterTextChanged(CharSequence text) {
+        callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    public void afterTextChanged(Editable text) {
         String distance = mEditDistance.getText().toString();
         String weight = mEditWeight.getText().toString();
         try{

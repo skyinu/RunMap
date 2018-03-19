@@ -10,6 +10,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.skyinu.annotations.BindView;
+import com.skyinu.gradlebutterknife.GradleButterKnife;
 import com.stdnull.baselib.utils.TimeUtils;
 import com.stdnull.v2api.R;
 import com.stdnull.v2api.R2;
@@ -18,9 +20,6 @@ import com.stdnull.v2api.model.V2ExBean;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by chen on 2017/8/20.
@@ -95,7 +94,7 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            GradleButterKnife.bind(this, itemView);
         }
     }
 }
