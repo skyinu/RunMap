@@ -1,3 +1,5 @@
+package com.stdnull
+
 import com.android.build.api.transform.Format
 import com.android.build.api.transform.QualifiedContent
 import com.android.build.api.transform.Transform
@@ -23,7 +25,7 @@ import org.gradle.api.tasks.compile.JavaCompile
 class MethodCallLogTransform extends Transform {
     Project project
     LoggerWrapper loggerWrapper
-    ClassPool classPool = ClassPool.getDefault()
+    ClassPool classPool
     List<String> classPathList
     File logClassMap
 
@@ -76,6 +78,8 @@ class MethodCallLogTransform extends Transform {
     @Override
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         super.transform(transformInvocation)
+        classPool = new ClassPool()
+        classPool.appendSystemPath()
         loggerWrapper.error("method call log transform run")
         classPool.insertClassPath(project.android.bootClasspath[0].toString())
         List<ClassPath> classPaths = new ArrayList<>()
@@ -89,9 +93,7 @@ class MethodCallLogTransform extends Transform {
         }
 
         TransformOutputProvider outputProvider = transformInvocation.outputProvider
-        if (transformInvocation.isIncremental()) {
-            outputProvider.deleteAll()
-        }
+        outputProvider.deleteAll()
         transformInvocation.inputs.each {
             it.jarInputs.each {
                 File out = outputProvider.getContentLocation(it.name, it.contentTypes, it.scopes, Format.JAR)
@@ -116,7 +118,7 @@ class MethodCallLogTransform extends Transform {
             if (!it.absolutePath.endsWith(".class")) {
                 return
             }
-            def className = it.absolutePath.substring(input.absolutePath.length() + 1).replace("\\", ".").replace(".class", "")
+            def className = it.absolutePath.substring(input.absolutePath.length() + 1).replace(File.separator, ".").replace(".class", "")
             CtClass ctClass = classPool.getOrNull(className)
             if (shouldIgnoreClass(ctClass)) {
                 return
