@@ -32,7 +32,7 @@ public class CalorieActivity extends BaseActivity {
     }
 
     @OnTextChanged(value = {R.id.edit_weight, R.id.edit_distance},
-        callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+        callback = OnTextChanged.AFTER_TEXT_CHANGED)
     public void afterTextChanged(Editable text) {
         String distance = mEditDistance.getText().toString();
         String weight = mEditWeight.getText().toString();

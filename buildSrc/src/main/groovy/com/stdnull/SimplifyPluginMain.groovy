@@ -25,7 +25,7 @@ class SimplifyPluginMain implements Plugin<Project> {
         project.gradle.addListener(new McDependenceResolveListener(mProjectContext, mcConfiguration))
         project.android.registerTransform(new MethodCallLogTransform(project, loggerWrapper))
         addNativeSoCopyTask()
-        addSkipTask()
+//        addSkipTask()
         addPrintDenpenciesTask()
         project.afterEvaluate {
             hookProguardResult()
