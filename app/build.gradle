@@ -61,6 +61,11 @@ android {
 
 }
 
+GradleButterKnife {
+    dumpAble true
+    dumpDir "${project.buildDir}${File.separator}dumpDir"
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -76,8 +81,8 @@ dependencies {
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'io.reactivex:rxjava:1.1.6'
     implementation 'com.google.dagger:dagger:2.11'
-    implementation 'com.skyinu:gradlebutterknife-annotations:0.0.9'
-    implementation 'com.skyinu:gradlebutterknife:0.0.2'
+    implementation 'com.skyinu:gradlebutterknife-annotations:0.1.0'
+    implementation 'com.skyinu:gradlebutterknife:0.1.0'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     implementation project(':baselib')
     implementation project(':v2api')

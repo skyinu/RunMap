@@ -27,6 +27,11 @@ android {
     }
 }
 
+GradleButterKnife {
+    dumpAble true
+    dumpDir "${project.buildDir}${File.separator}dumpDir"
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -36,8 +41,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
     implementation 'com.google.dagger:dagger:2.11'
-    implementation 'com.skyinu:gradlebutterknife-annotations:0.0.9'
-    implementation 'com.skyinu:gradlebutterknife:0.0.2'
+    implementation 'com.skyinu:gradlebutterknife-annotations:0.1.0'
+    implementation 'com.skyinu:gradlebutterknife:0.1.0'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     implementation 'com.facebook.fresco:animated-webp:1.5.0'
     implementation 'com.facebook.fresco:webpsupport:1.5.0'
