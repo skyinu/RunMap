@@ -28,17 +28,19 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'io.reactivex:rxandroid:1.2.1'
-    implementation 'io.reactivex:rxjava:1.1.6'
-    implementation 'com.google.dagger:dagger:2.11'
-    implementation 'com.facebook.fresco:fresco:1.5.0'
-    implementation 'com.facebook.fresco:animated-webp:1.5.0'
-    implementation 'com.facebook.fresco:webpsupport:1.5.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.skyinu:gradlebutterknife-annotations:0.1.0'
-    implementation 'com.skyinu:gradlebutterknife:0.1.0'
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api 'com.android.support:appcompat-v7:26.1.0'
+    api 'com.android.support:recyclerview-v7:26.1.0'
+    api 'com.android.support.constraint:constraint-layout:1.0.2'
+    api 'io.reactivex:rxandroid:1.2.1'
+    api 'io.reactivex:rxjava:1.1.6'
+    api 'com.google.dagger:dagger:2.11'
+    api 'com.facebook.fresco:fresco:1.5.0'
+    api 'com.facebook.fresco:animated-webp:1.5.0'
+    api 'com.facebook.fresco:webpsupport:1.5.0'
+    api 'com.squareup.retrofit2:retrofit:2.3.0'
+    api 'com.squareup.retrofit2:converter-gson:2.0.0'
+    api 'com.skyinu:gradlebutterknife-annotations:0.1.0'
+    api 'com.skyinu:gradlebutterknife:0.1.0'
+    api 'com.google.code.gson:gson:2.8.0'
 }
