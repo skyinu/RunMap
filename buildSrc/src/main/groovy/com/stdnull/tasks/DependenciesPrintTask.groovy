@@ -44,7 +44,8 @@ class DependenciesPrintTask extends DefaultTask{
             logger.error "project ${item.name}'s dependency: ${it}'s dependency list is "
             dependencies.each {
                 logger.error "type is " + it
-                FileTree files = it.properties.get("files")
+                //TODO DefaultConfigurableFileCollection
+                FileTree files = null// it.properties.get("files")
                 if(files) {
                     files.files.each {
                         logger.error "- ${it.name}"
