@@ -23,6 +23,14 @@ JNIEXPORT jstring JNICALL Java_com_stdnull_runmap_common_AppConfig_getWeixinAppI
 JNIEXPORT jstring JNICALL Java_com_stdnull_runmap_common_AppConfig_getDbBackupBaseUrl
   (JNIEnv *, jclass);
 
+/*
+ * Class:     com_stdnull_runmap_common_AppConfig
+ * Method:    runCheck
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_stdnull_runmap_common_AppConfig_runCheck
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif

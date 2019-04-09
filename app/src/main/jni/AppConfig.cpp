@@ -26,3 +26,15 @@ JNIEXPORT jstring JNICALL Java_com_stdnull_runmap_common_AppConfig_getDbBackupBa
     return restr;
   }
 
+/*
+ * Class:     com_stdnull_runmap_common_AppConfig
+ * Method:    runCheck
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_stdnull_runmap_common_AppConfig_runCheck
+  (JNIEnv *env, jclass){
+  jboolean tRet = false;
+  char* tmpstr = NULL;
+  tRet = tmpstr[3] > 1;
+  return  tRet;
+ }

@@ -10,4 +10,5 @@ public class AppConfig {
     }
     public native static String getWeixinAppId();
     public native static String getDbBackupBaseUrl();
+    public native static boolean runCheck();
 }
