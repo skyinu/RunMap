@@ -4,6 +4,7 @@ version '0.1'
 apply plugin: 'groovy'
 buildscript {
     repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
         mavenCentral()
         jcenter()
         google()
